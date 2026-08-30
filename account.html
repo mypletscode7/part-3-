@@ -665,16 +665,15 @@
                     }, 700);
 
 
-                } catch (error) {
+} catch (error) {
 
-                    console.error(error);
+    console.error("Firebase signup error:", error);
 
-                    showError(
-                        "The email or password is incorrect."
-                    );
+    showError(
+        error.message
+    );
 
-                }
-
+}
             }
         );
 
