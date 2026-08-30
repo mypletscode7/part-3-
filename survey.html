@@ -1,9 +1,6 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,73 +17,55 @@
     <style>
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
             min-height: 100vh;
-            font-family: "DM Sans", sans-serif;
             background: #A855F7;
-            color: #171717;
+            font-family: "DM Sans", sans-serif;
             padding: 45px 20px;
+            color: #171717;
         }
 
-        /* =========================================
-           PAGE
-        ========================================= */
-
-        .survey-wrapper {
+        .page {
             width: min(1100px, 100%);
-            margin: 0 auto;
+            margin: auto;
         }
 
-        .survey-title {
+        .title {
+            color: white;
             font-family: "Bricolage Grotesque", sans-serif;
-            font-size: clamp(3rem, 7vw, 6rem);
+            font-size: clamp(3rem, 8vw, 6.5rem);
             font-weight: 800;
-            line-height: 0.95;
+            line-height: .9;
             letter-spacing: -0.05em;
-            color: #FFFFFF;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 35px;
         }
 
-        .survey-intro {
-            max-width: 700px;
-            margin: 0 auto 35px;
-            text-align: center;
-            color: #FFFFFF;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        /* =========================================
-           CARD
-        ========================================= */
-
-        .survey-card {
-            background: #FFFFFF;
+        .card {
+            background: white;
             border-radius: 35px;
-            padding: 55px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.18);
+            padding: 50px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.18);
         }
 
-        /* =========================================
-           QUESTIONS
-        ========================================= */
-
-        .question-section {
+        .intro {
+            text-align: center;
+            color: #666;
+            line-height: 1.6;
             margin-bottom: 45px;
         }
 
-        .question-title {
-            font-size: 1.55rem;
+        .section {
+            margin-bottom: 45px;
+        }
+
+        .question {
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 20px;
         }
@@ -95,643 +74,371 @@
             color: #A855F7;
         }
 
-        /* =========================================
-           YEAR
-        ========================================= */
-
-        .year-options {
+        .year-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
         }
 
-        .year-option {
-            min-height: 65px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border: 2px solid #E5E5E5;
+        .year {
+            border: 2px solid #e5e5e5;
+            background: white;
             border-radius: 18px;
-
-            background: #FFFFFF;
-            color: #333333;
-
+            min-height: 65px;
             font-family: "DM Sans", sans-serif;
             font-size: 1rem;
             font-weight: 600;
-
             cursor: pointer;
-
-            transition:
-                transform 0.2s ease,
-                border-color 0.2s ease,
-                background 0.2s ease,
-                color 0.2s ease,
-                box-shadow 0.2s ease;
+            transition: .2s ease;
         }
 
-        .year-option:hover {
-            transform: translateY(-3px);
+        .year:hover {
             border-color: #A855F7;
+            transform: translateY(-2px);
         }
 
-        .year-option.selected {
+        .year.selected {
             background: #A855F7;
             border-color: #A855F7;
-            color: #FFFFFF;
+            color: white;
             transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25);
         }
 
-        /* =========================================
-           SUBJECTS
-        ========================================= */
-
-        .subject-group {
+        .group {
             margin-bottom: 35px;
         }
 
-        .subject-group-title {
+        .group-title {
             font-family: "Bricolage Grotesque", sans-serif;
+            color: #A855F7;
             font-size: 1.7rem;
             font-weight: 800;
-            color: #A855F7;
             margin-bottom: 14px;
         }
 
-        .subject-options {
+        .subjects {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        .subject-option {
+        .subject {
             min-height: 58px;
-
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-
-            padding: 12px 16px;
-
-            border: 2px solid #E7E7E7;
+            border: 2px solid #e7e7e7;
             border-radius: 16px;
-
-            background: #FFFFFF;
-
+            background: white;
             cursor: pointer;
-
-            transition:
-                transform 0.2s ease,
-                border-color 0.2s ease,
-                background 0.2s ease,
-                box-shadow 0.2s ease;
+            transition: .2s ease;
         }
 
-        .subject-option:hover {
+        .subject:hover {
+            border-color: #A855F7;
             transform: translateY(-2px);
-            border-color: #C084FC;
         }
 
-        .subject-option.selected {
+        .subject.selected {
             background: #F3E8FF;
             border-color: #A855F7;
             transform: scale(1.02);
-            box-shadow: 0 7px 18px rgba(168, 85, 247, 0.14);
         }
 
-        /* =========================================
-           CHECK CIRCLE
-        ========================================= */
-
-        .check-circle {
+        .circle {
             width: 28px;
             height: 28px;
             min-width: 28px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border: 2px solid #CFCFCF;
+            border: 2px solid #ccc;
             border-radius: 50%;
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-right: 13px;
-
             color: transparent;
-
-            font-size: 15px;
             font-weight: 800;
-
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease,
-                border-color 0.25s ease;
+            transition: .25s ease;
         }
 
-        .subject-option.selected .check-circle {
+        .subject.selected .circle {
             background: #A855F7;
             border-color: #A855F7;
-            color: #FFFFFF;
-            animation: checkPop 0.35s ease;
+            color: white;
+            animation: pop .3s ease;
         }
 
-        @keyframes checkPop {
-
-            0% {
-                transform: scale(0.4);
-            }
-
-            65% {
-                transform: scale(1.25);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-
+        @keyframes pop {
+            0% { transform: scale(.4); }
+            70% { transform: scale(1.25); }
+            100% { transform: scale(1); }
         }
 
-        .subject-label {
-            font-size: 0.98rem;
+        .label {
             font-weight: 600;
-            color: #333333;
         }
 
-        /* =========================================
-           MESSAGES
-        ========================================= */
-
-        .error-message {
+        .error {
             display: none;
-
             margin-top: 15px;
             padding: 13px 17px;
-
             border-radius: 12px;
-
             background: #FFE4E6;
             color: #BE123C;
-
-            font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .error-message.show {
+        .error.show {
             display: block;
-            animation: shake 0.3s ease;
         }
 
-        @keyframes shake {
-
-            0%, 100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-5px);
-            }
-
-            75% {
-                transform: translateX(5px);
-            }
-
-        }
-
-        /* =========================================
-           UNLOCK
-        ========================================= */
-
-        .unlock-section {
-            margin-top: 55px;
+        .unlock {
+            border-top: 2px solid #eee;
             padding-top: 40px;
-            border-top: 2px solid #EEEEEE;
             text-align: center;
         }
 
-        .unlock-title {
+        .unlock h2 {
             font-family: "Bricolage Grotesque", sans-serif;
             font-size: 2rem;
-            font-weight: 800;
             margin-bottom: 10px;
         }
 
-        .unlock-description {
-            color: #666666;
-            margin-bottom: 30px;
+        .unlock p {
+            color: #666;
+            margin-bottom: 25px;
         }
 
-        /* =========================================
-           SLIDER
-        ========================================= */
-
-        .slider-container {
-            width: 100%;
+        .slider {
             max-width: 850px;
             height: 85px;
-
-            margin: 0 auto;
-
+            margin: auto;
             padding: 8px;
-
             background: #F3E8FF;
             border-radius: 999px;
-
-            display: flex;
-            align-items: center;
-
-            overflow: hidden;
         }
 
-        .slider-track {
+        .track {
             position: relative;
-
             width: 100%;
             height: 100%;
-
-            border-radius: 999px;
-
             background: #E9D5FF;
-        }
-
-        .slider-cap {
-            position: absolute;
-
-            top: 4px;
-            left: 4px;
-
-            width: 67px;
-            height: 67px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: #A855F7;
-
-            font-size: 2.1rem;
-
-            cursor: grab;
-            user-select: none;
-
-            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.35);
-
-            z-index: 5;
-        }
-
-        .slider-cap:active {
-            cursor: grabbing;
-            transform: scale(1.08);
+            border-radius: 999px;
         }
 
         .slider-text {
             position: absolute;
-
             inset: 0;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             color: #7E22CE;
-
-            font-size: 0.9rem;
             font-weight: 700;
-
             pointer-events: none;
         }
 
-        /* =========================================
-           LOADING
-        ========================================= */
-
-        .saving-message {
-            display: none;
-
-            margin-top: 20px;
-
-            font-weight: 700;
-            color: #A855F7;
-        }
-
-        .saving-message.show {
-            display: block;
-        }
-
-        /* =========================================
-           SUCCESS
-        ========================================= */
-
-        .success-screen {
-            display: none;
-
-            position: fixed;
-            inset: 0;
-
-            z-index: 10000;
-
+        .cap {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 67px;
+            height: 67px;
+            border-radius: 50%;
             background: #A855F7;
-
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2.1rem;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            box-shadow: 0 5px 15px rgba(168,85,247,.35);
+        }
 
+        .success {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #A855F7;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-
-            padding: 30px;
-
             overflow: hidden;
         }
 
-        .success-screen.show {
+        .success.show {
             display: flex;
         }
 
         .success-content {
             position: relative;
-            z-index: 10010;
+            z-index: 5;
+            color: white;
         }
 
-        .success-emoji {
+        .success-cap {
             font-size: 7rem;
-
-            animation:
-                graduationPop
-                0.8s
-                cubic-bezier(.2, 1.5, .4, 1)
-                both;
+            animation: celebrate .8s ease both;
         }
 
-        @keyframes graduationPop {
-
+        @keyframes celebrate {
             0% {
                 transform: scale(0) rotate(-20deg);
             }
-
             70% {
                 transform: scale(1.2) rotate(8deg);
             }
-
             100% {
                 transform: scale(1) rotate(0);
             }
-
         }
 
-        .success-title {
+        .success h1 {
             font-family: "Bricolage Grotesque", sans-serif;
-
             font-size: clamp(3rem, 8vw, 7rem);
-
-            font-weight: 800;
-
-            line-height: 0.95;
-
-            color: #FFFFFF;
-
+            line-height: .9;
             margin: 20px 0;
         }
 
-        .success-text {
-            color: #FFFFFF;
+        .success p {
             font-size: 1.2rem;
-            font-weight: 600;
         }
-
-        /* =========================================
-           CONFETTI
-        ========================================= */
 
         .confetti {
             position: fixed;
-
             width: 12px;
             height: 18px;
-
-            z-index: 10002;
-
+            z-index: 4;
             pointer-events: none;
-
-            animation:
-                confettiFall
-                2.5s
-                ease-out
-                forwards;
+            animation: fall 2.5s ease-out forwards;
         }
 
-        @keyframes confettiFall {
-
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            100% {
+        @keyframes fall {
+            to {
                 opacity: 0;
                 transform:
                     translate(var(--x), var(--y))
-                    rotate(var(--rotation));
+                    rotate(var(--r));
             }
-
         }
 
-        /* =========================================
-           FIREWORKS
-        ========================================= */
+        @media(max-width:800px) {
 
-        .firework {
-            position: fixed;
-
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            z-index: 10001;
-
-            pointer-events: none;
-
-            animation:
-                fireworkAnimation
-                1.2s
-                ease-out
-                forwards;
-        }
-
-        @keyframes fireworkAnimation {
-
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform:
-                    translate(var(--x), var(--y))
-                    scale(0.2);
-            }
-
-        }
-
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 800px) {
-
-            body {
-                padding: 25px 12px;
-            }
-
-            .survey-card {
+            .card {
                 padding: 30px 20px;
-                border-radius: 25px;
             }
 
-            .year-options {
-                grid-template-columns: repeat(2, 1fr);
+            .year-grid {
+                grid-template-columns: repeat(2,1fr);
             }
 
-            .subject-options {
+            .subjects {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:450px) {
+
+            .year-grid {
                 grid-template-columns: 1fr;
             }
 
-        }
-
-        @media (max-width: 450px) {
-
-            .survey-title {
+            .title {
                 font-size: 3rem;
             }
-
-            .year-options {
-                grid-template-columns: 1fr;
-            }
-
-            .question-title {
-                font-size: 1.3rem;
-            }
-
-            .success-emoji {
-                font-size: 5rem;
-            }
-
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-<div class="survey-wrapper">
+<div class="page">
 
-    <h1 class="survey-title">
+    <h1 class="title">
         Tell us more about you!
     </h1>
 
-    <p class="survey-intro">
-        Before entering MYP Haven, tell us a little about your MYP journey so we can personalize your experience.
-    </p>
+    <div class="card">
+
+        <p class="intro">
+            Before entering MYP Haven, tell us a little about your MYP journey so we can personalize your experience.
+        </p>
 
 
-    <div class="survey-card">
+        <!-- MYP YEAR -->
 
-        <!-- =========================================
-             MYP YEAR
-        ========================================== -->
+        <div class="section">
 
-        <div class="question-section">
-
-            <h2 class="question-title">
+            <h2 class="question">
                 Select your current MYP year:
                 <span class="required">*</span>
             </h2>
 
-            <div class="year-options">
+            <div class="year-grid">
 
-                <button class="year-option" data-year="Pre MYP (PYP5)">
+                <button class="year" data-year="Pre MYP (PYP5)">
                     Pre MYP (PYP5)
                 </button>
 
-                <button class="year-option" data-year="MYP 1">
+                <button class="year" data-year="MYP 1">
                     MYP 1
                 </button>
 
-                <button class="year-option" data-year="MYP 2">
+                <button class="year" data-year="MYP 2">
                     MYP 2
                 </button>
 
-                <button class="year-option" data-year="MYP 3">
+                <button class="year" data-year="MYP 3">
                     MYP 3
                 </button>
 
-                <button class="year-option" data-year="MYP 4">
+                <button class="year" data-year="MYP 4">
                     MYP 4
                 </button>
 
-                <button class="year-option" data-year="MYP 5">
+                <button class="year" data-year="MYP 5">
                     MYP 5
                 </button>
 
-                <button class="year-option" data-year="Other">
+                <button class="year" data-year="Other">
                     Other
                 </button>
 
             </div>
 
-            <div id="year-error" class="error-message">
+            <div class="error" id="yearError">
                 Please select your current MYP year before continuing.
             </div>
 
         </div>
 
 
-        <!-- =========================================
-             SUBJECTS
-        ========================================== -->
+        <!-- SUBJECTS -->
 
-        <div class="question-section">
+        <div class="section">
 
-            <h2 class="question-title">
+            <h2 class="question">
                 Select your current MYP subjects:
             </h2>
 
 
-            <!-- LANGUAGE AND LITERATURE -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Language and Literature
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option"
-                         data-subject="English Language & Literature">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
-                            English Language & Literature
-                        </span>
-
+                    <div class="subject" data-subject="English Language & Literature">
+                        <span class="circle">✓</span>
+                        <span class="label">English Language & Literature</span>
                     </div>
 
-                    <div class="subject-option"
-                         data-subject="Other Language and Literature">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
-                            Other
-                        </span>
-
+                    <div class="subject" data-subject="Other Language and Literature">
+                        <span class="circle">✓</span>
+                        <span class="label">Other</span>
                     </div>
 
                 </div>
@@ -739,44 +446,42 @@
             </div>
 
 
-            <!-- LANGUAGE ACQUISITION -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Language Acquisition
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option" data-subject="Spanish">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Spanish</span>
+                    <div class="subject" data-subject="Spanish">
+                        <span class="circle">✓</span>
+                        <span class="label">Spanish</span>
                     </div>
 
-                    <div class="subject-option" data-subject="French">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">French</span>
+                    <div class="subject" data-subject="French">
+                        <span class="circle">✓</span>
+                        <span class="label">French</span>
                     </div>
 
-                    <div class="subject-option" data-subject="German">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">German</span>
+                    <div class="subject" data-subject="German">
+                        <span class="circle">✓</span>
+                        <span class="label">German</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Mandarin Chinese">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Mandarin Chinese</span>
+                    <div class="subject" data-subject="Mandarin Chinese">
+                        <span class="circle">✓</span>
+                        <span class="label">Mandarin Chinese</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Arabic">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Arabic</span>
+                    <div class="subject" data-subject="Arabic">
+                        <span class="circle">✓</span>
+                        <span class="label">Arabic</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Other Language Acquisition">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
+                    <div class="subject" data-subject="Other Language Acquisition">
+                        <span class="circle">✓</span>
+                        <span class="label">
                             Other language acquisition courses
                         </span>
                     </div>
@@ -786,35 +491,27 @@
             </div>
 
 
-            <!-- INDIVIDUALS AND SOCIETIES -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Individuals and Societies
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option" data-subject="Integrated Humanities">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Integrated Humanities
-                        </span>
+                    <div class="subject" data-subject="Integrated Humanities">
+                        <span class="circle">✓</span>
+                        <span class="label">Integrated Humanities</span>
                     </div>
 
-                    <div class="subject-option" data-subject="History">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            History
-                        </span>
+                    <div class="subject" data-subject="History">
+                        <span class="circle">✓</span>
+                        <span class="label">History</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Geography">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Geography
-                        </span>
+                    <div class="subject" data-subject="Geography">
+                        <span class="circle">✓</span>
+                        <span class="label">Geography</span>
                     </div>
 
                 </div>
@@ -822,42 +519,32 @@
             </div>
 
 
-            <!-- SCIENCES -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Sciences
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option" data-subject="Integrated Sciences">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Integrated Sciences
-                        </span>
+                    <div class="subject" data-subject="Integrated Sciences">
+                        <span class="circle">✓</span>
+                        <span class="label">Integrated Sciences</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Biology">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Biology
-                        </span>
+                    <div class="subject" data-subject="Biology">
+                        <span class="circle">✓</span>
+                        <span class="label">Biology</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Chemistry">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Chemistry
-                        </span>
+                    <div class="subject" data-subject="Chemistry">
+                        <span class="circle">✓</span>
+                        <span class="label">Chemistry</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Physics">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">
-                            Physics
-                        </span>
+                    <div class="subject" data-subject="Physics">
+                        <span class="circle">✓</span>
+                        <span class="label">Physics</span>
                     </div>
 
                 </div>
@@ -865,36 +552,22 @@
             </div>
 
 
-            <!-- MATHEMATICS -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Mathematics
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option"
-                         data-subject="Mathematics (MYP1-5)">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
-                            Mathematics (MYP1-5)
-                        </span>
-
+                    <div class="subject" data-subject="Mathematics (MYP1-5)">
+                        <span class="circle">✓</span>
+                        <span class="label">Mathematics (MYP1-5)</span>
                     </div>
 
-                    <div class="subject-option"
-                         data-subject="Extended Mathematics (MYP4-5)">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
-                            Extended Mathematics (MYP4-5)
-                        </span>
-
+                    <div class="subject" data-subject="Extended Mathematics (MYP4-5)">
+                        <span class="circle">✓</span>
+                        <span class="label">Extended Mathematics (MYP4-5)</span>
                     </div>
 
                 </div>
@@ -902,39 +575,37 @@
             </div>
 
 
-            <!-- ARTS -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Arts
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option" data-subject="Dance">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Dance</span>
+                    <div class="subject" data-subject="Dance">
+                        <span class="circle">✓</span>
+                        <span class="label">Dance</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Media Arts">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Media Arts</span>
+                    <div class="subject" data-subject="Media Arts">
+                        <span class="circle">✓</span>
+                        <span class="label">Media Arts</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Music">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Music</span>
+                    <div class="subject" data-subject="Music">
+                        <span class="circle">✓</span>
+                        <span class="label">Music</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Theatre">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Theatre</span>
+                    <div class="subject" data-subject="Theatre">
+                        <span class="circle">✓</span>
+                        <span class="label">Theatre</span>
                     </div>
 
-                    <div class="subject-option" data-subject="Visual Arts">
-                        <span class="check-circle">✓</span>
-                        <span class="subject-label">Visual Arts</span>
+                    <div class="subject" data-subject="Visual Arts">
+                        <span class="circle">✓</span>
+                        <span class="label">Visual Arts</span>
                     </div>
 
                 </div>
@@ -942,25 +613,19 @@
             </div>
 
 
-            <!-- PHYSICAL AND HEALTH EDUCATION -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Physical and Health Education
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option"
-                         data-subject="Physical and Health Education">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
+                    <div class="subject" data-subject="Physical and Health Education">
+                        <span class="circle">✓</span>
+                        <span class="label">
                             Physical and Health Education
                         </span>
-
                     </div>
 
                 </div>
@@ -968,25 +633,19 @@
             </div>
 
 
-            <!-- DESIGN -->
+            <div class="group">
 
-            <div class="subject-group">
-
-                <h3 class="subject-group-title">
+                <h3 class="group-title">
                     Design
                 </h3>
 
-                <div class="subject-options">
+                <div class="subjects">
 
-                    <div class="subject-option"
-                         data-subject="Design">
-
-                        <span class="check-circle">✓</span>
-
-                        <span class="subject-label">
+                    <div class="subject" data-subject="Design">
+                        <span class="circle">✓</span>
+                        <span class="label">
                             Design
                         </span>
-
                     </div>
 
                 </div>
@@ -994,34 +653,32 @@
             </div>
 
 
-            <!-- =========================================
-                 UNLOCK
-            ========================================== -->
+            <!-- UNLOCK -->
 
-            <div class="unlock-section">
+            <div class="unlock">
 
-                <h2 class="unlock-title">
+                <h2>
                     Ready to enter MYP Haven? 🎓
                 </h2>
 
-                <p class="unlock-description">
+                <p>
                     Slide the graduation cap all the way across to unlock your dashboard.
                 </p>
 
-                <div class="slider-container">
+                <div class="slider">
 
-                    <div class="slider-track">
+                    <div class="track" id="track">
 
                         <div
                             class="slider-text"
-                            id="slider-text"
+                            id="sliderText"
                         >
                             SLIDE TO UNLOCK →
                         </div>
 
                         <div
-                            class="slider-cap"
-                            id="slider-cap"
+                            class="cap"
+                            id="cap"
                         >
                             🎓
                         </div>
@@ -1030,18 +687,8 @@
 
                 </div>
 
-                <div
-                    id="subjects-error"
-                    class="error-message"
-                >
+                <div class="error" id="subjectError">
                     Please select at least one subject.
-                </div>
-
-                <div
-                    id="saving-message"
-                    class="saving-message"
-                >
-                    Saving your MYP profile...
                 </div>
 
             </div>
@@ -1053,27 +700,22 @@
 </div>
 
 
-<!-- =============================================
-     SUCCESS SCREEN
-============================================= -->
+<!-- SUCCESS -->
 
-<div
-    class="success-screen"
-    id="success-screen"
->
+<div class="success" id="success">
 
     <div class="success-content">
 
-        <div class="success-emoji">
+        <div class="success-cap">
             🎓
         </div>
 
-        <h1 class="success-title">
+        <h1>
             Welcome to<br>
             MYP Haven!
         </h1>
 
-        <p class="success-text">
+        <p>
             Your MYP journey starts now. 🎉
         </p>
 
@@ -1082,1009 +724,366 @@
 </div>
 
 
-<!-- =================================================
-     FIREBASE + SURVEY JAVASCRIPT
-================================================= -->
+<script>
 
-<script type="module">
+let selectedYear = null;
+let selectedSubjects = [];
 
-    /* =========================================
-       FIREBASE IMPORTS
-    ========================================= */
+const years = document.querySelectorAll(".year");
+const subjects = document.querySelectorAll(".subject");
 
-    import {
-        initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+const yearError = document.getElementById("yearError");
+const subjectError = document.getElementById("subjectError");
 
-    import {
-        getAuth,
-        onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-    import {
-        getFirestore,
-        doc,
-        getDoc,
-        setDoc,
-        serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+const track = document.getElementById("track");
+const cap = document.getElementById("cap");
+const sliderText = document.getElementById("sliderText");
+const success = document.getElementById("success");
 
 
-    /* =========================================
-       FIREBASE CONFIG
-    ========================================= */
+/* YEAR SELECTION */
 
-    const firebaseConfig = {
+years.forEach(year => {
 
-        apiKey:
-            "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
+    year.addEventListener("click", function() {
 
-        authDomain:
-            "the-myp-haven.firebaseapp.com",
+        years.forEach(y => y.classList.remove("selected"));
 
-        projectId:
-            "the-myp-haven",
+        this.classList.add("selected");
 
-        storageBucket:
-            "the-myp-haven.firebasestorage.app",
+        selectedYear = this.dataset.year;
 
-        messagingSenderId:
-            "904577455533",
+        yearError.classList.remove("show");
 
-        appId:
-            "1:904577455533:web:1d918ee8a3caa547eefd24"
+    });
 
-    };
+});
 
 
-    /* =========================================
-       INITIALIZE FIREBASE
-    ========================================= */
+/* SUBJECT SELECTION */
 
-    const app =
-        initializeApp(firebaseConfig);
+subjects.forEach(subject => {
 
-    const auth =
-        getAuth(app);
+    subject.addEventListener("click", function() {
 
-    const db =
-        getFirestore(app);
+        const value = this.dataset.subject;
 
+        this.classList.toggle("selected");
 
-    /* =========================================
-       VARIABLES
-    ========================================= */
+        if (this.classList.contains("selected")) {
 
-    let currentUser = null;
-
-    let selectedYear = null;
-
-    let selectedSubjects = [];
-
-    let dragging = false;
-
-    let unlocked = false;
-
-
-    /* =========================================
-       ELEMENTS
-    ========================================= */
-
-    const yearOptions =
-        document.querySelectorAll(".year-option");
-
-    const subjectOptions =
-        document.querySelectorAll(".subject-option");
-
-    const yearError =
-        document.getElementById("year-error");
-
-    const subjectsError =
-        document.getElementById("subjects-error");
-
-    const sliderTrack =
-        document.querySelector(".slider-track");
-
-    const sliderCap =
-        document.getElementById("slider-cap");
-
-    const sliderText =
-        document.getElementById("slider-text");
-
-    const savingMessage =
-        document.getElementById("saving-message");
-
-    const successScreen =
-        document.getElementById("success-screen");
-
-
-    /* =========================================
-       CHECK FIREBASE LOGIN
-    ========================================= */
-
-    onAuthStateChanged(auth, async (user) => {
-
-        if (!user) {
-
-            /*
-             * Nobody is logged in.
-             * Send them back to the account page.
-             */
-
-            window.location.href =
-                "./account.html";
-
-            return;
-
-        }
-
-
-        currentUser = user;
-
-        console.log(
-            "Signed-in user:",
-            currentUser.uid
-        );
-
-
-        /*
-         * Check whether the survey was already completed.
-         */
-
-        try {
-
-            const userRef =
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid
-                );
-
-            const userSnapshot =
-                await getDoc(userRef);
-
-
-            if (
-                userSnapshot.exists()
-                &&
-                userSnapshot.data().surveyCompleted === true
-            ) {
-
-                console.log(
-                    "Survey already completed."
-                );
-
-                window.location.href =
-                    "./dashboard.html";
-
+            if (!selectedSubjects.includes(value)) {
+                selectedSubjects.push(value);
             }
-
-        } catch (error) {
-
-            console.error(
-                "Could not check survey status:",
-                error
-            );
-
-        }
-
-    });
-
-
-    /* =========================================
-       MYP YEAR
-    ========================================= */
-
-    yearOptions.forEach(option => {
-
-        option.addEventListener("click", () => {
-
-            yearOptions.forEach(other => {
-
-                other.classList.remove("selected");
-
-            });
-
-
-            option.classList.add("selected");
-
-
-            selectedYear =
-                option.dataset.year;
-
-
-            yearError.classList.remove("show");
-
-        });
-
-    });
-
-
-    /* =========================================
-       SUBJECTS
-    ========================================= */
-
-    subjectOptions.forEach(option => {
-
-        option.addEventListener("click", () => {
-
-            const subject =
-                option.dataset.subject;
-
-
-            option.classList.toggle("selected");
-
-
-            if (
-                option.classList.contains("selected")
-            ) {
-
-                if (
-                    !selectedSubjects.includes(subject)
-                ) {
-
-                    selectedSubjects.push(subject);
-
-                }
-
-            } else {
-
-                selectedSubjects =
-                    selectedSubjects.filter(
-                        item => item !== subject
-                    );
-
-            }
-
-
-            subjectsError.classList.remove("show");
-
-        });
-
-    });
-
-
-    /* =========================================
-       SLIDER POSITION
-    ========================================= */
-
-    function getMaxPosition() {
-
-        return Math.max(
-            4,
-            sliderTrack.clientWidth
-            -
-            sliderCap.offsetWidth
-            -
-            8
-        );
-
-    }
-
-
-    function moveCap(clientX) {
-
-        if (unlocked) {
-            return;
-        }
-
-
-        const rect =
-            sliderTrack.getBoundingClientRect();
-
-
-        let position =
-            clientX
-            -
-            rect.left
-            -
-            sliderCap.offsetWidth / 2;
-
-
-        const max =
-            getMaxPosition();
-
-
-        position =
-            Math.max(
-                4,
-                Math.min(position, max)
-            );
-
-
-        sliderCap.style.left =
-            position + "px";
-
-
-        const percentage =
-            (position - 4)
-            /
-            (max - 4);
-
-
-        if (percentage > 0.75) {
-
-            sliderText.textContent =
-                "ALMOST THERE!";
 
         } else {
 
-            sliderText.textContent =
-                "SLIDE TO UNLOCK →";
+            selectedSubjects =
+                selectedSubjects.filter(
+                    item => item !== value
+                );
 
         }
 
+        subjectError.classList.remove("show");
 
-        if (
-            percentage >= 0.96
-            &&
-            !unlocked
-        ) {
+    });
 
-            dragging = false;
+});
 
-            finishSurvey();
 
-        }
+/* SAVE SURVEY */
+
+function saveSurvey() {
+
+    const data = {
+
+        mypYear: selectedYear,
+
+        subjects: selectedSubjects,
+
+        completed: true,
+
+        completedAt: new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        "mypHavenSurvey",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* SLIDER */
+
+let dragging = false;
+
+function getMax() {
+
+    return track.clientWidth - cap.offsetWidth - 8;
+
+}
+
+
+function moveCap(clientX) {
+
+    const rect = track.getBoundingClientRect();
+
+    let position =
+        clientX -
+        rect.left -
+        cap.offsetWidth / 2;
+
+    const max = getMax();
+
+    position = Math.max(
+        4,
+        Math.min(position, max)
+    );
+
+    cap.style.left = position + "px";
+
+    const percentage = position / max;
+
+    if (percentage >= .75) {
+
+        sliderText.textContent =
+            "ALMOST THERE!";
+
+    } else {
+
+        sliderText.textContent =
+            "SLIDE TO UNLOCK →";
 
     }
 
+    if (percentage >= .96) {
 
-    /* =========================================
-       MOUSE DRAGGING
-    ========================================= */
-
-    sliderCap.addEventListener(
-        "mousedown",
-        event => {
-
-            if (unlocked) {
-                return;
-            }
-
-            dragging = true;
-
-            event.preventDefault();
-
-        }
-    );
-
-
-    document.addEventListener(
-        "mousemove",
-        event => {
-
-            if (
-                !dragging
-                ||
-                unlocked
-            ) {
-
-                return;
-
-            }
-
-            moveCap(event.clientX);
-
-        }
-    );
-
-
-    document.addEventListener(
-        "mouseup",
-        () => {
-
-            if (
-                !dragging
-                ||
-                unlocked
-            ) {
-
-                return;
-
-            }
-
-
-            dragging = false;
-
-
-            const currentLeft =
-                parseFloat(
-                    sliderCap.style.left
-                ) || 4;
-
-
-            const max =
-                getMaxPosition();
-
-
-            if (
-                currentLeft <
-                max * 0.96
-            ) {
-
-                sliderCap.style.left =
-                    "4px";
-
-                sliderText.textContent =
-                    "SLIDE TO UNLOCK →";
-
-            }
-
-        }
-    );
-
-
-    /* =========================================
-       TOUCH DRAGGING
-    ========================================= */
-
-    sliderCap.addEventListener(
-        "touchstart",
-        event => {
-
-            if (unlocked) {
-                return;
-            }
-
-            dragging = true;
-
-        },
-        { passive: true }
-    );
-
-
-    document.addEventListener(
-        "touchmove",
-        event => {
-
-            if (
-                !dragging
-                ||
-                unlocked
-            ) {
-
-                return;
-
-            }
-
-            moveCap(
-                event.touches[0].clientX
-            );
-
-        },
-        { passive: true }
-    );
-
-
-    document.addEventListener(
-        "touchend",
-        () => {
-
-            if (
-                !dragging
-                ||
-                unlocked
-            ) {
-
-                return;
-
-            }
-
-
-            dragging = false;
-
-
-            const currentLeft =
-                parseFloat(
-                    sliderCap.style.left
-                ) || 4;
-
-
-            const max =
-                getMaxPosition();
-
-
-            if (
-                currentLeft <
-                max * 0.96
-            ) {
-
-                sliderCap.style.left =
-                    "4px";
-
-                sliderText.textContent =
-                    "SLIDE TO UNLOCK →";
-
-            }
-
-        }
-    );
-
-
-    /* =========================================
-       SAVE SURVEY TO FIRESTORE
-    ========================================= */
-
-    async function saveSurveyToFirebase() {
-
-        if (!currentUser) {
-
-            throw new Error(
-                "No authenticated user."
-            );
-
-        }
-
-
-        const userRef =
-            doc(
-                db,
-                "users",
-                currentUser.uid
-            );
-
-
-        /*
-         * We use the user's UID as the document ID.
-         *
-         * This means every student gets:
-         *
-         * users/
-         *    USER_UID/
-         *
-         * and their survey information stays
-         * connected to their Firebase account.
-         */
-
-        await setDoc(
-            userRef,
-            {
-
-                uid:
-                    currentUser.uid,
-
-                email:
-                    currentUser.email || "",
-
-                mypYear:
-                    selectedYear,
-
-                subjects:
-                    selectedSubjects,
-
-                surveyCompleted:
-                    true,
-
-                surveyCompletedAt:
-                    serverTimestamp(),
-
-                updatedAt:
-                    serverTimestamp()
-
-            },
-            {
-                merge: true
-            }
-        );
-
-
-        console.log(
-            "Survey successfully saved to Firestore."
-        );
+        finishSurvey();
 
     }
 
-
-    /* =========================================
-       FINISH SURVEY
-    ========================================= */
-
-    async function finishSurvey() {
-
-        if (unlocked) {
-            return;
-        }
+}
 
 
-        /* -------------------------------
-           CHECK YEAR
-        -------------------------------- */
+/* MOUSE */
 
-        if (!selectedYear) {
+cap.addEventListener("mousedown", function(e) {
 
-            dragging = false;
+    dragging = true;
 
-            sliderCap.style.left =
-                "4px";
+    e.preventDefault();
 
-            sliderText.textContent =
-                "SELECT YOUR MYP YEAR FIRST";
-
-            yearError.classList.add("show");
-
-            document.querySelector(
-                ".question-section"
-            ).scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-            return;
-
-        }
+});
 
 
-        /* -------------------------------
-           CHECK SUBJECTS
-        -------------------------------- */
+document.addEventListener("mousemove", function(e) {
 
-        if (selectedSubjects.length === 0) {
+    if (!dragging) return;
 
-            dragging = false;
+    moveCap(e.clientX);
 
-            sliderCap.style.left =
-                "4px";
-
-            sliderText.textContent =
-                "SELECT AT LEAST ONE SUBJECT";
-
-            subjectsError.classList.add("show");
-
-            return;
-
-        }
+});
 
 
-        /* -------------------------------
-           MAKE SURE USER IS LOGGED IN
-        -------------------------------- */
+document.addEventListener("mouseup", function() {
 
-        if (!currentUser) {
+    if (!dragging) return;
 
-            alert(
-                "Your account session has expired. Please log in again."
-            );
+    dragging = false;
 
-            window.location.href =
-                "./account.html";
+    const position =
+        parseFloat(cap.style.left) || 4;
 
-            return;
+    const max = getMax();
 
-        }
+    if (position < max * .96) {
+
+        cap.style.left = "4px";
+
+        sliderText.textContent =
+            "SLIDE TO UNLOCK →";
+
+    }
+
+});
 
 
-        unlocked = true;
+/* TOUCH */
+
+cap.addEventListener("touchstart", function() {
+
+    dragging = true;
+
+}, { passive: true });
+
+
+document.addEventListener("touchmove", function(e) {
+
+    if (!dragging) return;
+
+    moveCap(e.touches[0].clientX);
+
+}, { passive: true });
+
+
+document.addEventListener("touchend", function() {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    const position =
+        parseFloat(cap.style.left) || 4;
+
+    const max = getMax();
+
+    if (position < max * .96) {
+
+        cap.style.left = "4px";
+
+        sliderText.textContent =
+            "SLIDE TO UNLOCK →";
+
+    }
+
+});
+
+
+/* CONFETTI */
+
+function createConfetti() {
+
+    const colors = [
+        "#FF4D6D",
+        "#FFD23F",
+        "#39D6C0",
+        "#8B5CF6",
+        "#00C2FF",
+        "#FFFFFF"
+    ];
+
+    for (let i = 0; i < 220; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left = "50%";
+        piece.style.top = "50%";
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+        piece.style.setProperty(
+            "--x",
+            ((Math.random() - .5)
+            * window.innerWidth * 1.7) + "px"
+        );
+
+        piece.style.setProperty(
+            "--y",
+            ((Math.random() - .5)
+            * window.innerHeight * 1.7) + "px"
+        );
+
+        piece.style.setProperty(
+            "--r",
+            (Math.random() * 1440) + "deg"
+        );
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => piece.remove(), 2800);
+
+    }
+
+}
+
+
+/* FINISH */
+
+function finishSurvey() {
+
+    if (selectedYear === null) {
 
         dragging = false;
 
-
-        sliderCap.style.left =
-            getMaxPosition() + "px";
+        cap.style.left = "4px";
 
         sliderText.textContent =
-            "SAVING...";
+            "SELECT YOUR MYP YEAR FIRST";
 
+        yearError.classList.add("show");
 
-        savingMessage.classList.add("show");
+        document.querySelector(".section")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
 
-
-        try {
-
-            /*
-             * SAVE EVERYTHING TO FIRESTORE
-             */
-
-            await saveSurveyToFirebase();
-
-
-            savingMessage.textContent =
-                "Saved! Welcome to MYP Haven! 🎉";
-
-
-            sliderText.textContent =
-                "UNLOCKED! 🎉";
-
-
-            /*
-             * Show celebration.
-             */
-
-            setTimeout(() => {
-
-                successScreen.classList.add(
-                    "show"
-                );
-
-
-                createConfetti();
-
-
-                for (
-                    let i = 0;
-                    i < 9;
-                    i++
-                ) {
-
-                    setTimeout(
-                        createFirework,
-                        i * 300
-                    );
-
-                }
-
-
-            }, 400);
-
-
-            /*
-             * After the celebration,
-             * take the student to the dashboard.
-             */
-
-            setTimeout(() => {
-
-                window.location.href =
-                    "./dashboard.html";
-
-            }, 4800);
-
-
-        } catch (error) {
-
-            console.error(
-                "SURVEY SAVE ERROR:",
-                error
-            );
-
-
-            unlocked = false;
-
-
-            sliderCap.style.left =
-                "4px";
-
-            sliderText.textContent =
-                "TRY AGAIN →";
-
-            savingMessage.classList.remove(
-                "show"
-            );
-
-
-            alert(
-                "We couldn't save your survey. Please try again."
-            );
-
-        }
+        return;
 
     }
 
 
-    /* =========================================
-       CONFETTI
-    ========================================= */
+    if (selectedSubjects.length === 0) {
 
-    function createConfetti() {
+        dragging = false;
 
-        const colors = [
+        cap.style.left = "4px";
 
-            "#FF4D6D",
-            "#FFD23F",
-            "#39D6C0",
-            "#8B5CF6",
-            "#00C2FF",
-            "#FFFFFF"
+        sliderText.textContent =
+            "SELECT AT LEAST ONE SUBJECT";
 
-        ];
+        subjectError.classList.add("show");
 
-
-        for (
-            let i = 0;
-            i < 220;
-            i++
-        ) {
-
-            const piece =
-                document.createElement("div");
-
-
-            piece.className =
-                "confetti";
-
-
-            piece.style.left =
-                "50%";
-
-            piece.style.top =
-                "50%";
-
-
-            piece.style.background =
-                colors[
-                    Math.floor(
-                        Math.random()
-                        *
-                        colors.length
-                    )
-                ];
-
-
-            piece.style.setProperty(
-                "--x",
-                (
-                    (Math.random() - 0.5)
-                    *
-                    window.innerWidth
-                    *
-                    1.6
-                ) + "px"
-            );
-
-
-            piece.style.setProperty(
-                "--y",
-                (
-                    (Math.random() - 0.5)
-                    *
-                    window.innerHeight
-                    *
-                    1.6
-                ) + "px"
-            );
-
-
-            piece.style.setProperty(
-                "--rotation",
-                (
-                    Math.random()
-                    * 1440
-                ) + "deg"
-            );
-
-
-            document.body.appendChild(
-                piece
-            );
-
-
-            setTimeout(() => {
-
-                piece.remove();
-
-            }, 2700);
-
-        }
+        return;
 
     }
 
 
-    /* =========================================
-       FIREWORKS
-    ========================================= */
+    saveSurvey();
 
-    function createFirework() {
+    cap.style.left =
+        getMax() + "px";
 
-        const centerX =
-            Math.random()
-            *
-            window.innerWidth;
-
-        const centerY =
-            80
-            +
-            Math.random()
-            *
-            window.innerHeight
-            *
-            0.65;
+    sliderText.textContent =
+        "UNLOCKED! 🎉";
 
 
-        const colors = [
+    success.classList.add("show");
 
-            "#FF4D6D",
-            "#FFD23F",
-            "#39D6C0",
-            "#FFFFFF",
-            "#00C2FF"
-
-        ];
+    createConfetti();
 
 
-        for (
-            let i = 0;
-            i < 45;
-            i++
-        ) {
+    /* Extra confetti bursts */
 
-            const particle =
-                document.createElement("div");
+    setTimeout(createConfetti, 700);
+    setTimeout(createConfetti, 1400);
 
 
-            particle.className =
-                "firework";
+    /*
+       Dashboard redirect.
+       Give the celebration time to play.
+    */
 
+    setTimeout(function() {
 
-            particle.style.left =
-                centerX + "px";
+        window.location.href =
+            "./dashboard.html";
 
-            particle.style.top =
-                centerY + "px";
+    }, 5000);
 
-
-            particle.style.background =
-                colors[
-                    Math.floor(
-                        Math.random()
-                        *
-                        colors.length
-                    )
-                ];
-
-
-            const angle =
-                Math.random()
-                *
-                Math.PI
-                *
-                2;
-
-
-            const distance =
-                90
-                +
-                Math.random()
-                *
-                210;
-
-
-            particle.style.setProperty(
-                "--x",
-                (
-                    Math.cos(angle)
-                    *
-                    distance
-                ) + "px"
-            );
-
-
-            particle.style.setProperty(
-                "--y",
-                (
-                    Math.sin(angle)
-                    *
-                    distance
-                ) + "px"
-            );
-
-
-            document.body.appendChild(
-                particle
-            );
-
-
-            setTimeout(() => {
-
-                particle.remove();
-
-            }, 1300);
-
-        }
-
-    }
-
-
-    /* =========================================
-       CONSOLE MESSAGE
-    ========================================= */
-
-    console.log(
-        "MYP Haven survey loaded successfully."
-    );
+}
 
 </script>
 
 </body>
-
 </html>
-```
