@@ -998,29 +998,12 @@
                 ------------------------------------- */
 
                 showSuccess(
-                    `Welcome to MYP Haven, ${name}!`
-                );
+    `Welcome to MYP Haven, ${name}!`
+);
 
-
-                /*
-                 * IMPORTANT:
-                 *
-                 * New users go to the survey.
-                 *
-                 * The survey will collect their
-                 * MYP year and subjects.
-                 */
-
-                setTimeout(
-                    () => {
-
-                        window.location.href =
-                            "/part-3-/survey.html";
-
-                    },
-                    1000
-                );
-
+setTimeout(() => {
+    window.location.href = "./survey.html";
+}, 1000);
 
             } catch (error) {
 
