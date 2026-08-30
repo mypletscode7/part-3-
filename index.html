@@ -1,1 +1,3464 @@
+<!DOCTYPE html>
 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>MYP Haven</title>
+
+<!-- =====================================================
+     GOOGLE FONTS
+====================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+    /* =====================================================
+       GLOBAL
+    ====================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+        font-family: "DM Sans", sans-serif;
+        background: #FFFFFF;
+        color: #FFFFFF;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    button {
+        font-family: "DM Sans", sans-serif;
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .hero {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+        background: #000000;
+    }
+
+    .hero-video {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        z-index: 0;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.38);
+
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+
+        width: min(1200px, 92%);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    .hero-title {
+        width: 100%;
+
+        font-family: "Bricolage Grotesque", sans-serif;
+
+        font-size: clamp(4rem, 9vw, 9rem);
+
+        font-weight: 800;
+
+        line-height: 0.95;
+
+        letter-spacing: -0.055em;
+
+        color: #FFFFFF;
+
+        margin-bottom: 25px;
+
+        white-space: nowrap;
+    }
+
+    #master-text {
+        color: #FFFFFF;
+    }
+
+    #myp-word {
+        display: inline-block;
+
+        color: #FF4D6D;
+
+        transition:
+            color 1.2s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .hero-subtitle {
+        width: min(950px, 100%);
+
+        min-height: 1.4em;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size: clamp(1.2rem, 2.2vw, 2rem);
+
+        font-weight: 500;
+
+        line-height: 1.4;
+
+        color: #FFFFFF;
+
+        margin-bottom: 45px;
+    }
+
+    .hero-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        min-width: 240px;
+        height: 68px;
+
+        padding: 0 36px;
+
+        border: none;
+        border-radius: 999px;
+
+        background: #FFFFFF;
+        color: #111111;
+
+        font-size: 1rem;
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .hero-button:hover {
+        transform: translateY(-4px);
+
+        box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.30);
+    }
+
+    .hero-button:active {
+        transform: scale(0.96);
+    }
+
+
+    /* =====================================================
+       CONFETTI
+    ====================================================== */
+
+    .confetti {
+        position: fixed;
+
+        width: 6px;
+        height: 6px;
+
+        pointer-events: none;
+
+        z-index: 9999;
+
+        animation:
+            confetti-pop 0.5s ease-out forwards;
+    }
+
+    @keyframes confetti-pop {
+
+        0% {
+            opacity: 1;
+
+            transform:
+                translate(0, 0)
+                rotate(0deg)
+                scale(1);
+        }
+
+        100% {
+            opacity: 0;
+
+            transform:
+                translate(var(--x), var(--y))
+                rotate(var(--rotation))
+                scale(0);
+        }
+    }
+
+
+    /* =====================================================
+       ABOUT MYP HAVEN
+    ====================================================== */
+
+    .about-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 100vh;
+        min-height: 100svh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        padding: 80px 8%;
+
+        background: #FFFFFF;
+    }
+
+    .about-section::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background: #FF4D6D;
+
+        opacity: 0.32;
+
+        z-index: 0;
+
+        pointer-events: none;
+    }
+
+    .about-content {
+        position: relative;
+        z-index: 2;
+
+        width: min(1250px, 100%);
+
+        text-align: center;
+    }
+
+    .about-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+
+        font-size: clamp(4rem, 8vw, 8rem);
+
+        font-weight: 800;
+
+        line-height: 0.95;
+
+        letter-spacing: -0.05em;
+
+        margin-bottom: 45px;
+
+        opacity: 0;
+
+        transform: translateX(-110vw);
+    }
+
+    .about-pink {
+        color: #CC2F4E;
+    }
+
+    .about-white {
+        color: #FFFFFF;
+    }
+
+    .about-section.visible .about-title {
+        animation:
+            about-title-movement
+            1.8s
+            cubic-bezier(.18, 1.3, .35, 1)
+            forwards;
+    }
+
+    @keyframes about-title-movement {
+
+        0% {
+            opacity: 0;
+            transform: translateX(-110vw);
+        }
+
+        55% {
+            opacity: 1;
+            transform: translateX(65px);
+        }
+
+        72% {
+            transform: translateX(-25px);
+        }
+
+        86% {
+            transform: translateX(12px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .about-description {
+        max-width: 1050px;
+
+        margin: 0 auto;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size: clamp(1.15rem, 1.9vw, 1.65rem);
+
+        line-height: 1.55;
+
+        font-weight: 700;
+
+        color: #FFFFFF;
+    }
+
+    .about-word {
+        display: inline-block;
+
+        color: #FFFFFF;
+
+        opacity: 0;
+
+        transform: translateY(60px);
+
+        margin-right: 0.25em;
+    }
+
+    .about-highlight {
+        color: #CC2F4E;
+    }
+
+    .about-section.visible .about-word {
+        animation:
+            about-word-rise
+            0.65s
+            cubic-bezier(.2, .8, .2, 1)
+            forwards;
+
+        animation-delay:
+            calc(var(--word-index) * 0.055s);
+    }
+
+    @keyframes about-word-rise {
+
+        from {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* =====================================================
+       MISSION & VISION
+    ====================================================== */
+
+    .mission-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 100vh;
+        min-height: 100svh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        overflow: hidden;
+
+        padding: 80px 7%;
+
+        background: #FFFFFF;
+    }
+
+    .mission-section::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background: #FF8A3D;
+
+        opacity: 0.32;
+
+        z-index: 0;
+
+        pointer-events: none;
+    }
+
+    .mission-circle {
+        position: absolute;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.25);
+
+        z-index: 1;
+
+        pointer-events: none;
+    }
+
+    .mission-circle-one {
+        width: 300px;
+        height: 300px;
+
+        left: -100px;
+        top: -100px;
+
+        animation:
+            circle-one-float
+            10s
+            ease-in-out
+            infinite;
+    }
+
+    .mission-circle-two {
+        width: 220px;
+        height: 220px;
+
+        right: -70px;
+        bottom: -70px;
+
+        animation:
+            circle-two-float
+            12s
+            ease-in-out
+            infinite;
+    }
+
+    @keyframes circle-one-float {
+
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(45px, 35px);
+        }
+    }
+
+    @keyframes circle-two-float {
+
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(-35px, -40px);
+        }
+    }
+
+    .mission-content {
+        position: relative;
+
+        z-index: 3;
+
+        width: min(1300px, 100%);
+    }
+
+    .mission-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+
+        font-size: clamp(3rem, 7vw, 8rem);
+
+        font-weight: 800;
+
+        line-height: 0.95;
+
+        letter-spacing: -0.05em;
+
+        white-space: nowrap;
+
+        margin-bottom: 38px;
+
+        opacity: 0;
+
+        transform: translateY(45px);
+    }
+
+    .mission-orange {
+        color: #FF8A3D;
+    }
+
+    .mission-white {
+        color: #FFFFFF;
+    }
+
+    .mission-section.visible .mission-title {
+        animation:
+            mission-title-in
+            1s
+            cubic-bezier(.2, .8, .2, 1)
+            forwards;
+    }
+
+    @keyframes mission-title-in {
+
+        from {
+            opacity: 0;
+            transform: translateY(45px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .mission-effortless {
+        display: inline-block;
+
+        transform-origin: center;
+    }
+
+    .mission-section.visible .mission-effortless {
+        animation:
+            effortless-pop
+            0.7s
+            ease-out
+            1s
+            both;
+    }
+
+    @keyframes effortless-pop {
+
+        0% {
+            transform: scale(1);
+        }
+
+        45% {
+            transform: scale(1.08);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .mission-description {
+        max-width: 950px;
+
+        margin: 0 auto;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size: clamp(1rem, 1.65vw, 1.5rem);
+
+        line-height: 1.55;
+
+        font-weight: 700;
+
+        color: #FFFFFF;
+
+        opacity: 0;
+
+        transform: translateY(55px);
+    }
+
+    .mission-highlight {
+        color: #FF8A3D;
+    }
+
+    .mission-section.visible .mission-description {
+        animation:
+            mission-text-in
+            1s
+            ease-out
+            1.45s
+            forwards;
+    }
+
+    @keyframes mission-text-in {
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* =====================================================
+       FEATURES
+    ====================================================== */
+
+    .features-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 90px 5% 100px;
+
+        background: #7ED957;
+
+        overflow: hidden;
+    }
+
+    .question-mark {
+        position: absolute;
+
+        font-family: "Bricolage Grotesque", sans-serif;
+
+        font-size: clamp(10rem, 20vw, 22rem);
+
+        font-weight: 800;
+
+        color: rgba(255, 255, 255, 0.10);
+
+        pointer-events: none;
+        user-select: none;
+
+        z-index: 0;
+    }
+
+    .question-one {
+        left: 3%;
+        top: -100px;
+
+        animation:
+            question-one-float
+            9s
+            ease-in-out
+            infinite;
+    }
+
+    .question-two {
+        right: 3%;
+        bottom: -120px;
+
+        animation:
+            question-two-float
+            11s
+            ease-in-out
+            infinite;
+    }
+
+    @keyframes question-one-float {
+
+        0%,
+        100% {
+            transform:
+                translateY(0)
+                rotate(-8deg);
+        }
+
+        50% {
+            transform:
+                translateY(25px)
+                rotate(5deg);
+        }
+    }
+
+    @keyframes question-two-float {
+
+        0%,
+        100% {
+            transform:
+                translateY(0)
+                rotate(8deg);
+        }
+
+        50% {
+            transform:
+                translateY(-30px)
+                rotate(-5deg);
+        }
+    }
+
+    .features-content {
+        position: relative;
+
+        z-index: 2;
+
+        width: min(1300px, 100%);
+
+        margin: 0 auto;
+
+        text-align: center;
+    }
+
+    .features-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+
+        font-size: clamp(4rem, 9vw, 9rem);
+
+        font-weight: 800;
+
+        line-height: 0.95;
+
+        color: #FFFFFF;
+
+        margin-bottom: 55px;
+
+        opacity: 0;
+
+        transform: translateY(45px);
+    }
+
+    .features-section.visible .features-title {
+        animation:
+            features-title-in
+            0.9s
+            ease-out
+            forwards;
+    }
+
+    @keyframes features-title-in {
+
+        from {
+            opacity: 0;
+            transform: translateY(45px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .features-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+
+        opacity: 0;
+
+        transform: scale(0.65);
+    }
+
+    .features-section.visible .features-grid {
+        animation:
+            feature-array-pop
+            0.9s
+            cubic-bezier(.15, 1.5, .35, 1)
+            2.1s
+            forwards;
+    }
+
+    @keyframes feature-array-pop {
+
+        0% {
+            opacity: 0;
+            transform: scale(0.65);
+        }
+
+        55% {
+            opacity: 1;
+            transform: scale(1.06);
+        }
+
+        72% {
+            transform: scale(0.96);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .feature-card {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        min-height: 115px;
+
+        padding: 18px 20px;
+
+        border-radius: 18px;
+
+        text-align: left;
+
+        color: #FFFFFF;
+
+        transition:
+            transform 0.25s ease,
+            filter 0.25s ease;
+    }
+
+    .feature-card:nth-child(1) {
+        background: #2F8F3A;
+    }
+
+    .feature-card:nth-child(2) {
+        background: #3A9B42;
+    }
+
+    .feature-card:nth-child(3) {
+        background: #287E34;
+    }
+
+    .feature-card:nth-child(4) {
+        background: #48A94D;
+    }
+
+    .feature-card:nth-child(5) {
+        background: #236F30;
+    }
+
+    .feature-card:nth-child(6) {
+        background: #55B84F;
+    }
+
+    .feature-card:nth-child(7) {
+        background: #338C3A;
+    }
+
+    .feature-card:nth-child(8) {
+        background: #439D43;
+    }
+
+    .feature-card:nth-child(9) {
+        background: #297C35;
+    }
+
+    .feature-card:nth-child(10) {
+        background: #50A949;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        filter: brightness(1.06);
+    }
+
+    .feature-text {
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .feature-number {
+        font-size: 0.72rem;
+
+        font-weight: 400;
+
+        color: #FFFFFF;
+
+        opacity: 0.9;
+
+        margin-bottom: 4px;
+    }
+
+    .feature-name {
+        font-size: 1.1rem;
+
+        font-weight: 700;
+
+        line-height: 1.25;
+
+        color: #FFFFFF;
+
+        margin-bottom: 5px;
+    }
+
+    .feature-description {
+        font-size: 0.87rem;
+
+        font-weight: 400;
+
+        line-height: 1.4;
+
+        color: #FFFFFF;
+    }
+
+    .feature-emoji {
+        width: 50px;
+        height: 50px;
+
+        min-width: 50px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 14px;
+
+        background: rgba(255, 255, 255, 0.12);
+
+        font-size: 1.6rem;
+    }
+
+
+    /* =====================================================
+       TESTIMONIALS
+    ====================================================== */
+
+    .testimonials-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        background: #39D6C0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        padding: 100px 30px;
+    }
+
+    .testimonials-container {
+        position: relative;
+
+        z-index: 2;
+
+        width: 100%;
+
+        max-width: 1100px;
+
+        text-align: center;
+    }
+
+    .testimonials-title {
+        margin: 0 auto 70px;
+
+        max-width: 900px;
+
+        color: #FFFFFF;
+
+        font-family:
+            "Bricolage Grotesque",
+            sans-serif;
+
+        font-size:
+            clamp(42px, 6vw, 78px);
+
+        font-weight: 700;
+
+        line-height: 0.98;
+
+        letter-spacing: -2px;
+    }
+
+    .testimonial-slider {
+        position: relative;
+
+        width: 100%;
+
+        max-width: 850px;
+
+        min-height: 370px;
+
+        margin: 0 auto;
+    }
+
+    .testimonial-card {
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+
+        min-height: 370px;
+
+        padding: 65px 75px;
+
+        border-radius: 35px;
+
+        background:
+            rgba(255, 255, 255, 0.14);
+
+        border:
+            2px solid rgba(255, 255, 255, 0.28);
+
+        backdrop-filter: blur(10px);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0;
+
+        transform:
+            translateX(40px)
+            scale(0.97);
+
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+
+        pointer-events: none;
+    }
+
+    .testimonial-card.active {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            scale(1);
+
+        pointer-events: auto;
+    }
+
+    .quote-mark {
+        position: absolute;
+
+        top: 25px;
+        left: 38px;
+
+        color: #FFFFFF;
+
+        font-family: Georgia, serif;
+
+        font-size: 85px;
+
+        line-height: 1;
+
+        opacity: 0.25;
+    }
+
+    .testimonial-quote {
+        max-width: 700px;
+
+        margin: 0 0 35px;
+
+        color: #FFFFFF;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size:
+            clamp(25px, 3vw, 39px);
+
+        font-weight: 700;
+
+        line-height: 1.2;
+
+        letter-spacing: -0.5px;
+    }
+
+    .testimonial-person {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 4px;
+
+        font-family: "DM Sans", sans-serif;
+
+        color: #FFFFFF;
+    }
+
+    .testimonial-person strong {
+        font-size: 20px;
+
+        font-weight: 700;
+    }
+
+    .testimonial-person span {
+        font-size: 15px;
+
+        font-weight: 500;
+
+        opacity: 0.85;
+    }
+
+    .testimonial-dots {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 10px;
+
+        margin-top: 35px;
+    }
+
+    .testimonial-dot {
+        width: 10px;
+        height: 10px;
+
+        padding: 0;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255, 255, 255, 0.4);
+
+        cursor: pointer;
+
+        transition:
+            transform 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+        background: #FFFFFF;
+
+        transform: scale(1.35);
+    }
+
+    .floating-mic {
+        position: absolute;
+
+        color: #FFFFFF;
+
+        font-size: 70px;
+
+        opacity: 0.10;
+
+        pointer-events: none;
+
+        z-index: 1;
+
+        user-select: none;
+    }
+
+    .mic-one {
+        top: 16%;
+        left: 7%;
+
+        animation:
+            floatMicOne
+            7s
+            ease-in-out
+            infinite;
+    }
+
+    .mic-two {
+        right: 7%;
+        bottom: 17%;
+
+        animation:
+            floatMicTwo
+            9s
+            ease-in-out
+            infinite;
+    }
+
+    @keyframes floatMicOne {
+
+        0%,
+        100% {
+            transform:
+                translate(0, 0)
+                rotate(-8deg);
+        }
+
+        50% {
+            transform:
+                translate(12px, -20px)
+                rotate(5deg);
+        }
+    }
+
+    @keyframes floatMicTwo {
+
+        0%,
+        100% {
+            transform:
+                translate(0, 0)
+                rotate(8deg);
+        }
+
+        50% {
+            transform:
+                translate(-15px, 18px)
+                rotate(-5deg);
+        }
+    }
+
+
+    /* =====================================================
+       FAQ
+    ====================================================== */
+
+    .faq-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 100px 7%;
+
+        background: #34D399;
+
+        overflow: hidden;
+    }
+
+    .faq-container {
+        width: min(1000px, 100%);
+
+        margin: 0 auto;
+    }
+
+    .faq-title {
+        text-align: center;
+
+        color: #FFFFFF;
+
+        font-family:
+            "Bricolage Grotesque",
+            sans-serif;
+
+        font-size:
+            clamp(3.5rem, 7vw, 7rem);
+
+        font-weight: 800;
+
+        line-height: 0.95;
+
+        letter-spacing: -0.05em;
+
+        margin-bottom: 60px;
+    }
+
+    .faq-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 16px;
+    }
+
+    .faq-item {
+        width: 100%;
+
+        border-radius: 22px;
+
+        background:
+            rgba(255, 255, 255, 0.16);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.25);
+
+        backdrop-filter: blur(12px);
+
+        overflow: hidden;
+
+        transition:
+            background 0.3s ease;
+    }
+
+    .faq-item:hover {
+        background:
+            rgba(255, 255, 255, 0.21);
+    }
+
+    .faq-question {
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        padding: 24px 28px;
+
+        border: none;
+
+        background: transparent;
+
+        color: #FFFFFF;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size: 1.1rem;
+
+        font-weight: 700;
+
+        text-align: left;
+
+        cursor: pointer;
+    }
+
+    .faq-icon {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 32px;
+        height: 32px;
+
+        min-width: 32px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255, 255, 255, 0.18);
+
+        font-size: 1.3rem;
+
+        transition:
+            transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-icon {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+        display: grid;
+
+        grid-template-rows: 0fr;
+
+        transition:
+            grid-template-rows 0.4s ease;
+    }
+
+    .faq-answer-inner {
+        overflow: hidden;
+
+        padding: 0 28px;
+
+        color: #FFFFFF;
+
+        font-family: "DM Sans", sans-serif;
+
+        font-size: 1rem;
+
+        line-height: 1.6;
+
+        font-weight: 500;
+    }
+
+    .faq-item.open .faq-answer {
+        grid-template-rows: 1fr;
+    }
+
+    .faq-item.open .faq-answer-inner {
+        padding-bottom: 25px;
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ====================================================== */
+
+    .contact-section {
+        position: relative;
+
+        width: 100%;
+
+        min-height: 75vh;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 100px 7%;
+
+        background: #00C2FF;
+
+        overflow: hidden;
+    }
+
+    .contact-container {
+        width: min(900px, 100%);
+
+        margin: 0 auto;
+    }
+
+    .contact-title {
+        font-family:
+            "Bricolage Grotesque",
+            sans-serif;
+
+        font-size:
+            clamp(5rem, 12vw, 11rem);
+
+        font-weight: 800;
+
+        line-height: 0.9;
+
+        letter-spacing: -0.06em;
+
+        color: #FFFFFF;
+
+        margin-bottom: 30px;
+    }
+
+    .contact-subtext {
+        color: #FFFFFF;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size:
+            clamp(1.1rem, 2vw, 1.5rem);
+
+        font-weight: 400;
+
+        line-height: 1.5;
+
+        margin-bottom: 30px;
+    }
+
+    .email-display {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 10px;
+
+        color: #FFFFFF;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size:
+            clamp(1.15rem, 2.2vw, 1.6rem);
+
+        font-weight: 700;
+
+        margin-bottom: 24px;
+    }
+
+    .email-icon {
+        font-size: 1.4em;
+    }
+
+    .copy-email-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        min-width: 155px;
+
+        height: 52px;
+
+        padding: 0 25px;
+
+        border: none;
+
+        border-radius: 999px;
+
+        background: #FFFFFF;
+
+        color: #00C2FF;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size: 0.95rem;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .copy-email-button:hover {
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 12px 25px
+            rgba(0, 0, 0, 0.18);
+    }
+
+    .copy-email-button.copied {
+        transform: scale(0.96);
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .footer {
+        width: 100%;
+
+        background: #3B82F6;
+
+        padding: 55px 7% 30px;
+
+        text-align: center;
+    }
+
+    .footer-container {
+        width: min(1200px, 100%);
+
+        margin: 0 auto;
+    }
+
+    .footer-content {
+        text-align: left;
+    }
+
+    .footer-disclaimer {
+        max-width: 1100px;
+
+        color: #FFFFFF;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size:
+            clamp(0.95rem, 1.5vw, 1.2rem);
+
+        font-weight: 700;
+
+        line-height: 1.5;
+
+        margin-bottom: 25px;
+    }
+
+    .back-to-top {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        height: 52px;
+
+        padding: 0 28px;
+
+        border: none;
+
+        border-radius: 999px;
+
+        background: #FFFFFF;
+
+        color: #3B82F6;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size: 0.95rem;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .back-to-top:hover {
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 12px 25px
+            rgba(0, 0, 0, 0.18);
+    }
+
+    .footer-copyright {
+        margin-top: 35px;
+
+        padding-top: 25px;
+
+        border-top:
+            1px solid rgba(255, 255, 255, 0.22);
+
+        color: #FFFFFF;
+
+        font-family:
+            "DM Sans",
+            sans-serif;
+
+        font-size: 0.8rem;
+
+        font-weight: 400;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 1000px) {
+
+        .hero-title {
+            white-space: normal;
+        }
+
+        .mission-title {
+            white-space: normal;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    @media (max-width: 700px) {
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+        }
+
+        .hero-button {
+            min-width: 210px;
+            height: 60px;
+        }
+
+        .about-section {
+            padding: 60px 7%;
+        }
+
+        .about-title {
+            font-size: 3.2rem;
+        }
+
+        .about-description {
+            font-size: 1.05rem;
+        }
+
+        .mission-section {
+            padding: 60px 7%;
+        }
+
+        .mission-title {
+            font-size: 3.2rem;
+            line-height: 1;
+        }
+
+        .mission-description {
+            font-size: 1rem;
+        }
+
+        .features-section {
+            padding: 70px 5%;
+        }
+
+        .features-title {
+            font-size: 4rem;
+        }
+
+        .feature-card {
+            min-height: 105px;
+            padding: 16px;
+        }
+
+        .feature-name {
+            font-size: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.78rem;
+        }
+
+        .feature-emoji {
+            width: 43px;
+            height: 43px;
+            min-width: 43px;
+            font-size: 1.35rem;
+        }
+
+        .testimonials-section {
+            padding: 80px 20px;
+        }
+
+        .testimonials-title {
+            margin-bottom: 45px;
+            letter-spacing: -1px;
+        }
+
+        .testimonial-slider {
+            min-height: 430px;
+        }
+
+        .testimonial-card {
+            min-height: 430px;
+            padding: 55px 30px;
+            border-radius: 28px;
+        }
+
+        .testimonial-quote {
+            font-size: 25px;
+            line-height: 1.25;
+        }
+
+        .quote-mark {
+            left: 20px;
+            font-size: 65px;
+        }
+
+        .floating-mic {
+            font-size: 45px;
+        }
+
+        .faq-section {
+            padding: 75px 6%;
+        }
+
+        .faq-title {
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 1rem;
+        }
+
+        .faq-answer-inner {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-size: 0.92rem;
+        }
+
+        .contact-section {
+            min-height: 70vh;
+            padding: 80px 7%;
+        }
+
+        .contact-title {
+            font-size: 5rem;
+        }
+
+        .footer {
+            padding:
+                45px 7% 25px;
+        }
+    }
+
+
+    /* =====================================================
+       ACCESSIBILITY
+    ====================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero" id="home">
+
+    <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+
+        <source
+            src="assets/videos/myp-haven-hero.mp4"
+            type="video/mp4"
+        >
+
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">
+
+            <span id="master-text"></span>
+
+            <span id="myp-word"></span>
+
+        </h1>
+
+        <p
+            class="hero-subtitle"
+            id="subtitle"
+        ></p>
+
+        <button
+            class="hero-button"
+            id="unlock-button"
+            type="button"
+        >
+            Unlock Free Access
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT MYP HAVEN
+====================================================== -->
+
+<section
+    class="about-section"
+    id="about"
+>
+
+    <div class="about-content">
+
+        <h2 class="about-title">
+
+            <span class="about-pink">
+                A place to
+            </span>
+
+            <span class="about-white">
+                master
+            </span>
+
+            <span class="about-pink">
+                the MYP
+            </span>
+
+        </h2>
+
+
+        <p class="about-description">
+
+            <span
+                class="about-word"
+                style="--word-index: 0"
+            >
+                <span class="about-highlight">
+                    MYP Haven
+                </span>
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 1"
+            >
+                is
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 2"
+            >
+                an
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 3"
+            >
+                <span class="about-highlight">
+                    all-in-one platform
+                </span>
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 4"
+            >
+                designed
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 5"
+            >
+                to
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 6"
+            >
+                help
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 7"
+            >
+                <span class="about-highlight">
+                    IB Middle Years Programme students
+                </span>
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 8"
+            >
+                stay
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 9"
+            >
+                organized,
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 10"
+            >
+                build
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 11"
+            >
+                confidence,
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 12"
+            >
+                and
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 13"
+            >
+                achieve
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 14"
+            >
+                their
+            </span>
+
+            <span
+                class="about-word"
+                style="--word-index: 15"
+            >
+                <span class="about-highlight">
+                    academic goals.
+                </span>
+            </span>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MISSION & VISION
+====================================================== -->
+
+<section
+    class="mission-section"
+    id="mission"
+>
+
+    <div
+        class="mission-circle mission-circle-one"
+    ></div>
+
+    <div
+        class="mission-circle mission-circle-two"
+    ></div>
+
+    <div class="mission-content">
+
+        <h2 class="mission-title">
+
+            <span class="mission-orange">
+                Built to make the MYP
+            </span>
+
+            <span
+                class="mission-white mission-effortless"
+            >
+                effortless
+            </span>
+
+        </h2>
+
+
+        <p class="mission-description">
+
+            MYP Haven’s objective is to
+
+            <span class="mission-highlight">
+                centralize relevant resources, improve academic organization, and help students better understand and achieve MYP expectations
+            </span>.
+
+            MYP Haven hopes to be that secondary place which helps with organization and understanding.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURES
+====================================================== -->
+
+<section
+    class="features-section"
+    id="features"
+>
+
+    <div class="question-mark question-one">
+        ?
+    </div>
+
+    <div class="question-mark question-two">
+        ?
+    </div>
+
+    <div class="features-content">
+
+        <h2 class="features-title">
+            What’s Inside
+        </h2>
+
+
+        <div class="features-grid">
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 1
+                    </div>
+
+                    <div class="feature-name">
+                        Dashboard Home
+                    </div>
+
+                    <div class="feature-description">
+                        Gives students a quick overview of their tasks, study schedule, MYP progress, goals, upcoming assessments, and quick actions.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    🏠
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 2
+                    </div>
+
+                    <div class="feature-name">
+                        My Subjects
+                    </div>
+
+                    <div class="feature-description">
+                        Allows students to organize their MYP subjects, view subject-related tasks and assessments, access resources, and track progress.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    📚
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 3
+                    </div>
+
+                    <div class="feature-name">
+                        Task & Assignment Tracker
+                    </div>
+
+                    <div class="feature-description">
+                        Helps students manage assignments, deadlines, priorities, and completion status in one place.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    ✅
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 4
+                    </div>
+
+                    <div class="feature-name">
+                        Study Scheduler
+                    </div>
+
+                    <div class="feature-description">
+                        Helps students plan and organize study sessions using daily schedules and weekly calendars.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    🗓️
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 5
+                    </div>
+
+                    <div class="feature-name">
+                        MYP Assessment Tracker
+                    </div>
+
+                    <div class="feature-description">
+                        Allows students to track their achievement levels, assessment history, MYP criteria, target levels, and progress.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    🎯
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 6
+                    </div>
+
+                    <div class="feature-name">
+                        Goals & Progress
+                    </div>
+
+                    <div class="feature-description">
+                        Allows students to set academic and personal goals, establish target grades, and monitor their progress.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    📈
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 7
+                    </div>
+
+                    <div class="feature-name">
+                        MYP Resources
+                    </div>
+
+                    <div class="feature-description">
+                        Provides students with information and resources to help them understand the MYP and its requirements.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    📖
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 8
+                    </div>
+
+                    <div class="feature-name">
+                        Command-Term Database
+                    </div>
+
+                    <div class="feature-description">
+                        Helps students understand MYP command terms, what they require, and how to use them in different subjects.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    🔎
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 9
+                    </div>
+
+                    <div class="feature-name">
+                        Criterion Self-Assessment
+                    </div>
+
+                    <div class="feature-description">
+                        Allows students to check their work against MYP criteria, reflect on their work, and identify areas for improvement.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    📝
+                </div>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-text">
+
+                    <div class="feature-number">
+                        FEATURE 10
+                    </div>
+
+                    <div class="feature-name">
+                        Study & Work Support
+                    </div>
+
+                    <div class="feature-description">
+                        Provides students with strategies for studying, managing time, taking notes, revising, avoiding procrastination, and preparing for assessments.
+                    </div>
+
+                </div>
+
+                <div class="feature-emoji">
+                    🧠
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TESTIMONIALS
+====================================================== -->
+
+<section
+    class="testimonials-section"
+    id="testimonials"
+>
+
+    <div class="floating-mic mic-one">
+        🎙
+    </div>
+
+    <div class="floating-mic mic-two">
+        🎙
+    </div>
+
+
+    <div class="testimonials-container">
+
+        <h2 class="testimonials-title">
+            See what other students have to say
+        </h2>
+
+
+        <div class="testimonial-slider">
+
+
+            <article class="testimonial-card active">
+
+                <div class="quote-mark">
+                    “
+                </div>
+
+                <p class="testimonial-quote">
+                    Truly a revolutionary website which helped me organize myself.
+                </p>
+
+                <div class="testimonial-person">
+
+                    <strong>
+                        Jean
+                    </strong>
+
+                    <span>
+                        Windhoek International School
+                    </span>
+
+                    <span>
+                        MYP5
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="testimonial-card">
+
+                <div class="quote-mark">
+                    “
+                </div>
+
+                <p class="testimonial-quote">
+                    I love the motivation pages, it really helps me keep going.
+                </p>
+
+                <div class="testimonial-person">
+
+                    <strong>
+                        Jisiele
+                    </strong>
+
+                    <span>
+                        International School of China
+                    </span>
+
+                    <span>
+                        MYP3
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="testimonial-card">
+
+                <div class="quote-mark">
+                    “
+                </div>
+
+                <p class="testimonial-quote">
+                    An absolute perfect website which is just meant for MYP students.
+                </p>
+
+                <div class="testimonial-person">
+
+                    <strong>
+                        Cholé
+                    </strong>
+
+                    <span>
+                        International School of Paris
+                    </span>
+
+                    <span>
+                        MYP5
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <div class="testimonial-dots">
+
+            <button
+                class="testimonial-dot active"
+                aria-label="Show testimonial 1"
+            ></button>
+
+            <button
+                class="testimonial-dot"
+                aria-label="Show testimonial 2"
+            ></button>
+
+            <button
+                class="testimonial-dot"
+                aria-label="Show testimonial 3"
+            ></button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+====================================================== -->
+
+<section
+    class="faq-section"
+    id="faq"
+>
+
+    <div class="faq-container">
+
+        <h2 class="faq-title">
+            Frequently Asked Questions
+        </h2>
+
+
+        <div class="faq-list">
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        What is MYP Haven?
+                    </span>
+
+                    <span class="faq-icon">
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="faq-answer-inner">
+
+                        MYP Haven is a digital space exclusively for MYP students where understanding and organization is prioritized.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        Is it free?
+                    </span>
+
+                    <span class="faq-icon">
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="faq-answer-inner">
+
+                        MYP Haven is completely free. Everything is accessible to everyone, with no hidden fees or locked features.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        How do I create an account?
+                    </span>
+
+                    <span class="faq-icon">
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="faq-answer-inner">
+
+                        Once you are ready to join the main website, scroll to the top and click the button “Unlock Free Access.” From there, you will be redirected to an account page. Important questions will also be asked so your interface is personalized to your needs.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        Does it work on phones?
+                    </span>
+
+                    <span class="faq-icon">
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="faq-answer-inner">
+
+                        MYP Haven can be used on phone, laptop, or tablet screen, making the interface accessible on any sized screen.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    aria-expanded="false"
+                >
+
+                    <span>
+                        Is MYP Haven affiliated with the IB?
+                    </span>
+
+                    <span class="faq-icon">
+                        +
+                    </span>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="faq-answer-inner">
+
+                        No. MYP Haven is an independent student-created website and is not affiliated with, sponsored by, or endorsed by the International Baccalaureate Organization.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+====================================================== -->
+
+<section
+    class="contact-section"
+    id="contact"
+>
+
+    <div class="contact-container">
+
+        <h2 class="contact-title">
+            Let’s Talk
+        </h2>
+
+        <p class="contact-subtext">
+            Have a question or problem? Contact MYP Haven.
+        </p>
+
+
+        <div class="email-display">
+
+            <span class="email-icon">
+                ✉
+            </span>
+
+            <span>
+                hello@myphaven.info
+            </span>
+
+        </div>
+
+
+        <button
+            class="copy-email-button"
+            id="copy-email"
+            type="button"
+        >
+            Copy Email
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-content">
+
+            <p class="footer-disclaimer">
+
+                MYP Haven is an independent student-created website and is not affiliated with, sponsored by, or endorsed by the International Baccalaureate Organization.
+
+            </p>
+
+
+            <button
+                class="back-to-top"
+                id="back-to-top"
+                type="button"
+            >
+                Back to Top
+            </button>
+
+        </div>
+
+
+        <p class="footer-copyright">
+
+            © 2026 MYP Haven. All rights reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     FIREBASE + JAVASCRIPT
+====================================================== -->
+
+<script type="module">
+
+    /* =================================================
+       FIREBASE
+    ================================================= */
+
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+    import {
+        getAuth,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    /* =================================================
+       YOUR FIREBASE CONFIGURATION
+    ================================================= */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
+
+        authDomain:
+            "the-myp-haven.firebaseapp.com",
+
+        projectId:
+            "the-myp-haven",
+
+        storageBucket:
+            "the-myp-haven.firebasestorage.app",
+
+        messagingSenderId:
+            "904577455533",
+
+        appId:
+            "1:904577455533:web:1d918ee8a3caa547eefd24"
+
+    };
+
+
+    /* =================================================
+       INITIALIZE FIREBASE
+    ================================================= */
+
+    let firebaseApp;
+    let auth;
+
+    try {
+
+        firebaseApp =
+            initializeApp(firebaseConfig);
+
+        auth =
+            getAuth(firebaseApp);
+
+        console.log(
+            "Firebase initialized successfully."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Firebase initialization failed:",
+            error
+        );
+
+    }
+
+
+    /* =================================================
+       FIREBASE AUTH STATE
+    ================================================= */
+
+    let currentUser = null;
+
+
+    if (auth) {
+
+        onAuthStateChanged(
+            auth,
+            user => {
+
+                currentUser = user;
+
+                if (user) {
+
+                    console.log(
+                        "User is signed in:",
+                        user.email
+                    );
+
+                } else {
+
+                    console.log(
+                        "No user is currently signed in."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       HERO TYPING
+    ================================================= */
+
+    const masterText =
+        document.getElementById("master-text");
+
+    const mypWord =
+        document.getElementById("myp-word");
+
+    const subtitle =
+        document.getElementById("subtitle");
+
+
+    function typeText(
+        element,
+        text,
+        speed
+    ) {
+
+        return new Promise(resolve => {
+
+            let index = 0;
+
+            const interval =
+                setInterval(() => {
+
+                    element.textContent +=
+                        text[index];
+
+                    index++;
+
+                    if (
+                        index >= text.length
+                    ) {
+
+                        clearInterval(interval);
+
+                        resolve();
+
+                    }
+
+                }, speed);
+
+        });
+
+    }
+
+
+    async function startHeroTyping() {
+
+        await typeText(
+            masterText,
+            "Master the ",
+            75
+        );
+
+        await typeText(
+            mypWord,
+            "MYP.",
+            100
+        );
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 250)
+        );
+
+        await typeText(
+            subtitle,
+            "Achieve Your Academic Goals.",
+            55
+        );
+
+    }
+
+
+    startHeroTyping();
+
+
+    /* =================================================
+       MYP COLOR CHANGER
+    ====================================================== */
+
+    const mypColors = [
+
+        "#FF4D6D",
+        "#FFD23F",
+        "#39D6C0",
+        "#8B5CF6"
+
+    ];
+
+    let colorIndex = 0;
+
+    mypWord.style.color =
+        mypColors[0];
+
+
+    setInterval(() => {
+
+        colorIndex =
+            (colorIndex + 1)
+            %
+            mypColors.length;
+
+        mypWord.style.color =
+            mypColors[colorIndex];
+
+    }, 2200);
+
+
+    /* =================================================
+       UNLOCK FREE ACCESS
+    ================================================= */
+
+    const unlockButton =
+        document.getElementById(
+            "unlock-button"
+        );
+
+    let buttonClicked = false;
+
+
+    unlockButton.addEventListener(
+        "click",
+        () => {
+
+            if (buttonClicked) {
+                return;
+            }
+
+            buttonClicked = true;
+
+
+            const rect =
+                unlockButton.getBoundingClientRect();
+
+
+            const centerX =
+                rect.left +
+                rect.width / 2;
+
+
+            const centerY =
+                rect.top +
+                rect.height / 2;
+
+
+            const confettiColors = [
+
+                "#FF4D6D",
+                "#FFD23F",
+                "#39D6C0",
+                "#8B5CF6",
+                "#FFFFFF"
+
+            ];
+
+
+            for (
+                let i = 0;
+                i < 45;
+                i++
+            ) {
+
+                const particle =
+                    document.createElement(
+                        "span"
+                    );
+
+                particle.className =
+                    "confetti";
+
+
+                particle.style.left =
+                    centerX + "px";
+
+
+                particle.style.top =
+                    centerY + "px";
+
+
+                particle.style.background =
+                    confettiColors[
+                        Math.floor(
+                            Math.random()
+                            *
+                            confettiColors.length
+                        )
+                    ];
+
+
+                particle.style.setProperty(
+                    "--x",
+                    `${
+                        (Math.random() - 0.5)
+                        * 350
+                    }px`
+                );
+
+
+                particle.style.setProperty(
+                    "--y",
+                    `${
+                        (Math.random() - 0.5)
+                        * 280
+                    }px`
+                );
+
+
+                particle.style.setProperty(
+                    "--rotation",
+                    `${
+                        (Math.random() - 0.5)
+                        * 720
+                    }deg`
+                );
+
+
+                document.body.appendChild(
+                    particle
+                );
+
+
+                setTimeout(() => {
+
+                    particle.remove();
+
+                }, 550);
+
+            }
+
+
+            /* =================================================
+   FIXED ACCOUNT PAGE REDIRECT
+================================================= */
+
+setTimeout(() => {
+
+    window.location.href = "./account.html";
+
+}, 500);
+        }
+    );
+
+
+    /* =================================================
+       SECTION SCROLL ANIMATIONS
+    ================================================= */
+
+    const animatedSections =
+        document.querySelectorAll(
+            ".about-section, .mission-section, .features-section"
+        );
+
+
+    const sectionObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.25
+            }
+        );
+
+
+    animatedSections.forEach(section => {
+
+        sectionObserver.observe(section);
+
+    });
+
+
+    /* =================================================
+       TESTIMONIAL SLIDER
+    ================================================= */
+
+    const testimonialCards =
+        document.querySelectorAll(
+            ".testimonial-card"
+        );
+
+    const testimonialDots =
+        document.querySelectorAll(
+            ".testimonial-dot"
+        );
+
+    let currentTestimonial = 0;
+
+    let testimonialTimer;
+
+
+    function showTestimonial(index) {
+
+        testimonialCards.forEach(
+            (card, i) => {
+
+                card.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            }
+        );
+
+
+        testimonialDots.forEach(
+            (dot, i) => {
+
+                dot.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            }
+        );
+
+
+        currentTestimonial = index;
+
+    }
+
+
+    function nextTestimonial() {
+
+        const next =
+            (
+                currentTestimonial + 1
+            )
+            %
+            testimonialCards.length;
+
+        showTestimonial(next);
+
+    }
+
+
+    function startTestimonialTimer() {
+
+        clearInterval(
+            testimonialTimer
+        );
+
+        testimonialTimer =
+            setInterval(
+                nextTestimonial,
+                8000
+            );
+
+    }
+
+
+    testimonialDots.forEach(
+        (dot, index) => {
+
+            dot.addEventListener(
+                "click",
+                () => {
+
+                    showTestimonial(index);
+
+                    startTestimonialTimer();
+
+                }
+            );
+
+        }
+    );
+
+
+    showTestimonial(0);
+
+    startTestimonialTimer();
+
+
+    /* =================================================
+       FAQ ACCORDION
+    ====================================================== */
+
+    const faqItems =
+        document.querySelectorAll(
+            ".faq-item"
+        );
+
+
+    faqItems.forEach(item => {
+
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
+
+
+        question.addEventListener(
+            "click",
+            () => {
+
+                const isOpen =
+                    item.classList.contains(
+                        "open"
+                    );
+
+
+                faqItems.forEach(
+                    otherItem => {
+
+                        otherItem.classList.remove(
+                            "open"
+                        );
+
+                        otherItem
+                            .querySelector(
+                                ".faq-question"
+                            )
+                            .setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                    }
+                );
+
+
+                if (!isOpen) {
+
+                    item.classList.add(
+                        "open"
+                    );
+
+                    question.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =================================================
+       COPY EMAIL
+    ====================================================== */
+
+    const copyEmailButton =
+        document.getElementById(
+            "copy-email"
+        );
+
+
+    copyEmailButton.addEventListener(
+        "click",
+        async () => {
+
+            const email =
+                "hello@myphaven.info";
+
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    email
+                );
+
+
+                copyEmailButton.textContent =
+                    "Email Copied!";
+
+
+                copyEmailButton.classList.add(
+                    "copied"
+                );
+
+
+                setTimeout(() => {
+
+                    copyEmailButton.textContent =
+                        "Copy Email";
+
+                    copyEmailButton.classList.remove(
+                        "copied"
+                    );
+
+                }, 1800);
+
+
+            } catch (error) {
+
+                const temporaryInput =
+                    document.createElement(
+                        "input"
+                    );
+
+                temporaryInput.value =
+                    email;
+
+                document.body.appendChild(
+                    temporaryInput
+                );
+
+                temporaryInput.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+                temporaryInput.remove();
+
+
+                copyEmailButton.textContent =
+                    "Email Copied!";
+
+
+                setTimeout(() => {
+
+                    copyEmailButton.textContent =
+                        "Copy Email";
+
+                }, 1800);
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       BACK TO TOP
+    ====================================================== */
+
+    const backToTop =
+        document.getElementById(
+            "back-to-top"
+        );
+
+
+    backToTop.addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+
+</script>
+```
+
+</body>
+
+</html>
