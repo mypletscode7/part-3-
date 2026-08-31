@@ -1,1 +1,3333 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MYP Haven | Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "DM Sans", sans-serif;
+    color: #111111;
+    background: #FFFFFF;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+#dashboard-background {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: none;
+}
+
+#dashboard-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background: rgba(255,255,255,0.84);
+
+    display: none;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 28px 80px;
+}
+
+.dashboard-inner {
+    width: min(1500px, 100%);
+    margin: auto;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 45px;
+}
+
+.background-button {
+    border: none;
+    border-radius: 999px;
+
+    background: #FFFFFF;
+    color: #6366F1;
+
+    padding: 12px 18px;
+
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+    transition: 0.2s ease;
+}
+
+.background-button:hover {
+    transform: translateY(-2px);
+}
+
+#background-input {
+    display: none;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.current-date {
+    text-align: center;
+
+    color: #D946EF;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.welcome-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    text-align: center;
+
+    font-size: clamp(4rem, 9vw, 8rem);
+
+    line-height: 0.9;
+
+    letter-spacing: -0.06em;
+
+    font-weight: 800;
+
+    margin-bottom: 18px;
+}
+
+.welcome-subtitle {
+    text-align: center;
+
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   LOCK IN
+========================================================= */
+
+.lock-section {
+    margin-top: 90px;
+    margin-bottom: 70px;
+}
+
+.lock-slider {
+    width: 100%;
+    height: 125px;
+
+    padding: 8px;
+
+    border-radius: 999px;
+
+    background: #F1F1F1;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.03);
+}
+
+.lock-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 0%;
+
+    border-radius: 999px;
+
+    background: linear-gradient(
+        90deg,
+        #FF4D6D,
+        #FF8A3D,
+        #FFD23F,
+        #7ED957,
+        #39D6C0,
+        #34D399,
+        #00C2FF,
+        #3B82F6,
+        #8B5CF6,
+        #A855F7,
+        #FF6FB5,
+        #D946EF,
+        #C026D3,
+        #A21CAF,
+        #86198F,
+        #6366F1,
+        #818CF8,
+        #22D3EE
+    );
+
+    transition: width 0.05s linear;
+}
+
+.lock-text {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 700;
+
+    z-index: 3;
+
+    transition: color 0.25s ease;
+}
+
+.lock-handle {
+    position: absolute;
+
+    top: 8px;
+    left: 8px;
+
+    width: 109px;
+    height: 109px;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3.3rem;
+
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+
+    z-index: 5;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.lock-handle.dragging {
+    cursor: grabbing;
+    transform: scale(0.94);
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.22);
+}
+
+.lock-slider.completed .lock-text {
+    color: #FFFFFF;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+========================================================= */
+
+.dashboard-content {
+    opacity: 0;
+    transform: translateY(40px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.dashboard-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   SECTION CARDS
+========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+}
+
+.dashboard-card {
+    background: rgba(255,255,255,0.94);
+
+    border-radius: 30px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 18px 50px rgba(0,0,0,0.08);
+
+    backdrop-filter: blur(10px);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: #666666;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   ON MY PLATE
+========================================================= */
+
+.metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.metric {
+    padding: 22px 14px;
+
+    border-radius: 22px;
+
+    background: #F8F8F8;
+
+    text-align: center;
+}
+
+.metric-number {
+    display: block;
+
+    font-size: 3rem;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+.metric-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #444444;
+}
+
+.metric:nth-child(1) .metric-number {
+    color: #FF4D6D;
+}
+
+.metric:nth-child(2) .metric-number {
+    color: #FF8A3D;
+}
+
+.metric:nth-child(3) .metric-number {
+    color: #10B981;
+}
+
+.metric:nth-child(4) .metric-number {
+    color: #DC2626;
+}
+
+
+/* =========================================================
+   GAME PLAN / COMING UP
+========================================================= */
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.empty-state {
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: #F7F7F7;
+
+    text-align: center;
+
+    color: #777777;
+}
+
+.entry {
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: #F8F8F8;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-left: 6px solid #6366F1;
+}
+
+.entry-info {
+    min-width: 0;
+}
+
+.entry-name {
+    font-size: 1rem;
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.entry-meta {
+    font-size: 0.85rem;
+    color: #666666;
+}
+
+.entry-date {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.entry-date strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.entry-date span {
+    font-size: 0.8rem;
+    color: #6366F1;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-buttons {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.status-button {
+    border: none;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.status-completed {
+    background: #DCFCE7;
+    color: #15803D;
+}
+
+.status-pending {
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+    grid-column: 1 / -1;
+}
+
+.action-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.action-button {
+    min-height: 100px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    color: #FFFFFF;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 1.15rem;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.action-button:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.12);
+}
+
+.game-plan-action {
+    background: #FF8A3D;
+}
+
+.coming-up-action {
+    background: #6366F1;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    background: rgba(0,0,0,0.45);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    backdrop-filter: blur(8px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: min(520px, 100%);
+
+    background: #FFFFFF;
+
+    border-radius: 30px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.25);
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 800;
+
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 52px;
+
+    border: 2px solid #E5E7EB;
+
+    border-radius: 14px;
+
+    padding: 0 14px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 0.95rem;
+
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #6366F1;
+}
+
+.assignment-types {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.type-option {
+    border: 2px solid transparent;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-weight: 700;
+
+    background: #F5F5F5;
+}
+
+.type-option.selected {
+    border-color: #111111;
+}
+
+.type-random {
+    background: #FFE1D0;
+}
+
+.type-formative {
+    background: #FFF3B8;
+}
+
+.type-summative {
+    background: #E7D7FF;
+}
+
+.type-other {
+    background: #FFD9EA;
+}
+
+.modal-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.modal-actions button {
+    flex: 1;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: #EEEEEE;
+}
+
+.add-button {
+    background: #6366F1;
+    color: #FFFFFF;
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+.celebration {
+    position: fixed;
+    inset: 0;
+
+    z-index: 5000;
+
+    background: linear-gradient(
+        135deg,
+        #A855F7,
+        #D946EF,
+        #22D3EE
+    );
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.celebration.show {
+    display: flex;
+}
+
+.celebration-content {
+    position: relative;
+    z-index: 10;
+
+    color: #FFFFFF;
+}
+
+.celebration-cap {
+    font-size: 8rem;
+
+    animation: capPop 0.8s ease both;
+}
+
+@keyframes capPop {
+
+    0% {
+        transform: scale(0) rotate(-25deg);
+    }
+
+    70% {
+        transform: scale(1.2) rotate(8deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+.celebration-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: clamp(3.5rem, 10vw, 8rem);
+
+    line-height: 0.9;
+
+    margin: 20px 0;
+}
+
+.celebration-text {
+    font-size: 1.3rem;
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+.confetti {
+    position: fixed;
+
+    width: 12px;
+    height: 20px;
+
+    z-index: 6000;
+
+    pointer-events: none;
+
+    animation: confettiFall 3s ease-out forwards;
+}
+
+@keyframes confettiFall {
+
+    from {
+        transform:
+            translate(0,0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    to {
+        transform:
+            translate(var(--x), var(--y))
+            rotate(var(--r));
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 950px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-column: auto;
+    }
+
+}
+
+@media(max-width: 700px) {
+
+    .dashboard {
+        padding: 25px 15px 60px;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .lock-slider {
+        height: 100px;
+    }
+
+    .lock-handle {
+        width: 84px;
+        height: 84px;
+
+        font-size: 2.5rem;
+    }
+
+    .dashboard-card {
+        padding: 25px 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div id="dashboard-background"></div>
+<div id="dashboard-overlay"></div>
+
+
+<main class="dashboard">
+
+<div class="dashboard-inner">
+
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="top-bar">
+
+    <label
+        class="background-button"
+        for="background-input"
+    >
+        Change Background
+    </label>
+
+    <input
+        type="file"
+        id="background-input"
+        accept="image/*"
+    >
+
+</div>
+
+
+<!-- =========================================================
+     WELCOME
+========================================================= -->
+
+<div class="current-date" id="current-date"></div>
+
+<h1 class="welcome-title">
+    Welcome Back!
+</h1>
+
+<p class="welcome-subtitle">
+    Let's make some progress today.
+</p>
+
+
+<!-- =========================================================
+     LOCK-IN SLIDER
+========================================================= -->
+
+<section class="lock-section">
+
+    <div
+        class="lock-slider"
+        id="lock-slider"
+    >
+
+        <div
+            class="lock-progress"
+            id="lock-progress"
+        ></div>
+
+        <div
+            class="lock-text"
+            id="lock-text"
+        >
+            Are we ready to lock in?
+        </div>
+
+        <div
+            class="lock-handle"
+            id="lock-handle"
+            aria-label="Slide to lock in"
+        >
+            🎓
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DASHBOARD OVERVIEW
+========================================================= -->
+
+<div
+    class="dashboard-content"
+    id="dashboard-content"
+>
+
+
+<div class="dashboard-grid">
+
+
+<!-- =========================================================
+     ON MY PLATE
+========================================================= -->
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        On My Plate
+    </h2>
+
+    <p class="section-description">
+        Keep track of what needs your attention.
+    </p>
+
+    <div class="metrics">
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="due-today"
+            >
+                0
+            </span>
+
+            <span class="metric-label">
+                Due Today
+            </span>
+        </div>
+
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="due-week"
+            >
+                0
+            </span>
+
+            <span class="metric-label">
+                Due This Week
+            </span>
+        </div>
+
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="completed-count"
+            >
+                0
+            </span>
+
+            <span class="metric-label">
+                Completed
+            </span>
+        </div>
+
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="overdue-count"
+            >
+                0
+            </span>
+
+            <span class="metric-label">
+                Overdue
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TODAY'S GAME PLAN
+========================================================= -->
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        Today’s Game Plan
+    </h2>
+
+    <p class="section-description">
+        Plan and track what you’re doing today.
+    </p>
+
+    <div
+        class="entries"
+        id="game-plan-list"
+    ></div>
+
+</section>
+
+
+<!-- =========================================================
+     COMING UP
+========================================================= -->
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        Coming Up
+    </h2>
+
+    <p class="section-description">
+        Stay ahead of what’s coming next.
+    </p>
+
+    <div
+        class="entries"
+        id="coming-up-list"
+    ></div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK ACTIONS
+========================================================= -->
+
+<section class="dashboard-card quick-actions">
+
+    <h2 class="section-title">
+        Quick Actions
+    </h2>
+
+    <p class="section-description">
+        Jump straight into your next task.
+    </p>
+
+    <div class="action-buttons">
+
+        <button
+            class="action-button game-plan-action"
+            id="open-game-plan"
+        >
+            + Today’s Game Plan
+        </button>
+
+        <button
+            class="action-button coming-up-action"
+            id="open-coming-up"
+        >
+            Coming Up
+        </button>
+
+    </div>
+
+</section>
+
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+     GAME PLAN MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="game-plan-modal"
+>
+
+<div class="modal-card">
+
+    <h2 class="modal-title">
+        Add to Today’s Game Plan
+    </h2>
+
+    <div class="form-group">
+
+        <label>
+            Start Time
+        </label>
+
+        <input
+            type="time"
+            id="game-start"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            End Time
+        </label>
+
+        <input
+            type="time"
+            id="game-end"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Name of Task
+        </label>
+
+        <input
+            type="text"
+            id="game-name"
+            placeholder="What are you working on?"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Subject
+        </label>
+
+        <select id="game-subject"></select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Assignment Type
+        </label>
+
+        <div class="assignment-types">
+
+            <button
+                class="type-option type-random"
+                data-type="Random Assignment"
+            >
+                Random Assignment
+            </button>
+
+            <button
+                class="type-option type-formative"
+                data-type="Formative Assessment"
+            >
+                Formative Assessment
+            </button>
+
+            <button
+                class="type-option type-summative"
+                data-type="Summative Assessment"
+            >
+                Summative Assessment
+            </button>
+
+            <button
+                class="type-option type-other"
+                data-type="Other"
+            >
+                Other
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+        <button
+            class="cancel-button"
+            id="cancel-game"
+        >
+            Cancel
+        </button>
+
+        <button
+            class="add-button"
+            id="add-game"
+        >
+            Add
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     COMING UP MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="coming-up-modal"
+>
+
+<div class="modal-card">
+
+    <h2 class="modal-title">
+        Add to Coming Up
+    </h2>
+
+
+    <div class="form-group">
+
+        <label>
+            Due Date
+        </label>
+
+        <input
+            type="date"
+            id="coming-date"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Name of Task
+        </label>
+
+        <input
+            type="text"
+            id="coming-name"
+            placeholder="What is coming up?"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Subject
+        </label>
+
+        <select id="coming-subject"></select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Assignment Type
+        </label>
+
+        <div class="assignment-types">
+
+            <button
+                class="type-option type-random"
+                data-type="Random Assignment"
+            >
+                Random Assignment
+            </button>
+
+            <button
+                class="type-option type-formative"
+                data-type="Formative Assessment"
+            >
+                Formative Assessment
+            </button>
+
+            <button
+                class="type-option type-summative"
+                data-type="Summative Assessment"
+            >
+                Summative Assessment
+            </button>
+
+            <button
+                class="type-option type-other"
+                data-type="Other"
+            >
+                Other
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+        <button
+            class="cancel-button"
+            id="cancel-coming"
+        >
+            Cancel
+        </button>
+
+        <button
+            class="add-button"
+            id="add-coming"
+        >
+            Add
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     CELEBRATION
+========================================================= -->
+
+<div
+    class="celebration"
+    id="celebration"
+>
+
+    <div class="celebration-content">
+
+        <div class="celebration-cap">
+            🎓
+        </div>
+
+        <h1 class="celebration-title">
+            WE'RE<br>
+            LOCKED IN!
+        </h1>
+
+        <p class="celebration-text">
+            Let's make some progress today. 🎉
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
+
+    authDomain:
+        "the-myp-haven.firebaseapp.com",
+
+    projectId:
+        "the-myp-haven",
+
+    storageBucket:
+        "the-myp-haven.firebasestorage.app",
+
+    messagingSenderId:
+        "904577455533",
+
+    appId:
+        "1:904577455533:web:1d918ee8a3caa547eefd24"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentUser = null;
+
+let selectedSubjects = [];
+
+let tasks = [];
+
+let gamePlans = [];
+
+let upcomingEvents = [];
+
+let selectedGameType = "";
+
+let selectedComingType = "";
+
+let dragging = false;
+
+let lockedIn = false;
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function updateDate() {
+
+    const now = new Date();
+
+    const formatted =
+        now.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    document.getElementById(
+        "current-date"
+    ).textContent = formatted;
+
+}
+
+updateDate();
+
+
+/* =========================================================
+   AUTHENTICATION
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        if (!user) {
+
+            window.location.href =
+                "./account.html";
+
+            return;
+
+        }
+
+        currentUser = user;
+
+        await loadUserData();
+
+        loadBackground();
+
+        setupSubjectDropdowns();
+
+        renderEverything();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD USER DATA
+========================================================= */
+
+async function loadUserData() {
+
+    try {
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            );
+
+        const userSnap =
+            await getDoc(userRef);
+
+
+        if (userSnap.exists()) {
+
+            const data =
+                userSnap.data();
+
+            if (
+                Array.isArray(data.subjects)
+            ) {
+
+                selectedSubjects =
+                    data.subjects;
+
+            }
+
+            if (
+                data.lockedIn === true
+            ) {
+
+                lockedIn = true;
+
+                showDashboard();
+
+            }
+
+        }
+
+
+        /*
+         * Fallback for the survey system
+         * currently saving to localStorage.
+         */
+
+        if (
+            selectedSubjects.length === 0
+        ) {
+
+            const localSurvey =
+                localStorage.getItem(
+                    "mypHavenSurvey"
+                );
+
+            if (localSurvey) {
+
+                const survey =
+                    JSON.parse(
+                        localSurvey
+                    );
+
+                selectedSubjects =
+                    Array.isArray(
+                        survey.subjects
+                    )
+                        ? survey.subjects
+                        : [];
+
+            }
+
+        }
+
+
+        await loadDashboardData();
+
+    } catch (error) {
+
+        console.error(
+            "Could not load user data:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD DASHBOARD DATA
+========================================================= */
+
+async function loadDashboardData() {
+
+    try {
+
+        const tasksRef =
+            collection(
+                db,
+                "users",
+                currentUser.uid,
+                "tasks"
+            );
+
+        const taskSnapshot =
+            await getDocs(tasksRef);
+
+        tasks =
+            taskSnapshot.docs.map(
+                doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            );
+
+
+        const gameRef =
+            collection(
+                db,
+                "users",
+                currentUser.uid,
+                "gamePlans"
+            );
+
+        const gameSnapshot =
+            await getDocs(gameRef);
+
+        gamePlans =
+            gameSnapshot.docs.map(
+                doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            );
+
+
+        const upcomingRef =
+            collection(
+                db,
+                "users",
+                currentUser.uid,
+                "upcoming"
+            );
+
+        const upcomingSnapshot =
+            await getDocs(upcomingRef);
+
+        upcomingEvents =
+            upcomingSnapshot.docs.map(
+                doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            );
+
+
+    } catch (error) {
+
+        console.error(
+            "Could not load dashboard data:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SUBJECT DROPDOWNS
+========================================================= */
+
+function setupSubjectDropdowns() {
+
+    const dropdowns = [
+        document.getElementById("game-subject"),
+        document.getElementById("coming-subject")
+    ];
+
+
+    dropdowns.forEach(
+        dropdown => {
+
+            dropdown.innerHTML = "";
+
+            selectedSubjects.forEach(
+                subject => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value =
+                        subject;
+
+                    option.textContent =
+                        subject;
+
+                    dropdown.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            const other =
+                document.createElement(
+                    "option"
+                );
+
+            other.value =
+                "Other";
+
+            other.textContent =
+                "Other";
+
+            dropdown.appendChild(
+                other
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER EVERYTHING
+========================================================= */
+
+function renderEverything() {
+
+    updateMetrics();
+
+    renderGamePlans();
+
+    renderComingUp();
+
+}
+
+
+/* =========================================================
+   METRICS
+========================================================= */
+
+function dateOnly(date) {
+
+    return new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
+
+}
+
+
+function updateMetrics() {
+
+    const today =
+        dateOnly(new Date());
+
+
+    const weekEnd =
+        new Date(today);
+
+    weekEnd.setDate(
+        weekEnd.getDate() + 7
+    );
+
+
+    let dueToday = 0;
+    let dueWeek = 0;
+    let completed = 0;
+    let overdue = 0;
+
+
+    tasks.forEach(
+        task => {
+
+            if (!task.dueDate) {
+                return;
+            }
+
+            const due =
+                dateOnly(
+                    new Date(
+                        task.dueDate
+                    )
+                );
+
+
+            if (
+                task.status === "Completed"
+            ) {
+
+                completed++;
+
+                return;
+
+            }
+
+
+            if (
+                due.getTime() ===
+                today.getTime()
+            ) {
+
+                dueToday++;
+
+            }
+
+
+            if (
+                due >= today &&
+                due < weekEnd
+            ) {
+
+                dueWeek++;
+
+            }
+
+
+            if (
+                due < today
+            ) {
+
+                overdue++;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "due-today"
+    ).textContent =
+        dueToday;
+
+    document.getElementById(
+        "due-week"
+    ).textContent =
+        dueWeek;
+
+    document.getElementById(
+        "completed-count"
+    ).textContent =
+        completed;
+
+    document.getElementById(
+        "overdue-count"
+    ).textContent =
+        overdue;
+
+}
+
+
+/* =========================================================
+   GAME PLANS
+========================================================= */
+
+function renderGamePlans() {
+
+    const container =
+        document.getElementById(
+            "game-plan-list"
+        );
+
+    container.innerHTML = "";
+
+
+    const today =
+        new Date().toISOString()
+            .split("T")[0];
+
+
+    const todayPlans =
+        gamePlans.filter(
+            plan =>
+                plan.date === today
+        );
+
+
+    if (
+        todayPlans.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                Nothing planned yet. Add something to your day!
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    todayPlans.forEach(
+        plan => {
+
+            const entry =
+                document.createElement(
+                    "div"
+                );
+
+            entry.className =
+                "entry";
+
+
+            entry.innerHTML = `
+
+                <div class="entry-info">
+
+                    <div class="entry-name">
+                        ${escapeHTML(plan.name)}
+                    </div>
+
+                    <div class="entry-meta">
+                        ${escapeHTML(plan.subject)}
+                        ·
+                        ${escapeHTML(plan.assignmentType)}
+                        ·
+                        ${escapeHTML(plan.startTime)}
+                        –
+                        ${escapeHTML(plan.endTime)}
+                    </div>
+
+                    <div class="status-buttons">
+
+                        <button
+                            class="status-button status-completed"
+                            data-id="${plan.id}"
+                            data-status="Completed"
+                        >
+                            Completed
+                        </button>
+
+                        <button
+                            class="status-button status-pending"
+                            data-id="${plan.id}"
+                            data-status="Not Completed"
+                        >
+                            Not Completed
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                entry
+            );
+
+
+            entry
+                .querySelectorAll(
+                    ".status-button"
+                )
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                updateGamePlanStatus(
+                                    button.dataset.id,
+                                    button.dataset.status
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE GAME PLAN STATUS
+========================================================= */
+
+async function updateGamePlanStatus(
+    id,
+    status
+) {
+
+    try {
+
+        await updateDoc(
+            doc(
+                db,
+                "users",
+                currentUser.uid,
+                "gamePlans",
+                id
+            ),
+            {
+                status:
+                    status,
+
+                updatedAt:
+                    serverTimestamp()
+            }
+        );
+
+
+        const plan =
+            gamePlans.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (plan) {
+
+            plan.status =
+                status;
+
+        }
+
+
+        renderEverything();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================================================
+   COMING UP
+========================================================= */
+
+function renderComingUp() {
+
+    const container =
+        document.getElementById(
+            "coming-up-list"
+        );
+
+    container.innerHTML = "";
+
+
+    const today =
+        dateOnly(new Date());
+
+
+    const events =
+        upcomingEvents
+            .filter(
+                event => {
+
+                    if (!event.date) {
+                        return false;
+                    }
+
+                    return (
+                        dateOnly(
+                            new Date(event.date)
+                        ) >= today
+                    );
+
+                }
+            )
+            .sort(
+                (a,b) =>
+                    new Date(a.date) -
+                    new Date(b.date)
+            )
+            .slice(0,5);
+
+
+    if (
+        events.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                Nothing coming up yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    events.forEach(
+        event => {
+
+            const date =
+                dateOnly(
+                    new Date(event.date)
+                );
+
+
+            const difference =
+                Math.round(
+                    (
+                        date -
+                        today
+                    ) /
+                    86400000
+                );
+
+
+            let countdown =
+                difference === 0
+                    ? "Today"
+                    : difference === 1
+                        ? "1 day away"
+                        : `${difference} days away`;
+
+
+            const entry =
+                document.createElement(
+                    "div"
+                );
+
+            entry.className =
+                "entry";
+
+
+            entry.innerHTML = `
+
+                <div class="entry-info">
+
+                    <div class="entry-name">
+                        ${escapeHTML(event.name)}
+                    </div>
+
+                    <div class="entry-meta">
+                        ${escapeHTML(event.subject)}
+                        ·
+                        ${escapeHTML(event.assignmentType)}
+                    </div>
+
+                </div>
+
+                <div class="entry-date">
+
+                    <strong>
+                        ${date.toLocaleDateString(
+                            "en-US",
+                            {
+                                month: "short",
+                                day: "numeric"
+                            }
+                        )}
+                    </strong>
+
+                    <span>
+                        ${countdown}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                entry
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   LOCK SLIDER
+========================================================= */
+
+const lockSlider =
+    document.getElementById(
+        "lock-slider"
+    );
+
+const lockHandle =
+    document.getElementById(
+        "lock-handle"
+    );
+
+const lockProgress =
+    document.getElementById(
+        "lock-progress"
+    );
+
+const lockText =
+    document.getElementById(
+        "lock-text"
+    );
+
+
+function maxSliderPosition() {
+
+    return (
+        lockSlider.clientWidth -
+        lockHandle.offsetWidth -
+        16
+    );
+
+}
+
+
+function moveSlider(clientX) {
+
+    if (lockedIn) {
+        return;
+    }
+
+
+    const rect =
+        lockSlider.getBoundingClientRect();
+
+
+    let position =
+        clientX -
+        rect.left -
+        lockHandle.offsetWidth / 2;
+
+
+    const max =
+        maxSliderPosition();
+
+
+    position =
+        Math.max(
+            8,
+            Math.min(
+                position,
+                max
+            )
+        );
+
+
+    const percentage =
+        position / max;
+
+
+    lockHandle.style.left =
+        `${position}px`;
+
+    lockProgress.style.width =
+        `${percentage * 100}%`;
+
+
+    if (
+        percentage >= 0.98
+    ) {
+
+        completeLockIn();
+
+    }
+
+}
+
+
+/* =========================================================
+   MOUSE
+========================================================= */
+
+lockHandle.addEventListener(
+    "mousedown",
+    event => {
+
+        if (lockedIn) {
+            return;
+        }
+
+        dragging = true;
+
+        lockHandle.classList.add(
+            "dragging"
+        );
+
+        event.preventDefault();
+
+    }
+);
+
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        if (!dragging) {
+            return;
+        }
+
+        moveSlider(
+            event.clientX
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    () => {
+
+        if (!dragging) {
+            return;
+        }
+
+        dragging = false;
+
+        lockHandle.classList.remove(
+            "dragging"
+        );
+
+
+        if (!lockedIn) {
+
+            lockHandle.style.left =
+                "8px";
+
+            lockProgress.style.width =
+                "0%";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+lockHandle.addEventListener(
+    "touchstart",
+    () => {
+
+        if (lockedIn) {
+            return;
+        }
+
+        dragging = true;
+
+        lockHandle.classList.add(
+            "dragging"
+        );
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "touchmove",
+    event => {
+
+        if (!dragging) {
+            return;
+        }
+
+        moveSlider(
+            event.touches[0].clientX
+        );
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    () => {
+
+        if (!dragging) {
+            return;
+        }
+
+        dragging = false;
+
+        lockHandle.classList.remove(
+            "dragging"
+        );
+
+
+        if (!lockedIn) {
+
+            lockHandle.style.left =
+                "8px";
+
+            lockProgress.style.width =
+                "0%";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   COMPLETE LOCK IN
+========================================================= */
+
+async function completeLockIn() {
+
+    if (lockedIn) {
+        return;
+    }
+
+
+    lockedIn = true;
+
+    dragging = false;
+
+
+    const max =
+        maxSliderPosition();
+
+
+    lockHandle.style.left =
+        `${max}px`;
+
+    lockProgress.style.width =
+        "100%";
+
+
+    lockText.textContent =
+        "We're locked in!";
+
+    lockSlider.classList.add(
+        "completed"
+    );
+
+
+    try {
+
+        await updateDoc(
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            ),
+            {
+                lockedIn:
+                    true,
+
+                updatedAt:
+                    serverTimestamp()
+            }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save lock-in state:",
+            error
+        );
+
+    }
+
+
+    showCelebration();
+
+}
+
+
+/* =========================================================
+   SHOW DASHBOARD
+========================================================= */
+
+function showDashboard() {
+
+    lockedIn = true;
+
+    const max =
+        maxSliderPosition();
+
+    lockHandle.style.left =
+        `${max}px`;
+
+    lockProgress.style.width =
+        "100%";
+
+    lockText.textContent =
+        "We're locked in!";
+
+    lockSlider.classList.add(
+        "completed"
+    );
+
+    document
+        .getElementById(
+            "dashboard-content"
+        )
+        .classList.add(
+            "visible"
+        );
+
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+function showCelebration() {
+
+    const celebration =
+        document.getElementById(
+            "celebration"
+        );
+
+    celebration.classList.add(
+        "show"
+    );
+
+
+    createConfetti();
+
+
+    setTimeout(
+        () => {
+
+            celebration.classList.remove(
+                "show"
+            );
+
+            document
+                .getElementById(
+                    "dashboard-content"
+                )
+                .classList.add(
+                    "visible"
+                );
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+function createConfetti() {
+
+    const colors = [
+
+        "#FF4D6D",
+        "#FF8A3D",
+        "#FFD23F",
+        "#7ED957",
+        "#39D6C0",
+        "#00C2FF",
+        "#8B5CF6",
+        "#D946EF",
+        "#22D3EE"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 220;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            `${Math.random() * 100}%`;
+
+        piece.style.top =
+            `${Math.random() * 20}%`;
+
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        piece.style.setProperty(
+            "--x",
+            `${(Math.random()-0.5) * window.innerWidth * 1.5}px`
+        );
+
+        piece.style.setProperty(
+            "--y",
+            `${Math.random() * window.innerHeight}px`
+        );
+
+        piece.style.setProperty(
+            "--r",
+            `${Math.random() * 1440}deg`
+        );
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => piece.remove(),
+            3200
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+========================================================= */
+
+const backgroundInput =
+    document.getElementById(
+        "background-input"
+    );
+
+
+backgroundInput.addEventListener(
+    "change",
+    event => {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(e) {
+
+                const image =
+                    e.target.result;
+
+
+                localStorage.setItem(
+                    `mypHavenBackground_${currentUser.uid}`,
+                    image
+                );
+
+
+                applyBackground(
+                    image
+                );
+
+            };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+);
+
+
+/* =========================================================
+   LOAD BACKGROUND
+========================================================= */
+
+function loadBackground() {
+
+    const image =
+        localStorage.getItem(
+            `mypHavenBackground_${currentUser.uid}`
+        );
+
+
+    if (image) {
+
+        applyBackground(
+            image
+        );
+
+    }
+
+}
+
+
+function applyBackground(image) {
+
+    const background =
+        document.getElementById(
+            "dashboard-background"
+        );
+
+    const overlay =
+        document.getElementById(
+            "dashboard-overlay"
+        );
+
+
+    background.style.backgroundImage =
+        `url("${image}")`;
+
+    background.style.display =
+        "block";
+
+    overlay.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+const gameModal =
+    document.getElementById(
+        "game-plan-modal"
+    );
+
+const comingModal =
+    document.getElementById(
+        "coming-up-modal"
+    );
+
+
+document.getElementById(
+    "open-game-plan"
+).addEventListener(
+    "click",
+    () => {
+
+        gameModal.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "open-coming-up"
+).addEventListener(
+    "click",
+    () => {
+
+        comingModal.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "cancel-game"
+).addEventListener(
+    "click",
+    () => {
+
+        gameModal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "cancel-coming"
+).addEventListener(
+    "click",
+    () => {
+
+        comingModal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   ASSIGNMENT TYPE BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "#game-plan-modal .type-option"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            "#game-plan-modal .type-option"
+                        )
+                        .forEach(
+                            b =>
+                                b.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                    selectedGameType =
+                        button.dataset.type;
+
+                }
+            );
+
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        "#coming-up-modal .type-option"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            "#coming-up-modal .type-option"
+                        )
+                        .forEach(
+                            b =>
+                                b.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                    selectedComingType =
+                        button.dataset.type;
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   ADD GAME PLAN
+========================================================= */
+
+document.getElementById(
+    "add-game"
+).addEventListener(
+    "click",
+    async () => {
+
+        const startTime =
+            document.getElementById(
+                "game-start"
+            ).value;
+
+        const endTime =
+            document.getElementById(
+                "game-end"
+            ).value;
+
+        const name =
+            document.getElementById(
+                "game-name"
+            ).value.trim();
+
+        const subject =
+            document.getElementById(
+                "game-subject"
+            ).value;
+
+
+        if (
+            !startTime ||
+            !endTime ||
+            !name ||
+            !subject ||
+            !selectedGameType
+        ) {
+
+            alert(
+                "Please complete all fields."
+            );
+
+            return;
+
+        }
+
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        try {
+
+            const ref =
+                await addDoc(
+                    collection(
+                        db,
+                        "users",
+                        currentUser.uid,
+                        "gamePlans"
+                    ),
+                    {
+
+                        date:
+                            today,
+
+                        startTime:
+                            startTime,
+
+                        endTime:
+                            endTime,
+
+                        name:
+                            name,
+
+                        subject:
+                            subject,
+
+                        assignmentType:
+                            selectedGameType,
+
+                        status:
+                            "Not Completed",
+
+                        createdAt:
+                            serverTimestamp(),
+
+                        updatedAt:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+            gamePlans.push({
+
+                id:
+                    ref.id,
+
+                date:
+                    today,
+
+                startTime,
+                endTime,
+                name,
+                subject,
+
+                assignmentType:
+                    selectedGameType,
+
+                status:
+                    "Not Completed"
+
+            });
+
+
+            gameModal.classList.remove(
+                "show"
+            );
+
+
+            document.getElementById(
+                "game-name"
+            ).value = "";
+
+
+            selectedGameType = "";
+
+
+            document
+                .querySelectorAll(
+                    "#game-plan-modal .type-option"
+                )
+                .forEach(
+                    b =>
+                        b.classList.remove(
+                            "selected"
+                        )
+                );
+
+
+            renderEverything();
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "The Game Plan could not be saved."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ADD COMING UP
+========================================================= */
+
+document.getElementById(
+    "add-coming"
+).addEventListener(
+    "click",
+    async () => {
+
+        const date =
+            document.getElementById(
+                "coming-date"
+            ).value;
+
+        const name =
+            document.getElementById(
+                "coming-name"
+            ).value.trim();
+
+        const subject =
+            document.getElementById(
+                "coming-subject"
+            ).value;
+
+
+        if (
+            !date ||
+            !name ||
+            !subject ||
+            !selectedComingType
+        ) {
+
+            alert(
+                "Please complete all fields."
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const ref =
+                await addDoc(
+                    collection(
+                        db,
+                        "users",
+                        currentUser.uid,
+                        "upcoming"
+                    ),
+                    {
+
+                        date:
+                            date,
+
+                        name:
+                            name,
+
+                        subject:
+                            subject,
+
+                        assignmentType:
+                            selectedComingType,
+
+                        createdAt:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+            upcomingEvents.push({
+
+                id:
+                    ref.id,
+
+                date,
+                name,
+                subject,
+
+                assignmentType:
+                    selectedComingType
+
+            });
+
+
+            comingModal.classList.remove(
+                "show"
+            );
+
+
+            document.getElementById(
+                "coming-name"
+            ).value = "";
+
+
+            selectedComingType = "";
+
+
+            document
+                .querySelectorAll(
+                    "#coming-up-modal .type-option"
+                )
+                .forEach(
+                    b =>
+                        b.classList.remove(
+                            "selected"
+                        )
+                );
+
+
+            renderEverything();
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "The upcoming event could not be saved."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE MODAL BY CLICKING OUTSIDE
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".modal"
+    )
+    .forEach(
+        modal => {
+
+            modal.addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target === modal
+                    ) {
+
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+
+</body>
+
+</html>
