@@ -2485,96 +2485,385 @@ function renderComingUp() {
 }
 
 
-/* =========================================================
-   LOCK SLIDER
-========================================================= */
+/* =========================================
+   LOCK-IN SLIDER — FIXED
+========================================= */
 
-const lockSlider =
-    document.getElementById(
-        "lock-slider"
-    );
+const lockSlider = document.getElementById("lock-slider");
+const lockHandle = document.getElementById("lock-handle");
+const lockText = document.getElementById("lock-text");
 
-const lockHandle =
-    document.getElementById(
-        "lock-handle"
-    );
+let sliderProgress = 0;
+let lockedIn = false;
+let dragging = false;
 
-const lockProgress =
-    document.getElementById(
-        "lock-progress"
-    );
+const rainbowColors = [
+    "#FF4D6D",
+    "#FF8A3D",
+    "#FFD23F",
+    "#7ED957",
+    "#39D6C0",
+    "#34D399",
+    "#00C2FF",
+    "#3B82F6",
+    "#8B5CF6",
+    "#A855F7",
+    "#FF6FB5",
+    "#D946EF",
+    "#C026D3",
+    "#A21CAF",
+    "#86198F",
+    "#6366F1",
+    "#818CF8",
+    "#22D3EE"
+];
 
-const lockText =
-    document.getElementById(
-        "lock-text"
-    );
 
+/* -----------------------------------------
+   GET SLIDER POSITION
+----------------------------------------- */
 
-function maxSliderPosition() {
+function getSliderPosition(clientX) {
 
-    return (
-        lockSlider.clientWidth -
-        lockHandle.offsetWidth -
-        16
-    );
+    if (!lockSlider || !lockHandle) return;
 
+    const sliderRect = lockSlider.getBoundingClientRect();
+
+    const handleWidth = lockHandle.offsetWidth;
+
+    const minX = sliderRect.left;
+    const maxX = sliderRect.right - handleWidth;
+
+    let x = clientX - handleWidth / 2;
+
+    x = Math.max(minX, Math.min(x, maxX));
+
+    const percentage =
+        ((x - minX) / (maxX - minX)) * 100;
+
+    setSliderProgress(percentage);
 }
 
 
-function moveSlider(clientX) {
+/* -----------------------------------------
+   UPDATE SLIDER
+----------------------------------------- */
 
-    if (lockedIn) {
-        return;
-    }
+function setSliderProgress(percent) {
 
+    if (lockedIn) return;
 
-    const rect =
-        lockSlider.getBoundingClientRect();
+    sliderProgress = Math.max(0, Math.min(100, percent));
 
+    const sliderWidth = lockSlider.offsetWidth;
+    const handleWidth = lockHandle.offsetWidth;
 
-    let position =
-        clientX -
-        rect.left -
-        lockHandle.offsetWidth / 2;
+    const availableWidth = sliderWidth - handleWidth;
 
+    const handlePosition =
+        availableWidth * (sliderProgress / 100);
 
-    const max =
-        maxSliderPosition();
+    lockHandle.style.left = `${handlePosition}px`;
 
+    /* Rainbow colour */
 
-    position =
-        Math.max(
-            8,
-            Math.min(
-                position,
-                max
-            )
-        );
+    const colorIndex = Math.floor(
+        (sliderProgress / 100) *
+        (rainbowColors.length - 1)
+    );
 
+    const currentColor =
+        rainbowColors[
+            Math.min(colorIndex, rainbowColors.length - 1)
+        ];
 
-    const percentage =
-        position / max;
+    lockSlider.style.background = currentColor;
 
+    /* Text */
 
-    lockHandle.style.left =
-        `${position}px`;
+    if (sliderProgress >= 98) {
 
+        sliderProgress = 100;
 
-    lockProgress.style.width =
-        `${percentage * 100}%`;
+        lockHandle.style.left =
+            `${availableWidth}px`;
 
+        lockSlider.style.background =
+            "#22D3EE";
 
-    if (
-        percentage >= 0.98
-    ) {
+        lockText.textContent =
+            "We're locked in!";
 
         completeLockIn();
 
+    } else {
+
+        lockText.textContent =
+            "Are we ready to lock in?";
+    }
+}
+
+
+/* -----------------------------------------
+   START DRAGGING
+----------------------------------------- */
+
+function startSliderDrag(event) {
+
+    if (lockedIn) return;
+
+    event.preventDefault();
+
+    dragging = true;
+
+    lockSlider.classList.add("dragging");
+
+    if (event.pointerId !== undefined) {
+
+        try {
+            lockSlider.setPointerCapture(event.pointerId);
+        } catch (error) {
+            console.log("Pointer capture unavailable");
+        }
+
+    }
+
+    getSliderPosition(event.clientX);
+}
+
+
+/* -----------------------------------------
+   DRAGGING
+----------------------------------------- */
+
+function moveSlider(event) {
+
+    if (!dragging || lockedIn) return;
+
+    event.preventDefault();
+
+    getSliderPosition(event.clientX);
+}
+
+
+/* -----------------------------------------
+   STOP DRAGGING
+----------------------------------------- */
+
+function stopSliderDrag(event) {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    lockSlider.classList.remove("dragging");
+
+    if (
+        event &&
+        event.pointerId !== undefined
+    ) {
+
+        try {
+            lockSlider.releasePointerCapture(
+                event.pointerId
+            );
+        } catch (error) {
+            console.log("Pointer release unavailable");
+        }
+
+    }
+
+    /*
+       If they let go before 98%,
+       smoothly return to the beginning.
+    */
+
+    if (!lockedIn && sliderProgress < 98) {
+
+        setSliderProgress(0);
+
     }
 
 }
 
 
+/* -----------------------------------------
+   POINTER EVENTS
+   WORKS ON MOUSE + TRACKPAD + TOUCH
+----------------------------------------- */
+
+lockSlider.addEventListener(
+    "pointerdown",
+    startSliderDrag
+);
+
+lockSlider.addEventListener(
+    "pointermove",
+    moveSlider
+);
+
+lockSlider.addEventListener(
+    "pointerup",
+    stopSliderDrag
+);
+
+lockSlider.addEventListener(
+    "pointercancel",
+    stopSliderDrag
+);
+
+lockSlider.addEventListener(
+    "lostpointercapture",
+    () => {
+
+        if (dragging) {
+            dragging = false;
+            lockSlider.classList.remove("dragging");
+        }
+
+    }
+);
+
+
+/* -----------------------------------------
+   CLICK ANYWHERE ON TRACK
+----------------------------------------- */
+
+lockSlider.addEventListener(
+    "click",
+    event => {
+
+        if (lockedIn) return;
+
+        getSliderPosition(event.clientX);
+
+    }
+);
+
+
+/* -----------------------------------------
+   LOCK IN
+----------------------------------------- */
+
+async function completeLockIn() {
+
+    if (lockedIn) return;
+
+    lockedIn = true;
+
+    sliderProgress = 100;
+
+    lockText.textContent =
+        "We're locked in!";
+
+    lockSlider.style.background =
+        "#22D3EE";
+
+    const availableWidth =
+        lockSlider.offsetWidth -
+        lockHandle.offsetWidth;
+
+    lockHandle.style.left =
+        `${availableWidth}px`;
+
+    /* Save permanently */
+
+    if (currentUser) {
+
+        try {
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                ),
+                {
+                    lockedIn: true,
+                    updatedAt: serverTimestamp()
+                },
+                {
+                    merge: true
+                }
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save lock-in:",
+                error
+            );
+
+        }
+
+    }
+
+    /* Show dashboard */
+
+    setTimeout(() => {
+
+        showDashboard();
+
+        if (typeof launchConfetti === "function") {
+            launchConfetti();
+        }
+
+    }, 400);
+}
+
+
+/* -----------------------------------------
+   RESTORE LOCKED STATE
+----------------------------------------- */
+
+function restoreLockedSlider() {
+
+    if (!lockedIn) {
+
+        sliderProgress = 0;
+
+        lockHandle.style.left = "0px";
+
+        lockSlider.style.background =
+            "#D1D5DB";
+
+        lockText.textContent =
+            "Are we ready to lock in?";
+
+        return;
+
+    }
+
+    sliderProgress = 100;
+
+    lockSlider.style.background =
+        "#22D3EE";
+
+    lockText.textContent =
+        "We're locked in!";
+
+    requestAnimationFrame(() => {
+
+        const availableWidth =
+            lockSlider.offsetWidth -
+            lockHandle.offsetWidth;
+
+        lockHandle.style.left =
+            `${availableWidth}px`;
+
+    });
+
+}
+
+
+/* -----------------------------------------
+   MAKE SURE THE HANDLE DOESN'T SELECT TEXT
+----------------------------------------- */
+
+lockSlider.style.touchAction = "none";
+lockSlider.style.userSelect = "none";
+lockHandle.style.touchAction = "none";
+lockHandle.style.userSelect = "none";
 /* =========================================================
    POINTER EVENTS
    FIXED SLIDER SYSTEM
