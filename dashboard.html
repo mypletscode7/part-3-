@@ -490,12 +490,14 @@ body {
     gap: 8px;
 
     margin-top: 12px;
+
+    flex-wrap: wrap;
 }
 
 .status-button {
-    border: none;
+    border: 2px solid transparent;
 
-    padding: 7px 12px;
+    padding: 8px 14px;
 
     border-radius: 999px;
 
@@ -505,6 +507,12 @@ body {
     font-weight: 700;
 
     cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease,
+        opacity 0.15s ease;
 }
 
 .status-completed {
@@ -512,9 +520,38 @@ body {
     color: #15803D;
 }
 
+.status-completed:hover {
+    transform: translateY(-2px);
+}
+
 .status-pending {
     background: #FEE2E2;
     color: #B91C1C;
+}
+
+.status-pending:hover {
+    transform: translateY(-2px);
+}
+
+
+/* CURRENTLY SELECTED STATUS */
+
+.status-button.selected {
+    border-color: currentColor;
+
+    box-shadow:
+        0 0 0 3px rgba(0,0,0,0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* WHILE SAVING */
+
+.status-button.saving {
+    opacity: 0.55;
+
+    pointer-events: none;
 }
 
 
@@ -1013,6 +1050,7 @@ body {
     <div class="metrics">
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="due-today"
@@ -1023,10 +1061,12 @@ body {
             <span class="metric-label">
                 Due Today
             </span>
+
         </div>
 
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="due-week"
@@ -1037,10 +1077,12 @@ body {
             <span class="metric-label">
                 Due This Week
             </span>
+
         </div>
 
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="completed-count"
@@ -1051,10 +1093,12 @@ body {
             <span class="metric-label">
                 Completed
             </span>
+
         </div>
 
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="overdue-count"
@@ -1065,6 +1109,7 @@ body {
             <span class="metric-label">
                 Overdue
             </span>
+
         </div>
 
     </div>
@@ -1238,6 +1283,7 @@ body {
         <div class="assignment-types">
 
             <button
+                type="button"
                 class="type-option type-random"
                 data-type="Random Assignment"
             >
@@ -1245,6 +1291,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-formative"
                 data-type="Formative Assessment"
             >
@@ -1252,6 +1299,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-summative"
                 data-type="Summative Assessment"
             >
@@ -1259,6 +1307,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-other"
                 data-type="Other"
             >
@@ -1273,6 +1322,7 @@ body {
     <div class="modal-actions">
 
         <button
+            type="button"
             class="cancel-button"
             id="cancel-game"
         >
@@ -1280,6 +1330,7 @@ body {
         </button>
 
         <button
+            type="button"
             class="add-button"
             id="add-game"
         >
@@ -1358,6 +1409,7 @@ body {
         <div class="assignment-types">
 
             <button
+                type="button"
                 class="type-option type-random"
                 data-type="Random Assignment"
             >
@@ -1365,6 +1417,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-formative"
                 data-type="Formative Assessment"
             >
@@ -1372,6 +1425,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-summative"
                 data-type="Summative Assessment"
             >
@@ -1379,6 +1433,7 @@ body {
             </button>
 
             <button
+                type="button"
                 class="type-option type-other"
                 data-type="Other"
             >
@@ -1393,6 +1448,7 @@ body {
     <div class="modal-actions">
 
         <button
+            type="button"
             class="cancel-button"
             id="cancel-coming"
         >
@@ -1400,6 +1456,7 @@ body {
         </button>
 
         <button
+            type="button"
             class="add-button"
             id="add-coming"
         >
@@ -1461,13 +1518,10 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc,
     updateDoc,
     collection,
     addDoc,
     getDocs,
-    query,
-    orderBy,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
@@ -1840,7 +1894,7 @@ function renderEverything() {
 
 
 /* =========================================================
-   METRICS
+   DATE ONLY
 ========================================================= */
 
 function dateOnly(date) {
@@ -1853,6 +1907,10 @@ function dateOnly(date) {
 
 }
 
+
+/* =========================================================
+   METRICS
+========================================================= */
 
 function updateMetrics() {
 
@@ -1874,12 +1932,17 @@ function updateMetrics() {
     let overdue = 0;
 
 
+    /* =====================================================
+       NORMAL TASKS
+    ===================================================== */
+
     tasks.forEach(
         task => {
 
             if (!task.dueDate) {
                 return;
             }
+
 
             const due =
                 dateOnly(
@@ -1888,6 +1951,11 @@ function updateMetrics() {
                     )
                 );
 
+
+            /*
+             * Completed tasks are counted as completed
+             * and are not counted as due/overdue.
+             */
 
             if (
                 task.status === "Completed"
@@ -1932,20 +2000,106 @@ function updateMetrics() {
     );
 
 
+    /* =====================================================
+       TODAY'S GAME PLANS
+    ===================================================== */
+
+    gamePlans.forEach(
+        plan => {
+
+            if (!plan.date) {
+                return;
+            }
+
+
+            const due =
+                dateOnly(
+                    new Date(
+                        plan.date
+                    )
+                );
+
+
+            /*
+             * COMPLETED
+             */
+
+            if (
+                plan.status === "Completed"
+            ) {
+
+                completed++;
+
+                return;
+
+            }
+
+
+            /*
+             * DUE TODAY
+             */
+
+            if (
+                due.getTime() ===
+                today.getTime()
+            ) {
+
+                dueToday++;
+
+            }
+
+
+            /*
+             * DUE THIS WEEK
+             */
+
+            if (
+                due >= today &&
+                due < weekEnd
+            ) {
+
+                dueWeek++;
+
+            }
+
+
+            /*
+             * OVERDUE
+             */
+
+            if (
+                due < today
+            ) {
+
+                overdue++;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       UPDATE ON MY PLATE
+    ===================================================== */
+
     document.getElementById(
         "due-today"
     ).textContent =
         dueToday;
+
 
     document.getElementById(
         "due-week"
     ).textContent =
         dueWeek;
 
+
     document.getElementById(
         "completed-count"
     ).textContent =
         completed;
+
 
     document.getElementById(
         "overdue-count"
@@ -1970,7 +2124,8 @@ function renderGamePlans() {
 
 
     const today =
-        new Date().toISOString()
+        new Date()
+            .toISOString()
             .split("T")[0];
 
 
@@ -2008,6 +2163,19 @@ function renderGamePlans() {
                 "entry";
 
 
+            /*
+             * Check the currently saved status.
+             */
+
+            const isCompleted =
+                plan.status === "Completed";
+
+
+            const isNotCompleted =
+                plan.status === "Not Completed" ||
+                !plan.status;
+
+
             entry.innerHTML = `
 
                 <div class="entry-info">
@@ -2017,31 +2185,51 @@ function renderGamePlans() {
                     </div>
 
                     <div class="entry-meta">
+
                         ${escapeHTML(plan.subject)}
+
                         ·
+
                         ${escapeHTML(plan.assignmentType)}
+
                         ·
+
                         ${escapeHTML(plan.startTime)}
+
                         –
+
                         ${escapeHTML(plan.endTime)}
+
                     </div>
+
 
                     <div class="status-buttons">
 
                         <button
-                            class="status-button status-completed"
+                            type="button"
+                            class="status-button status-completed ${
+                                isCompleted
+                                    ? "selected"
+                                    : ""
+                            }"
                             data-id="${plan.id}"
                             data-status="Completed"
                         >
-                            Completed
+                            ✓ Completed
                         </button>
 
+
                         <button
-                            class="status-button status-pending"
+                            type="button"
+                            class="status-button status-pending ${
+                                isNotCompleted
+                                    ? "selected"
+                                    : ""
+                            }"
                             data-id="${plan.id}"
                             data-status="Not Completed"
                         >
-                            Not Completed
+                            ○ Not Completed
                         </button>
 
                     </div>
@@ -2056,6 +2244,10 @@ function renderGamePlans() {
             );
 
 
+            /*
+             * Add click events.
+             */
+
             entry
                 .querySelectorAll(
                     ".status-button"
@@ -2065,12 +2257,79 @@ function renderGamePlans() {
 
                         button.addEventListener(
                             "click",
-                            () => {
+                            async () => {
 
-                                updateGamePlanStatus(
-                                    button.dataset.id,
-                                    button.dataset.status
+                                const id =
+                                    button.dataset.id;
+
+                                const status =
+                                    button.dataset.status;
+
+
+                                /*
+                                 * Immediately show
+                                 * the selected button.
+                                 */
+
+                                entry
+                                    .querySelectorAll(
+                                        ".status-button"
+                                    )
+                                    .forEach(
+                                        b => {
+
+                                            b.classList.remove(
+                                                "selected"
+                                            );
+
+                                        }
+                                    );
+
+
+                                button.classList.add(
+                                    "selected"
                                 );
+
+
+                                /*
+                                 * Temporarily disable both
+                                 * buttons while saving.
+                                 */
+
+                                entry
+                                    .querySelectorAll(
+                                        ".status-button"
+                                    )
+                                    .forEach(
+                                        b => {
+
+                                            b.classList.add(
+                                                "saving"
+                                            );
+
+                                        }
+                                    );
+
+
+                                await updateGamePlanStatus(
+                                    id,
+                                    status
+                                );
+
+
+                                entry
+                                    .querySelectorAll(
+                                        ".status-button"
+                                    )
+                                    .forEach(
+                                        b => {
+
+                                            b.classList.remove(
+                                                "saving"
+                                            );
+
+                                        }
+                                    );
 
                             }
                         );
@@ -2095,6 +2354,10 @@ async function updateGamePlanStatus(
 
     try {
 
+        /*
+         * Save the new status to Firestore.
+         */
+
         await updateDoc(
             doc(
                 db,
@@ -2104,14 +2367,20 @@ async function updateGamePlanStatus(
                 id
             ),
             {
+
                 status:
                     status,
 
                 updatedAt:
                     serverTimestamp()
+
             }
         );
 
+
+        /*
+         * Update the local Game Plan immediately.
+         */
 
         const plan =
             gamePlans.find(
@@ -2128,11 +2397,29 @@ async function updateGamePlanStatus(
         }
 
 
+        /*
+         * Refresh the dashboard.
+         *
+         * This updates both:
+         *
+         * 1. The selected status button
+         * 2. The On My Plate metrics
+         */
+
         renderEverything();
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Could not update Game Plan status:",
+            error
+        );
+
+
+        alert(
+            "The Game Plan status could not be saved. Please try again."
+        );
 
     }
 
