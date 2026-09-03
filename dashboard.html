@@ -2116,29 +2116,21 @@ function updateMetrics() {
 function renderGamePlans() {
 
     const container =
-        document.getElementById(
-            "game-plan-list"
-        );
+        document.getElementById("game-plan-list");
 
     container.innerHTML = "";
-
 
     const today =
         new Date()
             .toISOString()
             .split("T")[0];
 
-
     const todayPlans =
         gamePlans.filter(
-            plan =>
-                plan.date === today
+            plan => plan.date === today
         );
 
-
-    if (
-        todayPlans.length === 0
-    ) {
+    if (todayPlans.length === 0) {
 
         container.innerHTML = `
             <div class="empty-state">
@@ -2147,10 +2139,188 @@ function renderGamePlans() {
         `;
 
         return;
-
     }
 
+    todayPlans.forEach(plan => {
 
+        const entry =
+            document.createElement("div");
+
+        entry.className = "entry";
+
+        const entryInfo =
+            document.createElement("div");
+
+        entryInfo.className = "entry-info";
+
+        const name =
+            document.createElement("div");
+
+        name.className = "entry-name";
+
+        name.textContent =
+            plan.name || "";
+
+        const meta =
+            document.createElement("div");
+
+        meta.className = "entry-meta";
+
+        meta.textContent =
+            `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
+
+        const statusButtons =
+            document.createElement("div");
+
+        statusButtons.className =
+            "status-buttons";
+
+        const completedButton =
+            document.createElement("button");
+
+        completedButton.type = "button";
+
+        completedButton.className =
+            "status-button status-completed";
+
+        completedButton.textContent =
+            "✓ Completed";
+
+        const pendingButton =
+            document.createElement("button");
+
+        pendingButton.type = "button";
+
+        pendingButton.className =
+            "status-button status-pending";
+
+        pendingButton.textContent =
+            "○ Not Completed";
+
+        function refreshStatusButtons() {
+
+            completedButton.classList.remove("selected");
+            pendingButton.classList.remove("selected");
+
+            if (plan.status === "Completed") {
+
+                completedButton.classList.add("selected");
+
+            } else {
+
+                pendingButton.classList.add("selected");
+
+            }
+
+        }
+
+        refreshStatusButtons();
+
+        completedButton.addEventListener(
+            "click",
+            async () => {
+
+                if (plan.status === "Completed") {
+                    return;
+                }
+
+                plan.status = "Completed";
+
+                refreshStatusButtons();
+
+                updateMetrics();
+
+                completedButton.disabled = true;
+                pendingButton.disabled = true;
+
+                try {
+
+                    await updateGamePlanStatus(
+                        plan.id,
+                        "Completed"
+                    );
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    plan.status = "Not Completed";
+
+                    refreshStatusButtons();
+
+                    updateMetrics();
+
+                } finally {
+
+                    completedButton.disabled = false;
+                    pendingButton.disabled = false;
+
+                }
+
+            }
+        );
+
+        pendingButton.addEventListener(
+            "click",
+            async () => {
+
+                if (
+                    plan.status === "Not Completed" ||
+                    !plan.status
+                ) {
+                    return;
+                }
+
+                plan.status = "Not Completed";
+
+                refreshStatusButtons();
+
+                updateMetrics();
+
+                completedButton.disabled = true;
+                pendingButton.disabled = true;
+
+                try {
+
+                    await updateGamePlanStatus(
+                        plan.id,
+                        "Not Completed"
+                    );
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    plan.status = "Completed";
+
+                    refreshStatusButtons();
+
+                    updateMetrics();
+
+                } finally {
+
+                    completedButton.disabled = false;
+                    pendingButton.disabled = false;
+
+                }
+
+            }
+        );
+
+        statusButtons.appendChild(completedButton);
+        statusButtons.appendChild(pendingButton);
+
+        entryInfo.appendChild(name);
+        entryInfo.appendChild(meta);
+        entryInfo.appendChild(statusButtons);
+
+        entry.appendChild(entryInfo);
+
+        container.appendChild(entry);
+
+    });
+
+}
     todayPlans.forEach(
         plan => {
 
