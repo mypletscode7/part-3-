@@ -35,7 +35,9 @@ body {
     overflow-x: hidden;
 }
 
-/* BACKGROUND */
+/* =========================================
+   BACKGROUND
+========================================= */
 
 #dashboard-background {
     position: fixed;
@@ -55,7 +57,9 @@ body {
     display: none;
 }
 
-/* PAGE */
+/* =========================================
+   PAGE
+========================================= */
 
 .dashboard {
     width: 100%;
@@ -68,7 +72,9 @@ body {
     margin: auto;
 }
 
-/* TOP BAR */
+/* =========================================
+   TOP BAR
+========================================= */
 
 .top-bar {
     display: flex;
@@ -99,7 +105,9 @@ body {
     display: none;
 }
 
-/* WELCOME */
+/* =========================================
+   WELCOME
+========================================= */
 
 .current-date {
     text-align: center;
@@ -124,7 +132,9 @@ body {
     font-size: 1.15rem;
 }
 
-/* LOCK IN */
+/* =========================================
+   LOCK IN SLIDER
+========================================= */
 
 .lock-section {
     margin-top: 90px;
@@ -136,18 +146,34 @@ body {
     height: 125px;
     padding: 8px;
     border-radius: 999px;
-    background: #F1F1F1;
+    background: #D1D5DB;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.03);
+
+    cursor: grab;
+
+    touch-action: none;
+    user-select: none;
+
+    transition:
+        background 0.15s ease;
+}
+
+.lock-slider.dragging {
+    cursor: grabbing;
 }
 
 .lock-progress {
     position: absolute;
     left: 0;
     top: 0;
+
     height: 100%;
     width: 0%;
+
     border-radius: 999px;
 
     background: linear-gradient(
@@ -172,29 +198,42 @@ body {
         #22D3EE
     );
 
-    transition: width 0.05s linear;
+    pointer-events: none;
+
+    transition:
+        width 0.03s linear;
 }
 
 .lock-text {
     position: absolute;
     inset: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     pointer-events: none;
+
     font-size: clamp(1.2rem, 2vw, 2rem);
     font-weight: 700;
+
     z-index: 3;
-    transition: color 0.25s ease;
+
+    transition:
+        color 0.25s ease;
 }
 
 .lock-handle {
     position: absolute;
+
     top: 8px;
     left: 8px;
+
     width: 109px;
     height: 109px;
+
     border-radius: 50%;
+
     background: #FFFFFF;
 
     display: flex;
@@ -204,33 +243,42 @@ body {
     font-size: 3.3rem;
 
     cursor: grab;
+
     user-select: none;
     touch-action: none;
 
     z-index: 5;
 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
 
     transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
 }
 
 .lock-handle.dragging {
     cursor: grabbing;
+
     transform: scale(0.94);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.22);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.22);
 }
 
 .lock-slider.completed .lock-text {
     color: #FFFFFF;
 }
 
-/* DASHBOARD CONTENT */
+/* =========================================
+   DASHBOARD CONTENT
+========================================= */
 
 .dashboard-content {
     opacity: 0;
+
     transform: translateY(40px);
+
     pointer-events: none;
 
     transition:
@@ -240,24 +288,34 @@ body {
 
 .dashboard-content.visible {
     opacity: 1;
+
     transform: translateY(0);
+
     pointer-events: auto;
 }
 
-/* CARDS */
+/* =========================================
+   CARDS
+========================================= */
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 28px;
 }
 
 .dashboard-card {
     background: rgba(255,255,255,0.94);
+
     border-radius: 30px;
+
     padding: 35px;
 
-    box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+    box-shadow:
+        0 18px 50px rgba(0,0,0,0.08);
 
     backdrop-filter: blur(10px);
 }
@@ -265,40 +323,56 @@ body {
 .section-title {
     font-size: 2rem;
     font-weight: 800;
+
     margin-bottom: 8px;
 }
 
 .section-description {
     color: #666666;
+
     margin-bottom: 30px;
 }
 
-/* METRICS */
+/* =========================================
+   METRICS
+========================================= */
 
 .metrics {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
     gap: 15px;
 }
 
 .metric {
     padding: 22px 14px;
+
     border-radius: 22px;
+
     background: #F8F8F8;
+
     text-align: center;
 }
 
 .metric-number {
     display: block;
+
     font-size: 3rem;
+
     line-height: 1;
+
     font-weight: 800;
+
     margin-bottom: 10px;
 }
 
 .metric-label {
     font-size: 0.82rem;
+
     font-weight: 600;
+
     color: #444444;
 }
 
@@ -318,34 +392,47 @@ body {
     color: #DC2626;
 }
 
-/* ENTRIES */
+/* =========================================
+   ENTRIES
+========================================= */
 
 .entries {
     display: flex;
+
     flex-direction: column;
+
     gap: 12px;
 }
 
 .empty-state {
     padding: 30px;
+
     border-radius: 20px;
+
     background: #F7F7F7;
+
     text-align: center;
+
     color: #777777;
 }
 
 .entry {
     padding: 18px;
+
     border-radius: 20px;
+
     background: #F8F8F8;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     gap: 20px;
 
-    border-left: 6px solid #6366F1;
+    border-left:
+        6px solid #6366F1;
 }
 
 .entry-info {
@@ -354,47 +441,63 @@ body {
 
 .entry-name {
     font-size: 1rem;
+
     font-weight: 800;
+
     margin-bottom: 5px;
 }
 
 .entry-meta {
     font-size: 0.85rem;
+
     color: #666666;
 }
 
 .entry-date {
     text-align: right;
+
     white-space: nowrap;
 }
 
 .entry-date strong {
     display: block;
+
     font-size: 1rem;
 }
 
 .entry-date span {
     font-size: 0.8rem;
+
     color: #6366F1;
+
     font-weight: 700;
 }
 
-/* STATUS */
+/* =========================================
+   STATUS
+========================================= */
 
 .status-buttons {
     display: flex;
+
     gap: 8px;
+
     margin-top: 12px;
+
     flex-wrap: wrap;
 }
 
 .status-button {
     border: 2px solid transparent;
+
     padding: 8px 14px;
+
     border-radius: 999px;
 
     font-family: "DM Sans", sans-serif;
+
     font-size: 0.75rem;
+
     font-weight: 700;
 
     cursor: pointer;
@@ -408,26 +511,35 @@ body {
 
 .status-completed {
     background: #DCFCE7;
+
     color: #15803D;
 }
 
 .status-pending {
     background: #FEE2E2;
+
     color: #B91C1C;
 }
 
 .status-button.selected {
     border-color: currentColor;
-    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
-    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 3px rgba(0,0,0,0.08);
+
+    transform:
+        translateY(-1px);
 }
 
 .status-button.saving {
     opacity: 0.55;
+
     pointer-events: none;
 }
 
-/* QUICK ACTIONS */
+/* =========================================
+   QUICK ACTIONS
+========================================= */
 
 .quick-actions {
     grid-column: 1 / -1;
@@ -435,18 +547,26 @@ body {
 
 .action-buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 20px;
 }
 
 .action-button {
     min-height: 100px;
+
     border: none;
+
     border-radius: 25px;
+
     color: #FFFFFF;
 
     font-family: "DM Sans", sans-serif;
+
     font-size: 1.15rem;
+
     font-weight: 800;
 
     cursor: pointer;
@@ -457,8 +577,11 @@ body {
 }
 
 .action-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.12);
 }
 
 .game-plan-action {
@@ -469,19 +592,24 @@ body {
     background: #6366F1;
 }
 
-/* MODAL */
+/* =========================================
+   MODAL
+========================================= */
 
 .modal {
     position: fixed;
+
     inset: 0;
 
     z-index: 1000;
 
-    background: rgba(0,0,0,0.45);
+    background:
+        rgba(0,0,0,0.45);
 
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 20px;
@@ -502,12 +630,15 @@ body {
 
     padding: 35px;
 
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.25);
 }
 
 .modal-title {
     font-size: 2rem;
+
     font-weight: 800;
+
     margin-bottom: 25px;
 }
 
@@ -517,22 +648,30 @@ body {
 
 .form-group label {
     display: block;
+
     margin-bottom: 7px;
+
     font-size: 0.85rem;
+
     font-weight: 700;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
+
     height: 52px;
 
-    border: 2px solid #E5E7EB;
+    border:
+        2px solid #E5E7EB;
+
     border-radius: 14px;
 
     padding: 0 14px;
 
-    font-family: "DM Sans", sans-serif;
+    font-family:
+        "DM Sans", sans-serif;
+
     font-size: 0.95rem;
 
     outline: none;
@@ -545,19 +684,25 @@ body {
 
 .assignment-types {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 8px;
 }
 
 .type-option {
     border: 2px solid transparent;
+
     border-radius: 14px;
 
     padding: 12px;
 
     cursor: pointer;
 
-    font-family: "DM Sans", sans-serif;
+    font-family:
+        "DM Sans", sans-serif;
+
     font-weight: 700;
 
     background: #F5F5F5;
@@ -585,18 +730,24 @@ body {
 
 .modal-actions {
     display: flex;
+
     gap: 10px;
+
     margin-top: 25px;
 }
 
 .modal-actions button {
     flex: 1;
+
     height: 52px;
 
     border: none;
+
     border-radius: 999px;
 
-    font-family: "DM Sans", sans-serif;
+    font-family:
+        "DM Sans", sans-serif;
+
     font-weight: 800;
 
     cursor: pointer;
@@ -608,27 +759,33 @@ body {
 
 .add-button {
     background: #6366F1;
+
     color: #FFFFFF;
 }
 
-/* CELEBRATION */
+/* =========================================
+   CELEBRATION
+========================================= */
 
 .celebration {
     position: fixed;
+
     inset: 0;
 
     z-index: 5000;
 
-    background: linear-gradient(
-        135deg,
-        #A855F7,
-        #D946EF,
-        #22D3EE
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #A855F7,
+            #D946EF,
+            #22D3EE
+        );
 
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -642,34 +799,51 @@ body {
 
 .celebration-content {
     position: relative;
+
     z-index: 10;
+
     color: #FFFFFF;
 }
 
 .celebration-cap {
     font-size: 8rem;
-    animation: capPop 0.8s ease both;
+
+    animation:
+        capPop 0.8s ease both;
 }
 
 @keyframes capPop {
 
     0% {
-        transform: scale(0) rotate(-25deg);
+        transform:
+            scale(0)
+            rotate(-25deg);
     }
 
     70% {
-        transform: scale(1.2) rotate(8deg);
+        transform:
+            scale(1.2)
+            rotate(8deg);
     }
 
     100% {
-        transform: scale(1) rotate(0);
+        transform:
+            scale(1)
+            rotate(0);
     }
+
 }
 
 .celebration-title {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-family:
+        "Bricolage Grotesque",
+        sans-serif;
+
+    font-size:
+        clamp(3.5rem, 10vw, 8rem);
+
     line-height: 0.9;
+
     margin: 20px 0;
 }
 
@@ -677,24 +851,31 @@ body {
     font-size: 1.3rem;
 }
 
-/* CONFETTI */
+/* =========================================
+   CONFETTI
+========================================= */
 
 .confetti {
     position: fixed;
 
     width: 12px;
+
     height: 20px;
 
     z-index: 6000;
 
     pointer-events: none;
 
-    animation: confettiFall 3s ease-out forwards;
+    animation:
+        confettiFall
+        3s ease-out
+        forwards;
 }
 
 @keyframes confettiFall {
 
     from {
+
         transform:
             translate(0,0)
             rotate(0deg);
@@ -703,15 +884,19 @@ body {
     }
 
     to {
+
         transform:
             translate(var(--x), var(--y))
             rotate(var(--r));
 
         opacity: 0;
     }
+
 }
 
-/* RESPONSIVE */
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media(max-width: 950px) {
 
@@ -728,11 +913,15 @@ body {
 @media(max-width: 700px) {
 
     .dashboard {
-        padding: 25px 15px 60px;
+        padding:
+            25px
+            15px
+            60px;
     }
 
     .metrics {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .action-buttons {
@@ -745,12 +934,16 @@ body {
 
     .lock-handle {
         width: 84px;
+
         height: 84px;
+
         font-size: 2.5rem;
     }
 
     .dashboard-card {
-        padding: 25px 20px;
+        padding:
+            25px
+            20px;
     }
 
 }
@@ -762,13 +955,16 @@ body {
 <body>
 
 <div id="dashboard-background"></div>
+
 <div id="dashboard-overlay"></div>
 
 <main class="dashboard">
 
 <div class="dashboard-inner">
 
-<!-- TOP BAR -->
+<!-- =========================================
+     TOP BAR
+========================================= -->
 
 <div class="top-bar">
 
@@ -787,7 +983,9 @@ body {
 
 </div>
 
-<!-- WELCOME -->
+<!-- =========================================
+     WELCOME
+========================================= -->
 
 <div
     class="current-date"
@@ -802,7 +1000,9 @@ body {
     Let's make some progress today.
 </p>
 
-<!-- LOCK IN -->
+<!-- =========================================
+     LOCK IN
+========================================= -->
 
 <section class="lock-section">
 
@@ -835,7 +1035,9 @@ body {
 
 </section>
 
-<!-- DASHBOARD -->
+<!-- =========================================
+     DASHBOARD CONTENT
+========================================= -->
 
 <div
     class="dashboard-content"
@@ -859,6 +1061,7 @@ body {
     <div class="metrics">
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="due-today"
@@ -867,9 +1070,11 @@ body {
             <span class="metric-label">
                 Due Today
             </span>
+
         </div>
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="due-week"
@@ -878,9 +1083,11 @@ body {
             <span class="metric-label">
                 Due This Week
             </span>
+
         </div>
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="completed-count"
@@ -889,9 +1096,11 @@ body {
             <span class="metric-label">
                 Completed
             </span>
+
         </div>
 
         <div class="metric">
+
             <span
                 class="metric-number"
                 id="overdue-count"
@@ -900,13 +1109,14 @@ body {
             <span class="metric-label">
                 Overdue
             </span>
+
         </div>
 
     </div>
 
 </section>
 
-<!-- GAME PLAN -->
+<!-- TODAY'S GAME PLAN -->
 
 <section class="dashboard-card">
 
@@ -984,7 +1194,9 @@ body {
 
 </main>
 
-<!-- GAME PLAN MODAL -->
+<!-- =========================================
+     GAME PLAN MODAL
+========================================= -->
 
 <div
     class="modal"
@@ -1105,7 +1317,9 @@ body {
 
 </div>
 
-<!-- COMING UP MODAL -->
+<!-- =========================================
+     COMING UP MODAL
+========================================= -->
 
 <div
     class="modal"
@@ -1215,7 +1429,9 @@ body {
 
 </div>
 
-<!-- CELEBRATION -->
+<!-- =========================================
+     CELEBRATION
+========================================= -->
 
 <div
     class="celebration"
@@ -1241,9 +1457,15 @@ body {
 
 </div>
 
-<!-- FIREBASE -->
+<!-- =========================================
+     FIREBASE
+========================================= -->
 
 <script type="module">
+
+/* =========================================
+   FIREBASE IMPORTS
+========================================= */
 
 import {
     initializeApp
@@ -1259,6 +1481,7 @@ import {
     doc,
     getDoc,
     updateDoc,
+    setDoc,
     collection,
     addDoc,
     getDocs,
@@ -1266,9 +1489,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* =========================================================
-   FIREBASE
-========================================================= */
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
 
@@ -1302,9 +1525,9 @@ const db =
     getFirestore(app);
 
 
-/* =========================================================
+/* =========================================
    VARIABLES
-========================================================= */
+========================================= */
 
 let currentUser = null;
 
@@ -1320,20 +1543,51 @@ let selectedGameType = "";
 
 let selectedComingType = "";
 
-let dragging = false;
-
 let lockedIn = false;
 
 
-/* =========================================================
+/* =========================================
+   DOM ELEMENTS
+========================================= */
+
+const lockSlider =
+    document.getElementById(
+        "lock-slider"
+    );
+
+const lockHandle =
+    document.getElementById(
+        "lock-handle"
+    );
+
+const lockProgress =
+    document.getElementById(
+        "lock-progress"
+    );
+
+const lockText =
+    document.getElementById(
+        "lock-text"
+    );
+
+const dashboardContent =
+    document.getElementById(
+        "dashboard-content"
+    );
+
+
+/* =========================================
    DATE
-========================================================= */
+========================================= */
 
 function updateDate() {
 
-    const now = new Date();
+    const now =
+        new Date();
 
-    const formatted =
+    document.getElementById(
+        "current-date"
+    ).textContent =
         now.toLocaleDateString(
             "en-US",
             {
@@ -1344,18 +1598,32 @@ function updateDate() {
             }
         );
 
-    document.getElementById(
-        "current-date"
-    ).textContent = formatted;
-
 }
 
 updateDate();
 
 
-/* =========================================================
+/* =========================================
+   LOCAL DATE STRING
+========================================= */
+
+function getLocalDateString() {
+
+    const now =
+        new Date();
+
+    return `${now.getFullYear()}-${String(
+        now.getMonth() + 1
+    ).padStart(2,"0")}-${String(
+        now.getDate()
+    ).padStart(2,"0")}`;
+
+}
+
+
+/* =========================================
    AUTHENTICATION
-========================================================= */
+========================================= */
 
 onAuthStateChanged(
     auth,
@@ -1370,7 +1638,8 @@ onAuthStateChanged(
 
         }
 
-        currentUser = user;
+        currentUser =
+            user;
 
         console.log(
             "Logged in:",
@@ -1385,13 +1654,20 @@ onAuthStateChanged(
 
         renderEverything();
 
+        /*
+         * Restore the slider AFTER
+         * everything has loaded.
+         */
+
+        restoreLockedSlider();
+
     }
 );
 
 
-/* =========================================================
+/* =========================================
    LOAD USER DATA
-========================================================= */
+========================================= */
 
 async function loadUserData() {
 
@@ -1405,7 +1681,9 @@ async function loadUserData() {
             );
 
         const userSnap =
-            await getDoc(userRef);
+            await getDoc(
+                userRef
+            );
 
 
         if (userSnap.exists()) {
@@ -1415,7 +1693,9 @@ async function loadUserData() {
 
 
             if (
-                Array.isArray(data.subjects)
+                Array.isArray(
+                    data.subjects
+                )
             ) {
 
                 selectedSubjects =
@@ -1435,7 +1715,9 @@ async function loadUserData() {
         }
 
 
-        /* FALLBACK TO SURVEY */
+        /*
+         * FALLBACK TO SURVEY
+         */
 
         if (
             selectedSubjects.length === 0
@@ -1483,12 +1765,6 @@ async function loadUserData() {
         await loadDashboardData();
 
 
-        /*
-         * IMPORTANT:
-         * Show the dashboard AFTER all
-         * Firebase data has loaded.
-         */
-
         if (lockedIn) {
 
             showDashboard();
@@ -1508,15 +1784,13 @@ async function loadUserData() {
 }
 
 
-/* =========================================================
+/* =========================================
    LOAD DASHBOARD DATA
-========================================================= */
+========================================= */
 
 async function loadDashboardData() {
 
     try {
-
-        /* TASKS */
 
         const tasksRef =
             collection(
@@ -1527,7 +1801,9 @@ async function loadDashboardData() {
             );
 
         const taskSnapshot =
-            await getDocs(tasksRef);
+            await getDocs(
+                tasksRef
+            );
 
         tasks =
             taskSnapshot.docs.map(
@@ -1538,8 +1814,6 @@ async function loadDashboardData() {
             );
 
 
-        /* GAME PLANS */
-
         const gameRef =
             collection(
                 db,
@@ -1549,7 +1823,9 @@ async function loadDashboardData() {
             );
 
         const gameSnapshot =
-            await getDocs(gameRef);
+            await getDocs(
+                gameRef
+            );
 
         gamePlans =
             gameSnapshot.docs.map(
@@ -1560,8 +1836,6 @@ async function loadDashboardData() {
             );
 
 
-        /* UPCOMING */
-
         const upcomingRef =
             collection(
                 db,
@@ -1571,7 +1845,9 @@ async function loadDashboardData() {
             );
 
         const upcomingSnapshot =
-            await getDocs(upcomingRef);
+            await getDocs(
+                upcomingRef
+            );
 
         upcomingEvents =
             upcomingSnapshot.docs.map(
@@ -1604,15 +1880,22 @@ async function loadDashboardData() {
 }
 
 
-/* =========================================================
+/* =========================================
    SUBJECT DROPDOWNS
-========================================================= */
+========================================= */
 
 function setupSubjectDropdowns() {
 
     const dropdowns = [
-        document.getElementById("game-subject"),
-        document.getElementById("coming-subject")
+
+        document.getElementById(
+            "game-subject"
+        ),
+
+        document.getElementById(
+            "coming-subject"
+        )
+
     ];
 
 
@@ -1665,9 +1948,9 @@ function setupSubjectDropdowns() {
 }
 
 
-/* =========================================================
+/* =========================================
    RENDER EVERYTHING
-========================================================= */
+========================================= */
 
 function renderEverything() {
 
@@ -1680,9 +1963,9 @@ function renderEverything() {
 }
 
 
-/* =========================================================
+/* =========================================
    DATE ONLY
-========================================================= */
+========================================= */
 
 function dateOnly(date) {
 
@@ -1695,21 +1978,26 @@ function dateOnly(date) {
 }
 
 
-/* =========================================================
+/* =========================================
    METRICS
-========================================================= */
+========================================= */
 
 function updateMetrics() {
 
     const today =
-        dateOnly(new Date());
+        dateOnly(
+            new Date()
+        );
 
     const weekEnd =
-        new Date(today);
+        new Date(
+            today
+        );
 
     weekEnd.setDate(
         weekEnd.getDate() + 7
     );
+
 
     let dueToday = 0;
 
@@ -1720,14 +2008,13 @@ function updateMetrics() {
     let overdue = 0;
 
 
-    /* TASKS */
-
     tasks.forEach(
         task => {
 
             if (!task.dueDate) {
                 return;
             }
+
 
             const due =
                 dateOnly(
@@ -1738,7 +2025,8 @@ function updateMetrics() {
 
 
             if (
-                task.status === "Completed"
+                task.status ===
+                "Completed"
             ) {
 
                 completed++;
@@ -1780,14 +2068,13 @@ function updateMetrics() {
     );
 
 
-    /* GAME PLANS */
-
     gamePlans.forEach(
         plan => {
 
             if (!plan.date) {
                 return;
             }
+
 
             const due =
                 dateOnly(
@@ -1798,7 +2085,8 @@ function updateMetrics() {
 
 
             if (
-                plan.status === "Completed"
+                plan.status ===
+                "Completed"
             ) {
 
                 completed++;
@@ -1863,9 +2151,9 @@ function updateMetrics() {
 }
 
 
-/* =========================================================
+/* =========================================
    GAME PLANS
-========================================================= */
+========================================= */
 
 function renderGamePlans() {
 
@@ -1877,35 +2165,8 @@ function renderGamePlans() {
     container.innerHTML = "";
 
 
-    /*
-     * Use local date instead of UTC.
-     * This prevents Namibia date problems.
-     */
-
-    const now =
-        new Date();
-
-    const year =
-        now.getFullYear();
-
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-    const day =
-        String(
-            now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
     const today =
-        `${year}-${month}-${day}`;
+        getLocalDateString();
 
 
     const todayPlans =
@@ -2026,7 +2287,8 @@ function renderGamePlans() {
 
 
                 if (
-                    plan.status === "Completed"
+                    plan.status ===
+                    "Completed"
                 ) {
 
                     completedButton.classList.add(
@@ -2064,17 +2326,18 @@ function renderGamePlans() {
                     plan.status =
                         "Completed";
 
-
                     refreshStatus();
 
                     updateMetrics();
 
 
-                    completedButton.disabled =
-                        true;
+                    completedButton.classList.add(
+                        "saving"
+                    );
 
-                    pendingButton.disabled =
-                        true;
+                    pendingButton.classList.add(
+                        "saving"
+                    );
 
 
                     try {
@@ -2099,11 +2362,13 @@ function renderGamePlans() {
 
                     } finally {
 
-                        completedButton.disabled =
-                            false;
+                        completedButton.classList.remove(
+                            "saving"
+                        );
 
-                        pendingButton.disabled =
-                            false;
+                        pendingButton.classList.remove(
+                            "saving"
+                        );
 
                     }
 
@@ -2129,17 +2394,18 @@ function renderGamePlans() {
                     plan.status =
                         "Not Completed";
 
-
                     refreshStatus();
 
                     updateMetrics();
 
 
-                    completedButton.disabled =
-                        true;
+                    completedButton.classList.add(
+                        "saving"
+                    );
 
-                    pendingButton.disabled =
-                        true;
+                    pendingButton.classList.add(
+                        "saving"
+                    );
 
 
                     try {
@@ -2164,11 +2430,13 @@ function renderGamePlans() {
 
                     } finally {
 
-                        completedButton.disabled =
-                            false;
+                        completedButton.classList.remove(
+                            "saving"
+                        );
 
-                        pendingButton.disabled =
-                            false;
+                        pendingButton.classList.remove(
+                            "saving"
+                        );
 
                     }
 
@@ -2213,9 +2481,9 @@ function renderGamePlans() {
 }
 
 
-/* =========================================================
+/* =========================================
    UPDATE GAME PLAN STATUS
-========================================================= */
+========================================= */
 
 async function updateGamePlanStatus(
     id,
@@ -2253,12 +2521,6 @@ async function updateGamePlanStatus(
     );
 
 
-    console.log(
-        "Game Plan status saved:",
-        status
-    );
-
-
     const plan =
         gamePlans.find(
             item =>
@@ -2279,9 +2541,9 @@ async function updateGamePlanStatus(
 }
 
 
-/* =========================================================
+/* =========================================
    COMING UP
-========================================================= */
+========================================= */
 
 function renderComingUp() {
 
@@ -2319,7 +2581,7 @@ function renderComingUp() {
                 }
             )
             .sort(
-                (a,b) =>
+                (a, b) =>
                     new Date(a.date) -
                     new Date(b.date)
             )
@@ -2485,288 +2747,420 @@ function renderComingUp() {
 }
 
 
-/* =========================================
-   LOCK-IN SLIDER — FIXED
-========================================= */
-
-const lockSlider = document.getElementById("lock-slider");
-const lockHandle = document.getElementById("lock-handle");
-const lockText = document.getElementById("lock-text");
+/* =========================================================
+   🔥 FIXED LOCK-IN SLIDER
+========================================================= */
 
 let sliderProgress = 0;
-let lockedIn = false;
+
 let dragging = false;
 
-const rainbowColors = [
-    "#FF4D6D",
-    "#FF8A3D",
-    "#FFD23F",
-    "#7ED957",
-    "#39D6C0",
-    "#34D399",
-    "#00C2FF",
-    "#3B82F6",
-    "#8B5CF6",
-    "#A855F7",
-    "#FF6FB5",
-    "#D946EF",
-    "#C026D3",
-    "#A21CAF",
-    "#86198F",
-    "#6366F1",
-    "#818CF8",
-    "#22D3EE"
-];
 
+/* =========================================
+   GET MAX SLIDER POSITION
+========================================= */
 
-/* -----------------------------------------
-   GET SLIDER POSITION
------------------------------------------ */
+function maxSliderPosition() {
 
-function getSliderPosition(clientX) {
+    return (
+        lockSlider.clientWidth -
+        lockHandle.offsetWidth -
+        16
+    );
 
-    if (!lockSlider || !lockHandle) return;
-
-    const sliderRect = lockSlider.getBoundingClientRect();
-
-    const handleWidth = lockHandle.offsetWidth;
-
-    const minX = sliderRect.left;
-    const maxX = sliderRect.right - handleWidth;
-
-    let x = clientX - handleWidth / 2;
-
-    x = Math.max(minX, Math.min(x, maxX));
-
-    const percentage =
-        ((x - minX) / (maxX - minX)) * 100;
-
-    setSliderProgress(percentage);
 }
 
 
-/* -----------------------------------------
-   UPDATE SLIDER
------------------------------------------ */
+/* =========================================
+   SET SLIDER POSITION
+========================================= */
 
-function setSliderProgress(percent) {
+function setSliderProgress(
+    percent
+) {
 
-    if (lockedIn) return;
+    if (lockedIn) {
+        return;
+    }
 
-    sliderProgress = Math.max(0, Math.min(100, percent));
 
-    const sliderWidth = lockSlider.offsetWidth;
-    const handleWidth = lockHandle.offsetWidth;
+    sliderProgress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                percent
+            )
+        );
 
-    const availableWidth = sliderWidth - handleWidth;
 
-    const handlePosition =
-        availableWidth * (sliderProgress / 100);
+    const max =
+        maxSliderPosition();
 
-    lockHandle.style.left = `${handlePosition}px`;
 
-    /* Rainbow colour */
+    const position =
+        max *
+        (
+            sliderProgress /
+            100
+        );
 
-    const colorIndex = Math.floor(
-        (sliderProgress / 100) *
-        (rainbowColors.length - 1)
-    );
 
-    const currentColor =
+    lockHandle.style.left =
+        `${8 + position}px`;
+
+
+    lockProgress.style.width =
+        `${sliderProgress}%`;
+
+
+    /*
+     * Change the slider background
+     * through the rainbow as it moves.
+     */
+
+    const rainbowColors = [
+
+        "#FF4D6D",
+        "#FF8A3D",
+        "#FFD23F",
+        "#7ED957",
+        "#39D6C0",
+        "#34D399",
+        "#00C2FF",
+        "#3B82F6",
+        "#8B5CF6",
+        "#A855F7",
+        "#FF6FB5",
+        "#D946EF",
+        "#C026D3",
+        "#A21CAF",
+        "#86198F",
+        "#6366F1",
+        "#818CF8",
+        "#22D3EE"
+
+    ];
+
+
+    const index =
+        Math.floor(
+            (
+                sliderProgress /
+                100
+            ) *
+            (
+                rainbowColors.length - 1
+            )
+        );
+
+
+    lockProgress.style.background =
         rainbowColors[
-            Math.min(colorIndex, rainbowColors.length - 1)
+            Math.min(
+                index,
+                rainbowColors.length - 1
+            )
         ];
 
-    lockSlider.style.background = currentColor;
 
-    /* Text */
-
-    if (sliderProgress >= 98) {
+    if (
+        sliderProgress >= 98
+    ) {
 
         sliderProgress = 100;
 
-        lockHandle.style.left =
-            `${availableWidth}px`;
-
-        lockSlider.style.background =
-            "#22D3EE";
-
-        lockText.textContent =
-            "We're locked in!";
-
         completeLockIn();
 
-    } else {
-
-        lockText.textContent =
-            "Are we ready to lock in?";
     }
+
 }
 
 
-/* -----------------------------------------
-   START DRAGGING
------------------------------------------ */
+/* =========================================
+   POINTER DOWN
+========================================= */
 
-function startSliderDrag(event) {
+function startDragging(
+    event
+) {
 
-    if (lockedIn) return;
+    if (lockedIn) {
+        return;
+    }
+
 
     event.preventDefault();
+
 
     dragging = true;
 
-    lockSlider.classList.add("dragging");
 
-    if (event.pointerId !== undefined) {
+    lockSlider.classList.add(
+        "dragging"
+    );
 
-        try {
-            lockSlider.setPointerCapture(event.pointerId);
-        } catch (error) {
-            console.log("Pointer capture unavailable");
-        }
+    lockHandle.classList.add(
+        "dragging"
+    );
+
+
+    try {
+
+        lockSlider.setPointerCapture(
+            event.pointerId
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Pointer capture unavailable."
+        );
 
     }
 
-    getSliderPosition(event.clientX);
+
+    updateSliderFromPointer(
+        event.clientX
+    );
+
 }
 
 
-/* -----------------------------------------
-   DRAGGING
------------------------------------------ */
+/* =========================================
+   POINTER MOVE
+========================================= */
 
-function moveSlider(event) {
+function dragSlider(
+    event
+) {
 
-    if (!dragging || lockedIn) return;
+    if (
+        !dragging ||
+        lockedIn
+    ) {
+
+        return;
+
+    }
+
 
     event.preventDefault();
 
-    getSliderPosition(event.clientX);
+
+    updateSliderFromPointer(
+        event.clientX
+    );
+
 }
 
 
-/* -----------------------------------------
-   STOP DRAGGING
------------------------------------------ */
+/* =========================================
+   UPDATE FROM POINTER
+========================================= */
 
-function stopSliderDrag(event) {
+function updateSliderFromPointer(
+    clientX
+) {
 
-    if (!dragging) return;
+    const rect =
+        lockSlider.getBoundingClientRect();
+
+
+    /*
+     * Position relative to slider.
+     */
+
+    const relativeX =
+        clientX -
+        rect.left;
+
+
+    const handleWidth =
+        lockHandle.offsetWidth;
+
+
+    const usableWidth =
+        lockSlider.clientWidth -
+        handleWidth -
+        16;
+
+
+    /*
+     * Centre the handle under
+     * the pointer.
+     */
+
+    let position =
+        relativeX -
+        handleWidth / 2 -
+        8;
+
+
+    position =
+        Math.max(
+            0,
+            Math.min(
+                usableWidth,
+                position
+            )
+        );
+
+
+    const percentage =
+        (
+            position /
+            usableWidth
+        ) *
+        100;
+
+
+    setSliderProgress(
+        percentage
+    );
+
+}
+
+
+/* =========================================
+   POINTER UP
+========================================= */
+
+function stopDragging(
+    event
+) {
+
+    if (!dragging) {
+        return;
+    }
+
 
     dragging = false;
 
-    lockSlider.classList.remove("dragging");
 
-    if (
-        event &&
-        event.pointerId !== undefined
-    ) {
+    lockSlider.classList.remove(
+        "dragging"
+    );
 
-        try {
-            lockSlider.releasePointerCapture(
-                event.pointerId
-            );
-        } catch (error) {
-            console.log("Pointer release unavailable");
-        }
+    lockHandle.classList.remove(
+        "dragging"
+    );
+
+
+    try {
+
+        lockSlider.releasePointerCapture(
+            event.pointerId
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Pointer release unavailable."
+        );
 
     }
 
+
     /*
-       If they let go before 98%,
-       smoothly return to the beginning.
-    */
+     * If they didn't reach the end,
+     * return to the beginning.
+     */
 
-    if (!lockedIn && sliderProgress < 98) {
+    if (
+        !lockedIn &&
+        sliderProgress < 98
+    ) {
 
-        setSliderProgress(0);
+        setSliderProgress(
+            0
+        );
 
     }
 
 }
 
 
-/* -----------------------------------------
-   POINTER EVENTS
-   WORKS ON MOUSE + TRACKPAD + TOUCH
------------------------------------------ */
+/* =========================================
+   SLIDER EVENTS
+========================================= */
 
 lockSlider.addEventListener(
     "pointerdown",
-    startSliderDrag
+    startDragging
 );
 
 lockSlider.addEventListener(
     "pointermove",
-    moveSlider
+    dragSlider
 );
 
 lockSlider.addEventListener(
     "pointerup",
-    stopSliderDrag
+    stopDragging
 );
 
 lockSlider.addEventListener(
     "pointercancel",
-    stopSliderDrag
-);
-
-lockSlider.addEventListener(
-    "lostpointercapture",
-    () => {
-
-        if (dragging) {
-            dragging = false;
-            lockSlider.classList.remove("dragging");
-        }
-
-    }
+    stopDragging
 );
 
 
-/* -----------------------------------------
-   CLICK ANYWHERE ON TRACK
------------------------------------------ */
-
-lockSlider.addEventListener(
-    "click",
-    event => {
-
-        if (lockedIn) return;
-
-        getSliderPosition(event.clientX);
-
-    }
-);
-
-
-/* -----------------------------------------
+/* =========================================
    LOCK IN
------------------------------------------ */
+========================================= */
 
 async function completeLockIn() {
 
-    if (lockedIn) return;
+    if (lockedIn) {
+        return;
+    }
+
 
     lockedIn = true;
 
+    dragging = false;
+
     sliderProgress = 100;
+
+
+    const max =
+        maxSliderPosition();
+
+
+    lockHandle.style.left =
+        `${8 + max}px`;
+
+
+    lockProgress.style.width =
+        "100%";
+
+
+    lockProgress.style.background =
+        "#22D3EE";
+
 
     lockText.textContent =
         "We're locked in!";
 
+
     lockSlider.style.background =
         "#22D3EE";
 
-    const availableWidth =
-        lockSlider.offsetWidth -
-        lockHandle.offsetWidth;
 
-    lockHandle.style.left =
-        `${availableWidth}px`;
+    lockSlider.classList.add(
+        "completed"
+    );
 
-    /* Save permanently */
+
+    lockHandle.classList.remove(
+        "dragging"
+    );
+
+
+    /*
+     * SAVE TO FIREBASE
+     */
 
     if (currentUser) {
 
@@ -2780,12 +3174,20 @@ async function completeLockIn() {
                 ),
                 {
                     lockedIn: true,
-                    updatedAt: serverTimestamp()
+
+                    updatedAt:
+                        serverTimestamp()
                 },
                 {
                     merge: true
                 }
             );
+
+
+            console.log(
+                "Lock-in saved successfully."
+            );
+
 
         } catch (error) {
 
@@ -2798,280 +3200,26 @@ async function completeLockIn() {
 
     }
 
-    /* Show dashboard */
 
-    setTimeout(() => {
-
-        showDashboard();
-
-        if (typeof launchConfetti === "function") {
-            launchConfetti();
-        }
-
-    }, 400);
-}
-
-
-/* -----------------------------------------
-   RESTORE LOCKED STATE
------------------------------------------ */
-
-function restoreLockedSlider() {
-
-    if (!lockedIn) {
-
-        sliderProgress = 0;
-
-        lockHandle.style.left = "0px";
-
-        lockSlider.style.background =
-            "#D1D5DB";
-
-        lockText.textContent =
-            "Are we ready to lock in?";
-
-        return;
-
-    }
-
-    sliderProgress = 100;
-
-    lockSlider.style.background =
-        "#22D3EE";
-
-    lockText.textContent =
-        "We're locked in!";
-
-    requestAnimationFrame(() => {
-
-        const availableWidth =
-            lockSlider.offsetWidth -
-            lockHandle.offsetWidth;
-
-        lockHandle.style.left =
-            `${availableWidth}px`;
-
-    });
-
-}
-
-
-/* -----------------------------------------
-   MAKE SURE THE HANDLE DOESN'T SELECT TEXT
------------------------------------------ */
-
-lockSlider.style.touchAction = "none";
-lockSlider.style.userSelect = "none";
-lockHandle.style.touchAction = "none";
-lockHandle.style.userSelect = "none";
-/* =========================================================
-   POINTER EVENTS
-   FIXED SLIDER SYSTEM
-========================================================= */
-
-lockHandle.addEventListener(
-    "pointerdown",
-    event => {
-
-        if (lockedIn) {
-            return;
-        }
-
-
-        dragging = true;
-
-
-        lockHandle.classList.add(
-            "dragging"
-        );
-
-
-        lockHandle.setPointerCapture(
-            event.pointerId
-        );
-
-
-        event.preventDefault();
-
-    }
-);
-
-
-lockHandle.addEventListener(
-    "pointermove",
-    event => {
-
-        if (!dragging) {
-            return;
-        }
-
-
-        moveSlider(
-            event.clientX
-        );
-
-    }
-);
-
-
-lockHandle.addEventListener(
-    "pointerup",
-    event => {
-
-        if (!dragging) {
-            return;
-        }
-
-
-        dragging = false;
-
-
-        lockHandle.classList.remove(
-            "dragging"
-        );
-
-
-        try {
-
-            lockHandle.releasePointerCapture(
-                event.pointerId
-            );
-
-        } catch (error) {
-
-            console.log(
-                "Pointer release:",
-                error
-            );
-
-        }
-
-
-        if (!lockedIn) {
-
-            lockHandle.style.left =
-                "8px";
-
-            lockProgress.style.width =
-                "0%";
-
-        }
-
-    }
-);
-
-
-lockHandle.addEventListener(
-    "pointercancel",
-    () => {
-
-        dragging = false;
-
-        lockHandle.classList.remove(
-            "dragging"
-        );
-
-
-        if (!lockedIn) {
-
-            lockHandle.style.left =
-                "8px";
-
-            lockProgress.style.width =
-                "0%";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   COMPLETE LOCK IN
-========================================================= */
-
-async function completeLockIn() {
-
-    if (
-        lockedIn
-    ) {
-
-        return;
-
-    }
-
-
-    lockedIn = true;
-
-    dragging = false;
-
-
-    const max =
-        maxSliderPosition();
-
-
-    lockHandle.style.left =
-        `${max}px`;
-
-    lockProgress.style.width =
-        "100%";
-
-
-    lockText.textContent =
-        "We're locked in!";
-
-
-    lockSlider.classList.add(
-        "completed"
-    );
-
+    /*
+     * Show dashboard.
+     */
 
     showDashboard();
 
 
-    try {
-
-        await updateDoc(
-            doc(
-                db,
-                "users",
-                currentUser.uid
-            ),
-            {
-
-                lockedIn:
-                    true,
-
-                updatedAt:
-                    serverTimestamp()
-
-            }
-        );
-
-
-        console.log(
-            "Lock-in saved."
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Could not save lock-in state:",
-            error
-        );
-
-    }
-
+    /*
+     * Celebration.
+     */
 
     showCelebration();
 
 }
 
 
-/* =========================================================
+/* =========================================
    SHOW DASHBOARD
-========================================================= */
+========================================= */
 
 function showDashboard() {
 
@@ -3083,11 +3231,19 @@ function showDashboard() {
 
 
     lockHandle.style.left =
-        `${max}px`;
+        `${8 + max}px`;
 
 
     lockProgress.style.width =
         "100%";
+
+
+    lockProgress.style.background =
+        "#22D3EE";
+
+
+    lockSlider.style.background =
+        "#22D3EE";
 
 
     lockText.textContent =
@@ -3099,20 +3255,58 @@ function showDashboard() {
     );
 
 
-    document
-        .getElementById(
-            "dashboard-content"
-        )
-        .classList.add(
-            "visible"
-        );
+    dashboardContent.classList.add(
+        "visible"
+    );
 
 }
 
 
-/* =========================================================
+/* =========================================
+   RESTORE LOCKED SLIDER
+========================================= */
+
+function restoreLockedSlider() {
+
+    if (!lockedIn) {
+
+        sliderProgress = 0;
+
+        lockHandle.style.left =
+            "8px";
+
+        lockProgress.style.width =
+            "0%";
+
+        lockSlider.style.background =
+            "#D1D5DB";
+
+        lockText.textContent =
+            "Are we ready to lock in?";
+
+        lockSlider.classList.remove(
+            "completed"
+        );
+
+        return;
+
+    }
+
+
+    requestAnimationFrame(
+        () => {
+
+            showDashboard();
+
+        }
+    );
+
+}
+
+
+/* =========================================
    CELEBRATION
-========================================================= */
+========================================= */
 
 function showCelebration() {
 
@@ -3144,9 +3338,9 @@ function showCelebration() {
 }
 
 
-/* =========================================================
+/* =========================================
    CONFETTI
-========================================================= */
+========================================= */
 
 function createConfetti() {
 
@@ -3199,19 +3393,25 @@ function createConfetti() {
 
         piece.style.setProperty(
             "--x",
-            `${(Math.random() - 0.5) * window.innerWidth * 1.5}px`
+            `${(
+                Math.random() - 0.5
+            ) *
+            window.innerWidth *
+            1.5}px`
         );
 
 
         piece.style.setProperty(
             "--y",
-            `${Math.random() * window.innerHeight}px`
+            `${Math.random() *
+            window.innerHeight}px`
         );
 
 
         piece.style.setProperty(
             "--r",
-            `${Math.random() * 1440}deg`
+            `${Math.random() *
+            1440}deg`
         );
 
 
@@ -3221,7 +3421,8 @@ function createConfetti() {
 
 
         setTimeout(
-            () => piece.remove(),
+            () =>
+                piece.remove(),
             3200
         );
 
@@ -3230,9 +3431,9 @@ function createConfetti() {
 }
 
 
-/* =========================================================
+/* =========================================
    BACKGROUND
-========================================================= */
+========================================= */
 
 const backgroundInput =
     document.getElementById(
@@ -3287,6 +3488,11 @@ backgroundInput.addEventListener(
 
 function loadBackground() {
 
+    if (!currentUser) {
+        return;
+    }
+
+
     const image =
         localStorage.getItem(
             `mypHavenBackground_${currentUser.uid}`
@@ -3331,9 +3537,9 @@ function applyBackground(
 }
 
 
-/* =========================================================
+/* =========================================
    MODALS
-========================================================= */
+========================================= */
 
 const gameModal =
     document.getElementById(
@@ -3402,9 +3608,9 @@ document.getElementById(
 );
 
 
-/* =========================================================
-   ASSIGNMENT TYPE BUTTONS
-========================================================= */
+/* =========================================
+   ASSIGNMENT TYPES
+========================================= */
 
 document
     .querySelectorAll(
@@ -3482,9 +3688,9 @@ document
     );
 
 
-/* =========================================================
+/* =========================================
    ADD GAME PLAN
-========================================================= */
+========================================= */
 
 document.getElementById(
     "add-game"
@@ -3533,18 +3739,8 @@ document.getElementById(
         }
 
 
-        /* LOCAL DATE */
-
-        const now =
-            new Date();
-
-
         const today =
-            `${now.getFullYear()}-${String(
-                now.getMonth() + 1
-            ).padStart(2,"0")}-${String(
-                now.getDate()
-            ).padStart(2,"0")}`;
+            getLocalDateString();
 
 
         try {
@@ -3676,9 +3872,9 @@ document.getElementById(
 );
 
 
-/* =========================================================
+/* =========================================
    ADD COMING UP
-========================================================= */
+========================================= */
 
 document.getElementById(
     "add-coming"
@@ -3823,9 +4019,9 @@ document.getElementById(
 );
 
 
-/* =========================================================
+/* =========================================
    CLOSE MODALS
-========================================================= */
+========================================= */
 
 document
     .querySelectorAll(
@@ -3855,12 +4051,12 @@ document
     );
 
 
-/* =========================================================
+/* =========================================
    STARTUP
-========================================================= */
+========================================= */
 
 console.log(
-    "MYP Haven Dashboard JavaScript loaded successfully."
+    "🔥 MYP Haven Dashboard loaded successfully."
 );
 
 </script>
