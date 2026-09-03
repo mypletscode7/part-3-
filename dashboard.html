@@ -17,10 +17,6 @@ rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +35,6 @@ body {
     overflow-x: hidden;
 }
 
-
 /* =========================================================
    BACKGROUND
 ========================================================= */
@@ -48,11 +43,9 @@ body {
     position: fixed;
     inset: 0;
     z-index: -3;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     display: none;
 }
 
@@ -60,12 +53,9 @@ body {
     position: fixed;
     inset: 0;
     z-index: -2;
-
     background: rgba(255,255,255,0.84);
-
     display: none;
 }
-
 
 /* =========================================================
    PAGE
@@ -82,7 +72,6 @@ body {
     margin: auto;
 }
 
-
 /* =========================================================
    TOP BAR
 ========================================================= */
@@ -92,26 +81,19 @@ body {
     justify-content: flex-end;
     align-items: center;
     gap: 12px;
-
     margin-bottom: 45px;
 }
 
 .background-button {
     border: none;
     border-radius: 999px;
-
     background: #FFFFFF;
     color: #6366F1;
-
     padding: 12px 18px;
-
     font-family: "DM Sans", sans-serif;
     font-weight: 700;
-
     cursor: pointer;
-
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-
     transition: 0.2s ease;
 }
 
@@ -123,44 +105,32 @@ body {
     display: none;
 }
 
-
 /* =========================================================
    WELCOME
 ========================================================= */
 
 .current-date {
     text-align: center;
-
     color: #D946EF;
-
     font-size: 0.95rem;
     font-weight: 700;
-
     margin-bottom: 12px;
 }
 
 .welcome-title {
     font-family: "Bricolage Grotesque", sans-serif;
-
     text-align: center;
-
     font-size: clamp(4rem, 9vw, 8rem);
-
     line-height: 0.9;
-
     letter-spacing: -0.06em;
-
     font-weight: 800;
-
     margin-bottom: 18px;
 }
 
 .welcome-subtitle {
     text-align: center;
-
     font-size: 1.15rem;
 }
-
 
 /* =========================================================
    LOCK IN
@@ -174,29 +144,20 @@ body {
 .lock-slider {
     width: 100%;
     height: 125px;
-
     padding: 8px;
-
     border-radius: 999px;
-
     background: #F1F1F1;
-
     position: relative;
-
     overflow: hidden;
-
-    box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,0.03);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
 }
 
 .lock-progress {
     position: absolute;
     left: 0;
     top: 0;
-
     height: 100%;
     width: 0%;
-
     border-radius: 999px;
 
     background: linear-gradient(
@@ -227,44 +188,31 @@ body {
 .lock-text {
     position: absolute;
     inset: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     pointer-events: none;
-
     font-size: clamp(1.2rem, 2vw, 2rem);
     font-weight: 700;
-
     z-index: 3;
-
     transition: color 0.25s ease;
 }
 
 .lock-handle {
     position: absolute;
-
     top: 8px;
     left: 8px;
-
     width: 109px;
     height: 109px;
-
     border-radius: 50%;
-
     background: #FFFFFF;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 3.3rem;
-
     cursor: grab;
     user-select: none;
     touch-action: none;
-
     z-index: 5;
 
     box-shadow:
@@ -278,6 +226,7 @@ body {
 .lock-handle.dragging {
     cursor: grabbing;
     transform: scale(0.94);
+
     box-shadow:
         0 5px 15px rgba(0,0,0,0.22);
 }
@@ -286,7 +235,6 @@ body {
     color: #FFFFFF;
 }
 
-
 /* =========================================================
    DASHBOARD CONTENT
 ========================================================= */
@@ -294,7 +242,6 @@ body {
 .dashboard-content {
     opacity: 0;
     transform: translateY(40px);
-
     pointer-events: none;
 
     transition:
@@ -305,10 +252,8 @@ body {
 .dashboard-content.visible {
     opacity: 1;
     transform: translateY(0);
-
     pointer-events: auto;
 }
-
 
 /* =========================================================
    SECTION CARDS
@@ -316,18 +261,13 @@ body {
 
 .dashboard-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
 }
 
 .dashboard-card {
     background: rgba(255,255,255,0.94);
-
     border-radius: 30px;
-
     padding: 35px;
 
     box-shadow:
@@ -339,16 +279,13 @@ body {
 .section-title {
     font-size: 2rem;
     font-weight: 800;
-
     margin-bottom: 8px;
 }
 
 .section-description {
     color: #666666;
-
     margin-bottom: 30px;
 }
-
 
 /* =========================================================
    ON MY PLATE
@@ -356,32 +293,22 @@ body {
 
 .metrics {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 .metric {
     padding: 22px 14px;
-
     border-radius: 22px;
-
     background: #F8F8F8;
-
     text-align: center;
 }
 
 .metric-number {
     display: block;
-
     font-size: 3rem;
-
     line-height: 1;
-
     font-weight: 800;
-
     margin-bottom: 10px;
 }
 
@@ -407,7 +334,6 @@ body {
     color: #DC2626;
 }
 
-
 /* =========================================================
    GAME PLAN / COMING UP
 ========================================================= */
@@ -420,27 +346,19 @@ body {
 
 .empty-state {
     padding: 30px;
-
     border-radius: 20px;
-
     background: #F7F7F7;
-
     text-align: center;
-
     color: #777777;
 }
 
 .entry {
     padding: 18px;
-
     border-radius: 20px;
-
     background: #F8F8F8;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
     gap: 20px;
@@ -455,7 +373,6 @@ body {
 .entry-name {
     font-size: 1rem;
     font-weight: 800;
-
     margin-bottom: 5px;
 }
 
@@ -480,7 +397,6 @@ body {
     font-weight: 700;
 }
 
-
 /* =========================================================
    STATUS
 ========================================================= */
@@ -488,21 +404,16 @@ body {
 .status-buttons {
     display: flex;
     gap: 8px;
-
     margin-top: 12px;
-
     flex-wrap: wrap;
 }
 
 .status-button {
     border: 2px solid transparent;
-
     padding: 8px 14px;
-
     border-radius: 999px;
 
     font-family: "DM Sans", sans-serif;
-
     font-size: 0.75rem;
     font-weight: 700;
 
@@ -533,9 +444,6 @@ body {
     transform: translateY(-2px);
 }
 
-
-/* CURRENTLY SELECTED STATUS */
-
 .status-button.selected {
     border-color: currentColor;
 
@@ -545,15 +453,10 @@ body {
     transform: translateY(-1px);
 }
 
-
-/* WHILE SAVING */
-
 .status-button.saving {
     opacity: 0.55;
-
     pointer-events: none;
 }
-
 
 /* =========================================================
    QUICK ACTIONS
@@ -565,23 +468,18 @@ body {
 
 .action-buttons {
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 20px;
 }
 
 .action-button {
     min-height: 100px;
-
     border: none;
-
     border-radius: 25px;
 
     color: #FFFFFF;
 
     font-family: "DM Sans", sans-serif;
-
     font-size: 1.15rem;
     font-weight: 800;
 
@@ -607,7 +505,6 @@ body {
     background: #6366F1;
 }
 
-
 /* =========================================================
    MODAL
 ========================================================= */
@@ -615,7 +512,6 @@ body {
 .modal {
     position: fixed;
     inset: 0;
-
     z-index: 1000;
 
     background: rgba(0,0,0,0.45);
@@ -650,7 +546,6 @@ body {
 .modal-title {
     font-size: 2rem;
     font-weight: 800;
-
     margin-bottom: 25px;
 }
 
@@ -660,9 +555,7 @@ body {
 
 .form-group label {
     display: block;
-
     margin-bottom: 7px;
-
     font-size: 0.85rem;
     font-weight: 700;
 }
@@ -670,17 +563,14 @@ body {
 .form-group input,
 .form-group select {
     width: 100%;
-
     height: 52px;
 
     border: 2px solid #E5E7EB;
-
     border-radius: 14px;
 
     padding: 0 14px;
 
     font-family: "DM Sans", sans-serif;
-
     font-size: 0.95rem;
 
     outline: none;
@@ -693,15 +583,12 @@ body {
 
 .assignment-types {
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 8px;
 }
 
 .type-option {
     border: 2px solid transparent;
-
     border-radius: 14px;
 
     padding: 12px;
@@ -709,7 +596,6 @@ body {
     cursor: pointer;
 
     font-family: "DM Sans", sans-serif;
-
     font-weight: 700;
 
     background: #F5F5F5;
@@ -737,23 +623,18 @@ body {
 
 .modal-actions {
     display: flex;
-
     gap: 10px;
-
     margin-top: 25px;
 }
 
 .modal-actions button {
     flex: 1;
-
     height: 52px;
 
     border: none;
-
     border-radius: 999px;
 
     font-family: "DM Sans", sans-serif;
-
     font-weight: 800;
 
     cursor: pointer;
@@ -767,7 +648,6 @@ body {
     background: #6366F1;
     color: #FFFFFF;
 }
-
 
 /* =========================================================
    CELEBRATION
@@ -803,13 +683,11 @@ body {
 .celebration-content {
     position: relative;
     z-index: 10;
-
     color: #FFFFFF;
 }
 
 .celebration-cap {
     font-size: 8rem;
-
     animation: capPop 0.8s ease both;
 }
 
@@ -826,6 +704,7 @@ body {
     100% {
         transform: scale(1) rotate(0);
     }
+
 }
 
 .celebration-title {
@@ -842,7 +721,6 @@ body {
     font-size: 1.3rem;
 }
 
-
 /* =========================================================
    CONFETTI
 ========================================================= */
@@ -857,7 +735,8 @@ body {
 
     pointer-events: none;
 
-    animation: confettiFall 3s ease-out forwards;
+    animation:
+        confettiFall 3s ease-out forwards;
 }
 
 @keyframes confettiFall {
@@ -877,8 +756,8 @@ body {
 
         opacity: 0;
     }
-}
 
+}
 
 /* =========================================================
    RESPONSIVE
@@ -917,7 +796,6 @@ body {
     .lock-handle {
         width: 84px;
         height: 84px;
-
         font-size: 2.5rem;
     }
 
@@ -933,7 +811,6 @@ body {
 
 <body>
 
-
 <!-- =========================================================
      BACKGROUND
 ========================================================= -->
@@ -941,11 +818,9 @@ body {
 <div id="dashboard-background"></div>
 <div id="dashboard-overlay"></div>
 
-
 <main class="dashboard">
 
 <div class="dashboard-inner">
-
 
 <!-- =========================================================
      TOP BAR
@@ -968,12 +843,14 @@ body {
 
 </div>
 
-
 <!-- =========================================================
      WELCOME
 ========================================================= -->
 
-<div class="current-date" id="current-date"></div>
+<div
+    class="current-date"
+    id="current-date"
+></div>
 
 <h1 class="welcome-title">
     Welcome Back!
@@ -982,7 +859,6 @@ body {
 <p class="welcome-subtitle">
     Let's make some progress today.
 </p>
-
 
 <!-- =========================================================
      LOCK-IN SLIDER
@@ -1019,7 +895,6 @@ body {
 
 </section>
 
-
 <!-- =========================================================
      DASHBOARD OVERVIEW
 ========================================================= -->
@@ -1029,9 +904,7 @@ body {
     id="dashboard-content"
 >
 
-
 <div class="dashboard-grid">
-
 
 <!-- =========================================================
      ON MY PLATE
@@ -1064,7 +937,6 @@ body {
 
         </div>
 
-
         <div class="metric">
 
             <span
@@ -1080,7 +952,6 @@ body {
 
         </div>
 
-
         <div class="metric">
 
             <span
@@ -1095,7 +966,6 @@ body {
             </span>
 
         </div>
-
 
         <div class="metric">
 
@@ -1115,7 +985,6 @@ body {
     </div>
 
 </section>
-
 
 <!-- =========================================================
      TODAY'S GAME PLAN
@@ -1138,7 +1007,6 @@ body {
 
 </section>
 
-
 <!-- =========================================================
      COMING UP
 ========================================================= -->
@@ -1159,7 +1027,6 @@ body {
     ></div>
 
 </section>
-
 
 <!-- =========================================================
      QUICK ACTIONS
@@ -1195,7 +1062,6 @@ body {
 
 </section>
 
-
 </div>
 
 </div>
@@ -1203,7 +1069,6 @@ body {
 </div>
 
 </main>
-
 
 <!-- =========================================================
      GAME PLAN MODAL
@@ -1233,7 +1098,6 @@ body {
 
     </div>
 
-
     <div class="form-group">
 
         <label>
@@ -1246,7 +1110,6 @@ body {
         >
 
     </div>
-
 
     <div class="form-group">
 
@@ -1262,7 +1125,6 @@ body {
 
     </div>
 
-
     <div class="form-group">
 
         <label>
@@ -1272,7 +1134,6 @@ body {
         <select id="game-subject"></select>
 
     </div>
-
 
     <div class="form-group">
 
@@ -1317,7 +1178,6 @@ body {
         </div>
 
     </div>
-
 
     <div class="modal-actions">
 
@@ -1343,7 +1203,6 @@ body {
 
 </div>
 
-
 <!-- =========================================================
      COMING UP MODAL
 ========================================================= -->
@@ -1359,7 +1218,6 @@ body {
         Add to Coming Up
     </h2>
 
-
     <div class="form-group">
 
         <label>
@@ -1372,7 +1230,6 @@ body {
         >
 
     </div>
-
 
     <div class="form-group">
 
@@ -1388,7 +1245,6 @@ body {
 
     </div>
 
-
     <div class="form-group">
 
         <label>
@@ -1398,7 +1254,6 @@ body {
         <select id="coming-subject"></select>
 
     </div>
-
 
     <div class="form-group">
 
@@ -1444,7 +1299,6 @@ body {
 
     </div>
 
-
     <div class="modal-actions">
 
         <button
@@ -1468,7 +1322,6 @@ body {
 </div>
 
 </div>
-
 
 <!-- =========================================================
      CELEBRATION
@@ -1498,7 +1351,6 @@ body {
 
 </div>
 
-
 <!-- =========================================================
      FIREBASE
 ========================================================= -->
@@ -1524,7 +1376,6 @@ import {
     getDocs,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
 
 /* =========================================================
    FIREBASE CONFIG
@@ -1552,7 +1403,6 @@ const firebaseConfig = {
 
 };
 
-
 const app =
     initializeApp(firebaseConfig);
 
@@ -1561,7 +1411,6 @@ const auth =
 
 const db =
     getFirestore(app);
-
 
 /* =========================================================
    VARIABLES
@@ -1585,14 +1434,14 @@ let dragging = false;
 
 let lockedIn = false;
 
-
 /* =========================================================
    DATE
 ========================================================= */
 
 function updateDate() {
 
-    const now = new Date();
+    const now =
+        new Date();
 
     const formatted =
         now.toLocaleDateString(
@@ -1607,12 +1456,12 @@ function updateDate() {
 
     document.getElementById(
         "current-date"
-    ).textContent = formatted;
+    ).textContent =
+        formatted;
 
 }
 
 updateDate();
-
 
 /* =========================================================
    AUTHENTICATION
@@ -1631,7 +1480,8 @@ onAuthStateChanged(
 
         }
 
-        currentUser = user;
+        currentUser =
+            user;
 
         await loadUserData();
 
@@ -1643,7 +1493,6 @@ onAuthStateChanged(
 
     }
 );
-
 
 /* =========================================================
    LOAD USER DATA
@@ -1661,8 +1510,9 @@ async function loadUserData() {
             );
 
         const userSnap =
-            await getDoc(userRef);
-
+            await getDoc(
+                userRef
+            );
 
         if (userSnap.exists()) {
 
@@ -1670,7 +1520,9 @@ async function loadUserData() {
                 userSnap.data();
 
             if (
-                Array.isArray(data.subjects)
+                Array.isArray(
+                    data.subjects
+                )
             ) {
 
                 selectedSubjects =
@@ -1682,7 +1534,8 @@ async function loadUserData() {
                 data.lockedIn === true
             ) {
 
-                lockedIn = true;
+                lockedIn =
+                    true;
 
                 showDashboard();
 
@@ -1690,11 +1543,7 @@ async function loadUserData() {
 
         }
 
-
-        /*
-         * Fallback for the survey system
-         * currently saving to localStorage.
-         */
+        /* FALLBACK TO SURVEY */
 
         if (
             selectedSubjects.length === 0
@@ -1707,22 +1556,32 @@ async function loadUserData() {
 
             if (localSurvey) {
 
-                const survey =
-                    JSON.parse(
-                        localSurvey
+                try {
+
+                    const survey =
+                        JSON.parse(
+                            localSurvey
+                        );
+
+                    selectedSubjects =
+                        Array.isArray(
+                            survey.subjects
+                        )
+                            ? survey.subjects
+                            : [];
+
+                } catch (error) {
+
+                    console.error(
+                        "Could not read survey:",
+                        error
                     );
 
-                selectedSubjects =
-                    Array.isArray(
-                        survey.subjects
-                    )
-                        ? survey.subjects
-                        : [];
+                }
 
             }
 
         }
-
 
         await loadDashboardData();
 
@@ -1737,7 +1596,6 @@ async function loadUserData() {
 
 }
 
-
 /* =========================================================
    LOAD DASHBOARD DATA
 ========================================================= */
@@ -1745,6 +1603,8 @@ async function loadUserData() {
 async function loadDashboardData() {
 
     try {
+
+        /* TASKS */
 
         const tasksRef =
             collection(
@@ -1755,16 +1615,20 @@ async function loadDashboardData() {
             );
 
         const taskSnapshot =
-            await getDocs(tasksRef);
+            await getDocs(
+                tasksRef
+            );
 
         tasks =
             taskSnapshot.docs.map(
-                doc => ({
-                    id: doc.id,
-                    ...doc.data()
+                taskDoc => ({
+                    id:
+                        taskDoc.id,
+                    ...taskDoc.data()
                 })
             );
 
+        /* GAME PLANS */
 
         const gameRef =
             collection(
@@ -1775,16 +1639,20 @@ async function loadDashboardData() {
             );
 
         const gameSnapshot =
-            await getDocs(gameRef);
+            await getDocs(
+                gameRef
+            );
 
         gamePlans =
             gameSnapshot.docs.map(
-                doc => ({
-                    id: doc.id,
-                    ...doc.data()
+                gameDoc => ({
+                    id:
+                        gameDoc.id,
+                    ...gameDoc.data()
                 })
             );
 
+        /* COMING UP */
 
         const upcomingRef =
             collection(
@@ -1795,16 +1663,18 @@ async function loadDashboardData() {
             );
 
         const upcomingSnapshot =
-            await getDocs(upcomingRef);
+            await getDocs(
+                upcomingRef
+            );
 
         upcomingEvents =
             upcomingSnapshot.docs.map(
-                doc => ({
-                    id: doc.id,
-                    ...doc.data()
+                upcomingDoc => ({
+                    id:
+                        upcomingDoc.id,
+                    ...upcomingDoc.data()
                 })
             );
-
 
     } catch (error) {
 
@@ -1817,7 +1687,6 @@ async function loadDashboardData() {
 
 }
 
-
 /* =========================================================
    SUBJECT DROPDOWNS
 ========================================================= */
@@ -1825,15 +1694,22 @@ async function loadDashboardData() {
 function setupSubjectDropdowns() {
 
     const dropdowns = [
-        document.getElementById("game-subject"),
-        document.getElementById("coming-subject")
-    ];
 
+        document.getElementById(
+            "game-subject"
+        ),
+
+        document.getElementById(
+            "coming-subject"
+        )
+
+    ];
 
     dropdowns.forEach(
         dropdown => {
 
-            dropdown.innerHTML = "";
+            dropdown.innerHTML =
+                "";
 
             selectedSubjects.forEach(
                 subject => {
@@ -1856,7 +1732,6 @@ function setupSubjectDropdowns() {
                 }
             );
 
-
             const other =
                 document.createElement(
                     "option"
@@ -1877,7 +1752,6 @@ function setupSubjectDropdowns() {
 
 }
 
-
 /* =========================================================
    RENDER EVERYTHING
 ========================================================= */
@@ -1891,7 +1765,6 @@ function renderEverything() {
     renderComingUp();
 
 }
-
 
 /* =========================================================
    DATE ONLY
@@ -1907,7 +1780,6 @@ function dateOnly(date) {
 
 }
 
-
 /* =========================================================
    METRICS
 ========================================================= */
@@ -1915,34 +1787,39 @@ function dateOnly(date) {
 function updateMetrics() {
 
     const today =
-        dateOnly(new Date());
-
+        dateOnly(
+            new Date()
+        );
 
     const weekEnd =
-        new Date(today);
+        new Date(
+            today
+        );
 
     weekEnd.setDate(
         weekEnd.getDate() + 7
     );
 
-
     let dueToday = 0;
+
     let dueWeek = 0;
+
     let completed = 0;
+
     let overdue = 0;
 
-
-    /* =====================================================
-       NORMAL TASKS
-    ===================================================== */
+    /* NORMAL TASKS */
 
     tasks.forEach(
         task => {
 
-            if (!task.dueDate) {
-                return;
-            }
+            if (
+                !task.dueDate
+            ) {
 
+                return;
+
+            }
 
             const due =
                 dateOnly(
@@ -1951,14 +1828,9 @@ function updateMetrics() {
                     )
                 );
 
-
-            /*
-             * Completed tasks are counted as completed
-             * and are not counted as due/overdue.
-             */
-
             if (
-                task.status === "Completed"
+                task.status ===
+                "Completed"
             ) {
 
                 completed++;
@@ -1966,7 +1838,6 @@ function updateMetrics() {
                 return;
 
             }
-
 
             if (
                 due.getTime() ===
@@ -1977,7 +1848,6 @@ function updateMetrics() {
 
             }
 
-
             if (
                 due >= today &&
                 due < weekEnd
@@ -1986,7 +1856,6 @@ function updateMetrics() {
                 dueWeek++;
 
             }
-
 
             if (
                 due < today
@@ -1999,18 +1868,18 @@ function updateMetrics() {
         }
     );
 
-
-    /* =====================================================
-       TODAY'S GAME PLANS
-    ===================================================== */
+    /* GAME PLANS */
 
     gamePlans.forEach(
         plan => {
 
-            if (!plan.date) {
-                return;
-            }
+            if (
+                !plan.date
+            ) {
 
+                return;
+
+            }
 
             const due =
                 dateOnly(
@@ -2019,13 +1888,9 @@ function updateMetrics() {
                     )
                 );
 
-
-            /*
-             * COMPLETED
-             */
-
             if (
-                plan.status === "Completed"
+                plan.status ===
+                "Completed"
             ) {
 
                 completed++;
@@ -2033,11 +1898,6 @@ function updateMetrics() {
                 return;
 
             }
-
-
-            /*
-             * DUE TODAY
-             */
 
             if (
                 due.getTime() ===
@@ -2048,11 +1908,6 @@ function updateMetrics() {
 
             }
 
-
-            /*
-             * DUE THIS WEEK
-             */
-
             if (
                 due >= today &&
                 due < weekEnd
@@ -2061,11 +1916,6 @@ function updateMetrics() {
                 dueWeek++;
 
             }
-
-
-            /*
-             * OVERDUE
-             */
 
             if (
                 due < today
@@ -2078,28 +1928,20 @@ function updateMetrics() {
         }
     );
 
-
-    /* =====================================================
-       UPDATE ON MY PLATE
-    ===================================================== */
-
     document.getElementById(
         "due-today"
     ).textContent =
         dueToday;
-
 
     document.getElementById(
         "due-week"
     ).textContent =
         dueWeek;
 
-
     document.getElementById(
         "completed-count"
     ).textContent =
         completed;
-
 
     document.getElementById(
         "overdue-count"
@@ -2108,7 +1950,6 @@ function updateMetrics() {
 
 }
 
-
 /* =========================================================
    GAME PLANS
 ========================================================= */
@@ -2116,21 +1957,54 @@ function updateMetrics() {
 function renderGamePlans() {
 
     const container =
-        document.getElementById("game-plan-list");
+        document.getElementById(
+            "game-plan-list"
+        );
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
+
+    /*
+     * Use the local date instead of UTC.
+     * This prevents Namibia's timezone from
+     * causing today's tasks to disappear.
+     */
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
 
     const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
+        `${year}-${month}-${day}`;
 
     const todayPlans =
         gamePlans.filter(
-            plan => plan.date === today
+            plan =>
+                plan.date ===
+                today
         );
 
-    if (todayPlans.length === 0) {
+    if (
+        todayPlans.length === 0
+    ) {
 
         container.innerHTML = `
             <div class="empty-state">
@@ -2139,188 +2013,9 @@ function renderGamePlans() {
         `;
 
         return;
+
     }
 
-    todayPlans.forEach(plan => {
-
-        const entry =
-            document.createElement("div");
-
-        entry.className = "entry";
-
-        const entryInfo =
-            document.createElement("div");
-
-        entryInfo.className = "entry-info";
-
-        const name =
-            document.createElement("div");
-
-        name.className = "entry-name";
-
-        name.textContent =
-            plan.name || "";
-
-        const meta =
-            document.createElement("div");
-
-        meta.className = "entry-meta";
-
-        meta.textContent =
-            `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
-
-        const statusButtons =
-            document.createElement("div");
-
-        statusButtons.className =
-            "status-buttons";
-
-        const completedButton =
-            document.createElement("button");
-
-        completedButton.type = "button";
-
-        completedButton.className =
-            "status-button status-completed";
-
-        completedButton.textContent =
-            "✓ Completed";
-
-        const pendingButton =
-            document.createElement("button");
-
-        pendingButton.type = "button";
-
-        pendingButton.className =
-            "status-button status-pending";
-
-        pendingButton.textContent =
-            "○ Not Completed";
-
-        function refreshStatusButtons() {
-
-            completedButton.classList.remove("selected");
-            pendingButton.classList.remove("selected");
-
-            if (plan.status === "Completed") {
-
-                completedButton.classList.add("selected");
-
-            } else {
-
-                pendingButton.classList.add("selected");
-
-            }
-
-        }
-
-        refreshStatusButtons();
-
-        completedButton.addEventListener(
-            "click",
-            async () => {
-
-                if (plan.status === "Completed") {
-                    return;
-                }
-
-                plan.status = "Completed";
-
-                refreshStatusButtons();
-
-                updateMetrics();
-
-                completedButton.disabled = true;
-                pendingButton.disabled = true;
-
-                try {
-
-                    await updateGamePlanStatus(
-                        plan.id,
-                        "Completed"
-                    );
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    plan.status = "Not Completed";
-
-                    refreshStatusButtons();
-
-                    updateMetrics();
-
-                } finally {
-
-                    completedButton.disabled = false;
-                    pendingButton.disabled = false;
-
-                }
-
-            }
-        );
-
-        pendingButton.addEventListener(
-            "click",
-            async () => {
-
-                if (
-                    plan.status === "Not Completed" ||
-                    !plan.status
-                ) {
-                    return;
-                }
-
-                plan.status = "Not Completed";
-
-                refreshStatusButtons();
-
-                updateMetrics();
-
-                completedButton.disabled = true;
-                pendingButton.disabled = true;
-
-                try {
-
-                    await updateGamePlanStatus(
-                        plan.id,
-                        "Not Completed"
-                    );
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    plan.status = "Completed";
-
-                    refreshStatusButtons();
-
-                    updateMetrics();
-
-                } finally {
-
-                    completedButton.disabled = false;
-                    pendingButton.disabled = false;
-
-                }
-
-            }
-        );
-
-        statusButtons.appendChild(completedButton);
-        statusButtons.appendChild(pendingButton);
-
-        entryInfo.appendChild(name);
-        entryInfo.appendChild(meta);
-        entryInfo.appendChild(statusButtons);
-
-        entry.appendChild(entryInfo);
-
-        container.appendChild(entry);
-
-    });
-
-}
     todayPlans.forEach(
         plan => {
 
@@ -2332,186 +2027,262 @@ function renderGamePlans() {
             entry.className =
                 "entry";
 
+            const entryInfo =
+                document.createElement(
+                    "div"
+                );
 
-            /*
-             * Check the currently saved status.
-             */
+            entryInfo.className =
+                "entry-info";
 
-            const isCompleted =
-                plan.status === "Completed";
+            const name =
+                document.createElement(
+                    "div"
+                );
 
+            name.className =
+                "entry-name";
 
-            const isNotCompleted =
-                plan.status === "Not Completed" ||
-                !plan.status;
+            name.textContent =
+                plan.name || "";
 
+            const meta =
+                document.createElement(
+                    "div"
+                );
 
-            entry.innerHTML = `
+            meta.className =
+                "entry-meta";
 
-                <div class="entry-info">
+            meta.textContent =
+                `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
 
-                    <div class="entry-name">
-                        ${escapeHTML(plan.name)}
-                    </div>
+            const statusButtons =
+                document.createElement(
+                    "div"
+                );
 
-                    <div class="entry-meta">
+            statusButtons.className =
+                "status-buttons";
 
-                        ${escapeHTML(plan.subject)}
+            const completedButton =
+                document.createElement(
+                    "button"
+                );
 
-                        ·
+            completedButton.type =
+                "button";
 
-                        ${escapeHTML(plan.assignmentType)}
+            completedButton.className =
+                "status-button status-completed";
 
-                        ·
+            completedButton.textContent =
+                "✓ Completed";
 
-                        ${escapeHTML(plan.startTime)}
+            const pendingButton =
+                document.createElement(
+                    "button"
+                );
 
-                        –
+            pendingButton.type =
+                "button";
 
-                        ${escapeHTML(plan.endTime)}
+            pendingButton.className =
+                "status-button status-pending";
 
-                    </div>
+            pendingButton.textContent =
+                "○ Not Completed";
 
+            function refreshStatusButtons() {
 
-                    <div class="status-buttons">
+                completedButton.classList.remove(
+                    "selected"
+                );
 
-                        <button
-                            type="button"
-                            class="status-button status-completed ${
-                                isCompleted
-                                    ? "selected"
-                                    : ""
-                            }"
-                            data-id="${plan.id}"
-                            data-status="Completed"
-                        >
-                            ✓ Completed
-                        </button>
+                pendingButton.classList.remove(
+                    "selected"
+                );
 
+                if (
+                    plan.status ===
+                    "Completed"
+                ) {
 
-                        <button
-                            type="button"
-                            class="status-button status-pending ${
-                                isNotCompleted
-                                    ? "selected"
-                                    : ""
-                            }"
-                            data-id="${plan.id}"
-                            data-status="Not Completed"
-                        >
-                            ○ Not Completed
-                        </button>
+                    completedButton.classList.add(
+                        "selected"
+                    );
 
-                    </div>
+                } else {
 
-                </div>
+                    pendingButton.classList.add(
+                        "selected"
+                    );
 
-            `;
+                }
 
+            }
+
+            refreshStatusButtons();
+
+            completedButton.addEventListener(
+                "click",
+                async () => {
+
+                    if (
+                        plan.status ===
+                        "Completed"
+                    ) {
+
+                        return;
+
+                    }
+
+                    const oldStatus =
+                        plan.status;
+
+                    plan.status =
+                        "Completed";
+
+                    refreshStatusButtons();
+
+                    updateMetrics();
+
+                    completedButton.disabled =
+                        true;
+
+                    pendingButton.disabled =
+                        true;
+
+                    try {
+
+                        await updateGamePlanStatus(
+                            plan.id,
+                            "Completed"
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            error
+                        );
+
+                        plan.status =
+                            oldStatus ||
+                            "Not Completed";
+
+                        refreshStatusButtons();
+
+                        updateMetrics();
+
+                    } finally {
+
+                        completedButton.disabled =
+                            false;
+
+                        pendingButton.disabled =
+                            false;
+
+                    }
+
+                }
+            );
+
+            pendingButton.addEventListener(
+                "click",
+                async () => {
+
+                    if (
+                        plan.status ===
+                        "Not Completed" ||
+                        !plan.status
+                    ) {
+
+                        return;
+
+                    }
+
+                    const oldStatus =
+                        plan.status;
+
+                    plan.status =
+                        "Not Completed";
+
+                    refreshStatusButtons();
+
+                    updateMetrics();
+
+                    completedButton.disabled =
+                        true;
+
+                    pendingButton.disabled =
+                        true;
+
+                    try {
+
+                        await updateGamePlanStatus(
+                            plan.id,
+                            "Not Completed"
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            error
+                        );
+
+                        plan.status =
+                            oldStatus ||
+                            "Completed";
+
+                        refreshStatusButtons();
+
+                        updateMetrics();
+
+                    } finally {
+
+                        completedButton.disabled =
+                            false;
+
+                        pendingButton.disabled =
+                            false;
+
+                    }
+
+                }
+            );
+
+            statusButtons.appendChild(
+                completedButton
+            );
+
+            statusButtons.appendChild(
+                pendingButton
+            );
+
+            entryInfo.appendChild(
+                name
+            );
+
+            entryInfo.appendChild(
+                meta
+            );
+
+            entryInfo.appendChild(
+                statusButtons
+            );
+
+            entry.appendChild(
+                entryInfo
+            );
 
             container.appendChild(
                 entry
             );
 
-
-            /*
-             * Add click events.
-             */
-
-            entry
-                .querySelectorAll(
-                    ".status-button"
-                )
-                .forEach(
-                    button => {
-
-                        button.addEventListener(
-                            "click",
-                            async () => {
-
-                                const id =
-                                    button.dataset.id;
-
-                                const status =
-                                    button.dataset.status;
-
-
-                                /*
-                                 * Immediately show
-                                 * the selected button.
-                                 */
-
-                                entry
-                                    .querySelectorAll(
-                                        ".status-button"
-                                    )
-                                    .forEach(
-                                        b => {
-
-                                            b.classList.remove(
-                                                "selected"
-                                            );
-
-                                        }
-                                    );
-
-
-                                button.classList.add(
-                                    "selected"
-                                );
-
-
-                                /*
-                                 * Temporarily disable both
-                                 * buttons while saving.
-                                 */
-
-                                entry
-                                    .querySelectorAll(
-                                        ".status-button"
-                                    )
-                                    .forEach(
-                                        b => {
-
-                                            b.classList.add(
-                                                "saving"
-                                            );
-
-                                        }
-                                    );
-
-
-                                await updateGamePlanStatus(
-                                    id,
-                                    status
-                                );
-
-
-                                entry
-                                    .querySelectorAll(
-                                        ".status-button"
-                                    )
-                                    .forEach(
-                                        b => {
-
-                                            b.classList.remove(
-                                                "saving"
-                                            );
-
-                                        }
-                                    );
-
-                            }
-                        );
-
-                    }
-                );
-
         }
     );
 
 }
-
 
 /* =========================================================
    UPDATE GAME PLAN STATUS
@@ -2522,20 +2293,29 @@ async function updateGamePlanStatus(
     status
 ) {
 
+    if (
+        !currentUser
+    ) {
+
+        throw new Error(
+            "No logged-in user."
+        );
+
+    }
+
+    const gamePlanRef =
+        doc(
+            db,
+            "users",
+            currentUser.uid,
+            "gamePlans",
+            id
+        );
+
     try {
 
-        /*
-         * Save the new status to Firestore.
-         */
-
         await updateDoc(
-            doc(
-                db,
-                "users",
-                currentUser.uid,
-                "gamePlans",
-                id
-            ),
+            gamePlanRef,
             {
 
                 status:
@@ -2547,54 +2327,28 @@ async function updateGamePlanStatus(
             }
         );
 
-
-        /*
-         * Update the local Game Plan immediately.
-         */
-
-        const plan =
-            gamePlans.find(
-                item =>
-                    item.id === id
-            );
-
-
-        if (plan) {
-
-            plan.status =
-                status;
-
-        }
-
-
-        /*
-         * Refresh the dashboard.
-         *
-         * This updates both:
-         *
-         * 1. The selected status button
-         * 2. The On My Plate metrics
-         */
-
-        renderEverything();
-
+        console.log(
+            "Game Plan status saved:",
+            id,
+            status
+        );
 
     } catch (error) {
 
         console.error(
-            "Could not update Game Plan status:",
+            "FIRESTORE STATUS ERROR:",
             error
         );
 
-
         alert(
-            "The Game Plan status could not be saved. Please try again."
+            "Could not save the status to your account. Check your Firestore rules."
         );
+
+        throw error;
 
     }
 
 }
-
 
 /* =========================================================
    COMING UP
@@ -2607,25 +2361,32 @@ function renderComingUp() {
             "coming-up-list"
         );
 
-    container.innerHTML = "";
-
+    container.innerHTML =
+        "";
 
     const today =
-        dateOnly(new Date());
-
+        dateOnly(
+            new Date()
+        );
 
     const events =
         upcomingEvents
             .filter(
                 event => {
 
-                    if (!event.date) {
+                    if (
+                        !event.date
+                    ) {
+
                         return false;
+
                     }
 
                     return (
                         dateOnly(
-                            new Date(event.date)
+                            new Date(
+                                event.date
+                            )
                         ) >= today
                     );
 
@@ -2633,11 +2394,17 @@ function renderComingUp() {
             )
             .sort(
                 (a,b) =>
-                    new Date(a.date) -
-                    new Date(b.date)
+                    new Date(
+                        a.date
+                    ) -
+                    new Date(
+                        b.date
+                    )
             )
-            .slice(0,5);
-
+            .slice(
+                0,
+                5
+            );
 
     if (
         events.length === 0
@@ -2653,15 +2420,15 @@ function renderComingUp() {
 
     }
 
-
     events.forEach(
         event => {
 
             const date =
                 dateOnly(
-                    new Date(event.date)
+                    new Date(
+                        event.date
+                    )
                 );
-
 
             const difference =
                 Math.round(
@@ -2672,14 +2439,12 @@ function renderComingUp() {
                     86400000
                 );
 
-
             let countdown =
                 difference === 0
                     ? "Today"
                     : difference === 1
                         ? "1 day away"
                         : `${difference} days away`;
-
 
             const entry =
                 document.createElement(
@@ -2688,7 +2453,6 @@ function renderComingUp() {
 
             entry.className =
                 "entry";
-
 
             entry.innerHTML = `
 
@@ -2712,8 +2476,10 @@ function renderComingUp() {
                         ${date.toLocaleDateString(
                             "en-US",
                             {
-                                month: "short",
-                                day: "numeric"
+                                month:
+                                    "short",
+                                day:
+                                    "numeric"
                             }
                         )}
                     </strong>
@@ -2726,7 +2492,6 @@ function renderComingUp() {
 
             `;
 
-
             container.appendChild(
                 entry
             );
@@ -2736,22 +2501,39 @@ function renderComingUp() {
 
 }
 
-
 /* =========================================================
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
-    return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    return String(
+        value || ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
-
 
 /* =========================================================
    LOCK SLIDER
@@ -2777,7 +2559,6 @@ const lockText =
         "lock-text"
     );
 
-
 function maxSliderPosition() {
 
     return (
@@ -2788,27 +2569,28 @@ function maxSliderPosition() {
 
 }
 
+function moveSlider(
+    clientX
+) {
 
-function moveSlider(clientX) {
+    if (
+        lockedIn
+    ) {
 
-    if (lockedIn) {
         return;
-    }
 
+    }
 
     const rect =
         lockSlider.getBoundingClientRect();
-
 
     let position =
         clientX -
         rect.left -
         lockHandle.offsetWidth / 2;
 
-
     const max =
         maxSliderPosition();
-
 
     position =
         Math.max(
@@ -2819,10 +2601,9 @@ function moveSlider(clientX) {
             )
         );
 
-
     const percentage =
-        position / max;
-
+        position /
+        max;
 
     lockHandle.style.left =
         `${position}px`;
@@ -2830,9 +2611,9 @@ function moveSlider(clientX) {
     lockProgress.style.width =
         `${percentage * 100}%`;
 
-
     if (
-        percentage >= 0.98
+        percentage >=
+        0.98
     ) {
 
         completeLockIn();
@@ -2840,7 +2621,6 @@ function moveSlider(clientX) {
     }
 
 }
-
 
 /* =========================================================
    MOUSE
@@ -2850,11 +2630,16 @@ lockHandle.addEventListener(
     "mousedown",
     event => {
 
-        if (lockedIn) {
+        if (
+            lockedIn
+        ) {
+
             return;
+
         }
 
-        dragging = true;
+        dragging =
+            true;
 
         lockHandle.classList.add(
             "dragging"
@@ -2865,13 +2650,16 @@ lockHandle.addEventListener(
     }
 );
 
-
 document.addEventListener(
     "mousemove",
     event => {
 
-        if (!dragging) {
+        if (
+            !dragging
+        ) {
+
             return;
+
         }
 
         moveSlider(
@@ -2881,23 +2669,28 @@ document.addEventListener(
     }
 );
 
-
 document.addEventListener(
     "mouseup",
     () => {
 
-        if (!dragging) {
+        if (
+            !dragging
+        ) {
+
             return;
+
         }
 
-        dragging = false;
+        dragging =
+            false;
 
         lockHandle.classList.remove(
             "dragging"
         );
 
-
-        if (!lockedIn) {
+        if (
+            !lockedIn
+        ) {
 
             lockHandle.style.left =
                 "8px";
@@ -2909,7 +2702,6 @@ document.addEventListener(
 
     }
 );
-
 
 /* =========================================================
    TOUCH
@@ -2919,11 +2711,16 @@ lockHandle.addEventListener(
     "touchstart",
     () => {
 
-        if (lockedIn) {
+        if (
+            lockedIn
+        ) {
+
             return;
+
         }
 
-        dragging = true;
+        dragging =
+            true;
 
         lockHandle.classList.add(
             "dragging"
@@ -2931,17 +2728,21 @@ lockHandle.addEventListener(
 
     },
     {
-        passive: true
+        passive:
+            true
     }
 );
-
 
 document.addEventListener(
     "touchmove",
     event => {
 
-        if (!dragging) {
+        if (
+            !dragging
+        ) {
+
             return;
+
         }
 
         moveSlider(
@@ -2950,27 +2751,33 @@ document.addEventListener(
 
     },
     {
-        passive: true
+        passive:
+            true
     }
 );
-
 
 document.addEventListener(
     "touchend",
     () => {
 
-        if (!dragging) {
+        if (
+            !dragging
+        ) {
+
             return;
+
         }
 
-        dragging = false;
+        dragging =
+            false;
 
         lockHandle.classList.remove(
             "dragging"
         );
 
-
-        if (!lockedIn) {
+        if (
+            !lockedIn
+        ) {
 
             lockHandle.style.left =
                 "8px";
@@ -2983,26 +2790,28 @@ document.addEventListener(
     }
 );
 
-
 /* =========================================================
    COMPLETE LOCK IN
 ========================================================= */
 
 async function completeLockIn() {
 
-    if (lockedIn) {
+    if (
+        lockedIn
+    ) {
+
         return;
+
     }
 
+    lockedIn =
+        true;
 
-    lockedIn = true;
-
-    dragging = false;
-
+    dragging =
+        false;
 
     const max =
         maxSliderPosition();
-
 
     lockHandle.style.left =
         `${max}px`;
@@ -3010,14 +2819,12 @@ async function completeLockIn() {
     lockProgress.style.width =
         "100%";
 
-
     lockText.textContent =
         "We're locked in!";
 
     lockSlider.classList.add(
         "completed"
     );
-
 
     try {
 
@@ -3028,11 +2835,13 @@ async function completeLockIn() {
                 currentUser.uid
             ),
             {
+
                 lockedIn:
                     true,
 
                 updatedAt:
                     serverTimestamp()
+
             }
         );
 
@@ -3045,11 +2854,9 @@ async function completeLockIn() {
 
     }
 
-
     showCelebration();
 
 }
-
 
 /* =========================================================
    SHOW DASHBOARD
@@ -3057,7 +2864,8 @@ async function completeLockIn() {
 
 function showDashboard() {
 
-    lockedIn = true;
+    lockedIn =
+        true;
 
     const max =
         maxSliderPosition();
@@ -3085,7 +2893,6 @@ function showDashboard() {
 
 }
 
-
 /* =========================================================
    CELEBRATION
 ========================================================= */
@@ -3101,9 +2908,7 @@ function showCelebration() {
         "show"
     );
 
-
     createConfetti();
-
 
     setTimeout(
         () => {
@@ -3126,7 +2931,6 @@ function showCelebration() {
 
 }
 
-
 /* =========================================================
    CONFETTI
 ========================================================= */
@@ -3147,7 +2951,6 @@ function createConfetti() {
 
     ];
 
-
     for (
         let i = 0;
         i < 220;
@@ -3159,17 +2962,14 @@ function createConfetti() {
                 "div"
             );
 
-
         piece.className =
             "confetti";
-
 
         piece.style.left =
             `${Math.random() * 100}%`;
 
         piece.style.top =
             `${Math.random() * 20}%`;
-
 
         piece.style.background =
             colors[
@@ -3178,7 +2978,6 @@ function createConfetti() {
                     colors.length
                 )
             ];
-
 
         piece.style.setProperty(
             "--x",
@@ -3195,21 +2994,19 @@ function createConfetti() {
             `${Math.random() * 1440}deg`
         );
 
-
         document.body.appendChild(
             piece
         );
 
-
         setTimeout(
-            () => piece.remove(),
+            () =>
+                piece.remove(),
             3200
         );
 
     }
 
 }
-
 
 /* =========================================================
    BACKGROUND IMAGE
@@ -3220,7 +3017,6 @@ const backgroundInput =
         "background-input"
     );
 
-
 backgroundInput.addEventListener(
     "change",
     event => {
@@ -3228,14 +3024,16 @@ backgroundInput.addEventListener(
         const file =
             event.target.files[0];
 
-        if (!file) {
-            return;
-        }
+        if (
+            !file
+        ) {
 
+            return;
+
+        }
 
         const reader =
             new FileReader();
-
 
         reader.onload =
             function(e) {
@@ -3243,12 +3041,10 @@ backgroundInput.addEventListener(
                 const image =
                     e.target.result;
 
-
                 localStorage.setItem(
                     `mypHavenBackground_${currentUser.uid}`,
                     image
                 );
-
 
                 applyBackground(
                     image
@@ -3256,14 +3052,12 @@ backgroundInput.addEventListener(
 
             };
 
-
         reader.readAsDataURL(
             file
         );
 
     }
 );
-
 
 /* =========================================================
    LOAD BACKGROUND
@@ -3276,8 +3070,9 @@ function loadBackground() {
             `mypHavenBackground_${currentUser.uid}`
         );
 
-
-    if (image) {
+    if (
+        image
+    ) {
 
         applyBackground(
             image
@@ -3287,8 +3082,9 @@ function loadBackground() {
 
 }
 
-
-function applyBackground(image) {
+function applyBackground(
+    image
+) {
 
     const background =
         document.getElementById(
@@ -3300,7 +3096,6 @@ function applyBackground(image) {
             "dashboard-overlay"
         );
 
-
     background.style.backgroundImage =
         `url("${image}")`;
 
@@ -3311,7 +3106,6 @@ function applyBackground(image) {
         "block";
 
 }
-
 
 /* =========================================================
    MODALS
@@ -3327,7 +3121,6 @@ const comingModal =
         "coming-up-modal"
     );
 
-
 document.getElementById(
     "open-game-plan"
 ).addEventListener(
@@ -3340,7 +3133,6 @@ document.getElementById(
 
     }
 );
-
 
 document.getElementById(
     "open-coming-up"
@@ -3355,7 +3147,6 @@ document.getElementById(
     }
 );
 
-
 document.getElementById(
     "cancel-game"
 ).addEventListener(
@@ -3369,7 +3160,6 @@ document.getElementById(
     }
 );
 
-
 document.getElementById(
     "cancel-coming"
 ).addEventListener(
@@ -3382,7 +3172,6 @@ document.getElementById(
 
     }
 );
-
 
 /* =========================================================
    ASSIGNMENT TYPE BUTTONS
@@ -3410,7 +3199,6 @@ document
                                 )
                         );
 
-
                     button.classList.add(
                         "selected"
                     );
@@ -3423,7 +3211,6 @@ document
 
         }
     );
-
 
 document
     .querySelectorAll(
@@ -3447,7 +3234,6 @@ document
                                 )
                         );
 
-
                     button.classList.add(
                         "selected"
                     );
@@ -3460,7 +3246,6 @@ document
 
         }
     );
-
 
 /* =========================================================
    ADD GAME PLAN
@@ -3492,7 +3277,6 @@ document.getElementById(
                 "game-subject"
             ).value;
 
-
         if (
             !startTime ||
             !endTime ||
@@ -3509,12 +3293,37 @@ document.getElementById(
 
         }
 
+        /*
+         * LOCAL DATE
+         * This prevents the task from being
+         * saved under tomorrow's date because
+         * of UTC conversion.
+         */
+
+        const now =
+            new Date();
+
+        const year =
+            now.getFullYear();
+
+        const month =
+            String(
+                now.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const day =
+            String(
+                now.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
 
         const today =
-            new Date()
-                .toISOString()
-                .split("T")[0];
-
+            `${year}-${month}-${day}`;
 
         try {
 
@@ -3558,7 +3367,6 @@ document.getElementById(
                     }
                 );
 
-
             gamePlans.push({
 
                 id:
@@ -3567,10 +3375,17 @@ document.getElementById(
                 date:
                     today,
 
-                startTime,
-                endTime,
-                name,
-                subject,
+                startTime:
+                    startTime,
+
+                endTime:
+                    endTime,
+
+                name:
+                    name,
+
+                subject:
+                    subject,
 
                 assignmentType:
                     selectedGameType,
@@ -3580,19 +3395,17 @@ document.getElementById(
 
             });
 
-
             gameModal.classList.remove(
                 "show"
             );
 
-
             document.getElementById(
                 "game-name"
-            ).value = "";
+            ).value =
+                "";
 
-
-            selectedGameType = "";
-
+            selectedGameType =
+                "";
 
             document
                 .querySelectorAll(
@@ -3605,12 +3418,13 @@ document.getElementById(
                         )
                 );
 
-
             renderEverything();
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                error
+            );
 
             alert(
                 "The Game Plan could not be saved."
@@ -3620,7 +3434,6 @@ document.getElementById(
 
     }
 );
-
 
 /* =========================================================
    ADD COMING UP
@@ -3647,7 +3460,6 @@ document.getElementById(
                 "coming-subject"
             ).value;
 
-
         if (
             !date ||
             !name ||
@@ -3662,7 +3474,6 @@ document.getElementById(
             return;
 
         }
-
 
         try {
 
@@ -3694,34 +3505,36 @@ document.getElementById(
                     }
                 );
 
-
             upcomingEvents.push({
 
                 id:
                     ref.id,
 
-                date,
-                name,
-                subject,
+                date:
+                    date,
+
+                name:
+                    name,
+
+                subject:
+                    subject,
 
                 assignmentType:
                     selectedComingType
 
             });
 
-
             comingModal.classList.remove(
                 "show"
             );
 
-
             document.getElementById(
                 "coming-name"
-            ).value = "";
+            ).value =
+                "";
 
-
-            selectedComingType = "";
-
+            selectedComingType =
+                "";
 
             document
                 .querySelectorAll(
@@ -3734,12 +3547,13 @@ document.getElementById(
                         )
                 );
 
-
             renderEverything();
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                error
+            );
 
             alert(
                 "The upcoming event could not be saved."
@@ -3749,7 +3563,6 @@ document.getElementById(
 
     }
 );
-
 
 /* =========================================================
    CLOSE MODAL BY CLICKING OUTSIDE
@@ -3767,7 +3580,8 @@ document
                 event => {
 
                     if (
-                        event.target === modal
+                        event.target ===
+                        modal
                     ) {
 
                         modal.classList.remove(
@@ -3781,7 +3595,6 @@ document
 
         }
     );
-
 
 </script>
 
