@@ -12,10 +12,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
-rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     margin: 0;
@@ -28,923 +33,602 @@ html {
 }
 
 body {
+
     min-height: 100vh;
+
     font-family: "DM Sans", sans-serif;
-    color: #111111;
-    background: #FFFFFF;
-    overflow-x: hidden;
+
+    background: #F8FAFC;
+
+    color: #111827;
+
 }
 
-/* =========================================
-   BACKGROUND
-========================================= */
 
-#dashboard-background {
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: none;
-}
-
-#dashboard-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    background: rgba(255,255,255,0.84);
-    display: none;
-}
-
-/* =========================================
-   PAGE
-========================================= */
-
-.dashboard {
-    width: 100%;
-    min-height: 100vh;
-    padding: 40px 28px 80px;
-}
-
-.dashboard-inner {
-    width: min(1500px, 100%);
-    margin: auto;
-}
-
-/* =========================================
+/* =====================================================
    TOP BAR
-========================================= */
+===================================================== */
 
 .top-bar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 45px;
-}
 
-.background-button {
-    border: none;
-    border-radius: 999px;
-    background: #FFFFFF;
-    color: #6366F1;
-    padding: 12px 18px;
-    font-family: "DM Sans", sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    transition: 0.2s ease;
-}
-
-.background-button:hover {
-    transform: translateY(-2px);
-}
-
-#background-input {
-    display: none;
-}
-
-/* =========================================
-   WELCOME
-========================================= */
-
-.current-date {
-    text-align: center;
-    color: #D946EF;
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.welcome-title {
-    font-family: "Bricolage Grotesque", sans-serif;
-    text-align: center;
-    font-size: clamp(4rem, 9vw, 8rem);
-    line-height: 0.9;
-    letter-spacing: -0.06em;
-    font-weight: 800;
-    margin-bottom: 18px;
-}
-
-.welcome-subtitle {
-    text-align: center;
-    font-size: 1.15rem;
-}
-
-/* =========================================
-   LOCK IN SLIDER
-========================================= */
-
-.lock-section {
-    margin-top: 90px;
-    margin-bottom: 70px;
-}
-
-.lock-slider {
     width: 100%;
-    height: 125px;
-    padding: 8px;
-    border-radius: 999px;
-    background: #D1D5DB;
-    position: relative;
-    overflow: hidden;
 
-    box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,0.03);
+    padding: 18px 30px;
 
-    cursor: grab;
+    display: flex;
 
-    touch-action: none;
-    user-select: none;
+    align-items: center;
 
-    transition:
-        background 0.15s ease;
-}
+    justify-content: space-between;
 
-.lock-slider.dragging {
-    cursor: grabbing;
-}
+    background: #FFFFFF;
 
-.lock-progress {
-    position: absolute;
-    left: 0;
+    border-bottom: 1px solid #E5E7EB;
+
+    position: sticky;
+
     top: 0;
 
-    height: 100%;
-    width: 0%;
+    z-index: 100;
+
+}
+
+
+.logo {
+
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: 1.5rem;
+
+    font-weight: 800;
+
+    color: #8B5CF6;
+
+}
+
+
+.top-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.user-name {
+
+    font-weight: 700;
+
+}
+
+
+.logout-button {
+
+    border: none;
 
     border-radius: 999px;
 
-    background: linear-gradient(
-        90deg,
-        #FF4D6D,
-        #FF8A3D,
-        #FFD23F,
-        #7ED957,
-        #39D6C0,
-        #34D399,
-        #00C2FF,
-        #3B82F6,
-        #8B5CF6,
-        #A855F7,
-        #FF6FB5,
-        #D946EF,
-        #C026D3,
-        #A21CAF,
-        #86198F,
-        #6366F1,
-        #818CF8,
-        #22D3EE
-    );
+    padding: 10px 18px;
 
-    pointer-events: none;
+    background: #111827;
 
-    transition:
-        width 0.03s linear,
-        background 0.15s ease;
-}
+    color: white;
 
-.lock-text {
-    position: absolute;
-    inset: 0;
+    font-family: "DM Sans", sans-serif;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    pointer-events: none;
-
-    font-size: clamp(1.2rem, 2vw, 2rem);
     font-weight: 700;
 
-    z-index: 3;
+    cursor: pointer;
 
-    transition:
-        color 0.25s ease;
+    transition: 0.2s ease;
+
 }
 
-.lock-handle {
-    position: absolute;
+.logout-button:hover {
 
-    top: 8px;
-    left: 8px;
+    transform: translateY(-2px);
 
-    width: 109px;
-    height: 109px;
+}
 
-    border-radius: 50%;
+
+/* =====================================================
+   HERO / WELCOME
+===================================================== */
+
+.dashboard-hero {
+
+    background: #8B5CF6;
+
+    color: white;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+}
+
+
+.dashboard-hero h1 {
+
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: clamp(3rem, 8vw, 6rem);
+
+    font-weight: 800;
+
+    letter-spacing: -0.05em;
+
+    line-height: 0.95;
+
+    margin-bottom: 20px;
+
+}
+
+
+.dashboard-hero p {
+
+    font-size: 1.1rem;
+
+    opacity: 0.9;
+
+}
+
+
+/* =====================================================
+   LOCK-IN SECTION
+===================================================== */
+
+.lock-section {
+
+    padding: 35px 20px;
 
     background: #FFFFFF;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 
-    font-size: 3.3rem;
+    border-bottom: 1px solid #E5E7EB;
 
-    cursor: grab;
-
-    user-select: none;
-    touch-action: none;
-
-    z-index: 5;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.18);
-
-    transition:
-        transform 0.12s ease,
-        box-shadow 0.12s ease;
 }
 
-.lock-handle.dragging {
-    cursor: grabbing;
 
-    transform: scale(0.94);
+.lock-section h2 {
 
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.22);
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: 2rem;
+
+    margin-bottom: 8px;
+
 }
 
-.lock-slider.completed .lock-text {
-    color: #FFFFFF;
+
+.lock-section p {
+
+    color: #6B7280;
+
+    margin-bottom: 25px;
+
 }
 
-/* =========================================
+
+.lock-button {
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #FF4D6D;
+
+    color: white;
+
+    padding: 15px 30px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.lock-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.25);
+
+}
+
+
+.lock-button.locked {
+
+    background: #34D399;
+
+}
+
+
+/* =====================================================
    DASHBOARD CONTENT
-========================================= */
+===================================================== */
 
 .dashboard-content {
-    opacity: 0;
 
-    transform: translateY(40px);
+    width: min(1200px, 100%);
 
-    pointer-events: none;
+    margin: auto;
 
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
+    padding: 50px 25px;
 
-.dashboard-content.visible {
     opacity: 1;
 
     transform: translateY(0);
 
     pointer-events: auto;
+
 }
 
-/* =========================================
-   CARDS
-========================================= */
 
-.dashboard-grid {
-    display: grid;
+/* =====================================================
+   SECTION
+===================================================== */
 
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+.dashboard-section {
 
-    gap: 28px;
+    margin-bottom: 50px;
+
 }
 
-.dashboard-card {
-    background: rgba(255,255,255,0.94);
-
-    border-radius: 30px;
-
-    padding: 35px;
-
-    box-shadow:
-        0 18px 50px rgba(0,0,0,0.08);
-
-    backdrop-filter: blur(10px);
-}
 
 .section-title {
-    font-size: 2rem;
-    font-weight: 800;
 
-    margin-bottom: 8px;
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: 2.4rem;
+
+    margin-bottom: 25px;
+
 }
 
-.section-description {
-    color: #666666;
 
-    margin-bottom: 30px;
-}
+/* =====================================================
+   CARDS
+===================================================== */
 
-/* =========================================
-   METRICS
-========================================= */
+.card-grid {
 
-.metrics {
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 15px;
-}
-
-.metric {
-    padding: 22px 14px;
-
-    border-radius: 22px;
-
-    background: #F8F8F8;
-
-    text-align: center;
-}
-
-.metric-number {
-    display: block;
-
-    font-size: 3rem;
-
-    line-height: 1;
-
-    font-weight: 800;
-
-    margin-bottom: 10px;
-}
-
-.metric-label {
-    font-size: 0.82rem;
-
-    font-weight: 600;
-
-    color: #444444;
-}
-
-.metric:nth-child(1) .metric-number {
-    color: #FF4D6D;
-}
-
-.metric:nth-child(2) .metric-number {
-    color: #FF8A3D;
-}
-
-.metric:nth-child(3) .metric-number {
-    color: #10B981;
-}
-
-.metric:nth-child(4) .metric-number {
-    color: #DC2626;
-}
-
-/* =========================================
-   ENTRIES
-========================================= */
-
-.entries {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.empty-state {
-    padding: 30px;
-
-    border-radius: 20px;
-
-    background: #F7F7F7;
-
-    text-align: center;
-
-    color: #777777;
-}
-
-.entry {
-    padding: 18px;
-
-    border-radius: 20px;
-
-    background: #F8F8F8;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
+        repeat(auto-fit, minmax(250px, 1fr));
 
     gap: 20px;
 
-    border-left:
-        6px solid #6366F1;
 }
 
-.entry-info {
-    min-width: 0;
+
+.card {
+
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 25px;
+
+    border: 1px solid #E5E7EB;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.05);
+
 }
 
-.entry-name {
-    font-size: 1rem;
 
-    font-weight: 800;
+.card h3 {
 
-    margin-bottom: 5px;
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: 1.4rem;
+
+    margin-bottom: 10px;
+
 }
 
-.entry-meta {
-    font-size: 0.85rem;
 
-    color: #666666;
+.card p {
+
+    color: #6B7280;
+
+    line-height: 1.5;
+
 }
 
-.entry-date {
-    text-align: right;
 
-    white-space: nowrap;
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-card {
+
+    background: #39D6C0;
+
+    color: #111827;
+
 }
 
-.entry-date strong {
-    display: block;
 
-    font-size: 1rem;
+.profile-card p {
+
+    color: #111827;
+
 }
 
-.entry-date span {
-    font-size: 0.8rem;
 
-    color: #6366F1;
+/* =====================================================
+   SUBJECTS
+===================================================== */
 
-    font-weight: 700;
-}
+.subject-list {
 
-/* =========================================
-   STATUS
-========================================= */
-
-.status-buttons {
     display: flex;
 
-    gap: 8px;
-
-    margin-top: 12px;
-
     flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
 }
 
-.status-button {
-    border: 2px solid transparent;
+
+.subject-pill {
 
     padding: 8px 14px;
 
     border-radius: 999px;
 
-    font-family: "DM Sans", sans-serif;
+    background: #8B5CF6;
 
-    font-size: 0.75rem;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease,
-        opacity 0.15s ease;
-}
-
-.status-completed {
-    background: #DCFCE7;
-
-    color: #15803D;
-}
-
-.status-pending {
-    background: #FEE2E2;
-
-    color: #B91C1C;
-}
-
-.status-button.selected {
-    border-color: currentColor;
-
-    box-shadow:
-        0 0 0 3px rgba(0,0,0,0.08);
-
-    transform:
-        translateY(-1px);
-}
-
-.status-button.saving {
-    opacity: 0.55;
-
-    pointer-events: none;
-}
-
-/* =========================================
-   QUICK ACTIONS
-========================================= */
-
-.quick-actions {
-    grid-column: 1 / -1;
-}
-
-.action-buttons {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-}
-
-.action-button {
-    min-height: 100px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    color: #FFFFFF;
-
-    font-family: "DM Sans", sans-serif;
-
-    font-size: 1.15rem;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.action-button:hover {
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.12);
-}
-
-.game-plan-action {
-    background: #FF8A3D;
-}
-
-.coming-up-action {
-    background: #6366F1;
-}
-
-/* =========================================
-   MODAL
-========================================= */
-
-.modal {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 1000;
-
-    background:
-        rgba(0,0,0,0.45);
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    backdrop-filter: blur(8px);
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-card {
-    width: min(520px, 100%);
-
-    background: #FFFFFF;
-
-    border-radius: 30px;
-
-    padding: 35px;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,0.25);
-}
-
-.modal-title {
-    font-size: 2rem;
-
-    font-weight: 800;
-
-    margin-bottom: 25px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-
-    margin-bottom: 7px;
+    color: white;
 
     font-size: 0.85rem;
 
     font-weight: 700;
+
 }
 
-.form-group input,
-.form-group select {
-    width: 100%;
 
-    height: 52px;
+/* =====================================================
+   EMPTY STATE
+===================================================== */
 
-    border:
-        2px solid #E5E7EB;
+.empty-state {
 
-    border-radius: 14px;
+    text-align: center;
 
-    padding: 0 14px;
+    padding: 30px;
 
-    font-family:
-        "DM Sans", sans-serif;
+    border-radius: 20px;
 
-    font-size: 0.95rem;
+    background: #F3F4F6;
 
-    outline: none;
+    color: #6B7280;
+
 }
 
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #6366F1;
+
+/* =====================================================
+   LIST ITEMS
+===================================================== */
+
+.list-item {
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #E5E7EB;
+
 }
 
-.assignment-types {
-    display: grid;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+.list-item:last-child {
 
-    gap: 8px;
+    border-bottom: none;
+
 }
 
-.type-option {
-    border: 2px solid transparent;
 
-    border-radius: 14px;
-
-    padding: 12px;
-
-    cursor: pointer;
-
-    font-family:
-        "DM Sans", sans-serif;
+.list-item-title {
 
     font-weight: 700;
 
-    background: #F5F5F5;
+    margin-bottom: 5px;
+
 }
 
-.type-option.selected {
-    border-color: #111111;
+
+.list-item-info {
+
+    color: #6B7280;
+
+    font-size: 0.9rem;
+
 }
 
-.type-random {
-    background: #FFE1D0;
-}
 
-.type-formative {
-    background: #FFF3B8;
-}
+/* =====================================================
+   STATUS
+===================================================== */
 
-.type-summative {
-    background: #E7D7FF;
-}
+.status {
 
-.type-other {
-    background: #FFD9EA;
-}
+    display: inline-block;
 
-.modal-actions {
-    display: flex;
+    margin-top: 8px;
 
-    gap: 10px;
-
-    margin-top: 25px;
-}
-
-.modal-actions button {
-    flex: 1;
-
-    height: 52px;
-
-    border: none;
+    padding: 6px 10px;
 
     border-radius: 999px;
 
-    font-family:
-        "DM Sans", sans-serif;
+    background: #FEF3C7;
 
-    font-weight: 800;
+    color: #92400E;
 
-    cursor: pointer;
+    font-size: 0.8rem;
+
+    font-weight: 700;
+
 }
 
-.cancel-button {
-    background: #EEEEEE;
-}
 
-.add-button {
-    background: #6366F1;
+/* =====================================================
+   LOADING
+===================================================== */
 
-    color: #FFFFFF;
-}
+.loading-screen {
 
-/* =========================================
-   CELEBRATION
-========================================= */
-
-.celebration {
     position: fixed;
 
     inset: 0;
 
-    z-index: 5000;
+    background: #8B5CF6;
 
-    background:
-        linear-gradient(
-            135deg,
-            #A855F7,
-            #D946EF,
-            #22D3EE
-        );
+    color: white;
 
-    display: none;
+    display: flex;
 
     align-items: center;
 
     justify-content: center;
 
+    flex-direction: column;
+
+    gap: 15px;
+
+    z-index: 9999;
+
+}
+
+
+.loading-screen h1 {
+
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: 3rem;
+
+}
+
+
+.loading-screen p {
+
+    opacity: 0.85;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.firebase-error {
+
+    display: none;
+
+    margin: 20px auto;
+
+    width: min(800px, calc(100% - 40px));
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: #FEE2E2;
+
+    color: #991B1B;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    background: #3B82F6;
+
+    color: white;
+
     text-align: center;
 
-    overflow: hidden;
-}
-
-.celebration.show {
-    display: flex;
-}
-
-.celebration-content {
-    position: relative;
-
-    z-index: 10;
-
-    color: #FFFFFF;
-}
-
-.celebration-cap {
-    font-size: 8rem;
-
-    animation:
-        capPop 0.8s ease both;
-}
-
-@keyframes capPop {
-
-    0% {
-        transform:
-            scale(0)
-            rotate(-25deg);
-    }
-
-    70% {
-        transform:
-            scale(1.2)
-            rotate(8deg);
-    }
-
-    100% {
-        transform:
-            scale(1)
-            rotate(0);
-    }
+    padding: 35px 20px;
 
 }
 
-.celebration-title {
-    font-family:
-        "Bricolage Grotesque",
-        sans-serif;
 
-    font-size:
-        clamp(3.5rem, 10vw, 8rem);
+footer p {
 
-    line-height: 0.9;
-
-    margin: 20px 0;
-}
-
-.celebration-text {
-    font-size: 1.3rem;
-}
-
-/* =========================================
-   CONFETTI
-========================================= */
-
-.confetti {
-    position: fixed;
-
-    width: 12px;
-
-    height: 20px;
-
-    z-index: 6000;
-
-    pointer-events: none;
-
-    animation:
-        confettiFall
-        3s ease-out
-        forwards;
-}
-
-@keyframes confettiFall {
-
-    from {
-
-        transform:
-            translate(0,0)
-            rotate(0deg);
-
-        opacity: 1;
-    }
-
-    to {
-
-        transform:
-            translate(var(--x), var(--y))
-            rotate(var(--r));
-
-        opacity: 0;
-    }
+    margin-bottom: 10px;
 
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
 
-@media(max-width: 950px) {
+.back-top {
 
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
+    border: none;
 
-    .quick-actions {
-        grid-column: auto;
-    }
+    background: white;
+
+    color: #3B82F6;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-weight: 700;
+
+    cursor: pointer;
 
 }
 
-@media(max-width: 700px) {
 
-    .dashboard {
-        padding:
-            25px
-            15px
-            60px;
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .top-bar {
+
+        padding: 15px 18px;
+
     }
 
-    .metrics {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .user-name {
+
+        display: none;
+
     }
 
-    .action-buttons {
-        grid-template-columns: 1fr;
+    .dashboard-hero {
+
+        padding: 55px 20px;
+
     }
 
-    .lock-slider {
-        height: 100px;
-    }
+    .dashboard-content {
 
-    .lock-handle {
-        width: 84px;
+        padding: 35px 18px;
 
-        height: 84px;
-
-        font-size: 2.5rem;
-    }
-
-    .dashboard-card {
-        padding:
-            25px
-            20px;
     }
 
 }
@@ -953,492 +637,291 @@ body {
 
 </head>
 
+
 <body>
 
-<div id="dashboard-background"></div>
 
-<div id="dashboard-overlay"></div>
+<!-- =================================================
+     LOADING SCREEN
+================================================= -->
 
-<main class="dashboard">
+<div
+    class="loading-screen"
+    id="loading-screen"
+>
 
-<div class="dashboard-inner">
+    <h1>MYP Haven</h1>
 
-<div class="top-bar">
-
-    <label
-        class="background-button"
-        for="background-input"
-    >
-        Change Background
-    </label>
-
-    <input
-        type="file"
-        id="background-input"
-        accept="image/*"
-    >
+    <p>Loading your dashboard...</p>
 
 </div>
 
+
+<!-- =================================================
+     ERROR MESSAGE
+================================================= -->
+
 <div
-    class="current-date"
-    id="current-date"
+    class="firebase-error"
+    id="firebase-error"
 ></div>
 
-<h1 class="welcome-title">
-    Welcome Back!
-</h1>
 
-<p class="welcome-subtitle">
-    Let's make some progress today.
-</p>
+<!-- =================================================
+     TOP BAR
+================================================= -->
+
+<header class="top-bar">
+
+    <div class="logo">
+        MYP Haven
+    </div>
+
+    <div class="top-right">
+
+        <span
+            class="user-name"
+            id="user-name"
+        >
+            Loading...
+        </span>
+
+        <button
+            class="logout-button"
+            id="logout-button"
+        >
+            Log Out
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section class="dashboard-hero">
+
+    <h1 id="welcome-title">
+        Welcome.
+    </h1>
+
+    <p>
+        Your MYP journey starts here.
+    </p>
+
+</section>
+
+
+<!-- =================================================
+     LOCK IN
+================================================= -->
 
 <section class="lock-section">
 
-    <div
-        class="lock-slider"
-        id="lock-slider"
+    <h2>
+        🔒 Lock In
+    </h2>
+
+    <p>
+        Stay focused and keep working toward your academic goals.
+    </p>
+
+    <button
+        class="lock-button"
+        id="lock-button"
     >
-
-        <div
-            class="lock-progress"
-            id="lock-progress"
-        ></div>
-
-        <div
-            class="lock-text"
-            id="lock-text"
-        >
-            Are we ready to lock in?
-        </div>
-
-        <div
-            class="lock-handle"
-            id="lock-handle"
-            aria-label="Slide to lock in"
-        >
-            🎓
-        </div>
-
-    </div>
+        🔒 Lock In
+    </button>
 
 </section>
 
-<div
-    class="dashboard-content"
-    id="dashboard-content"
->
 
-<div class="dashboard-grid">
+<!-- =================================================
+     DASHBOARD
+================================================= -->
 
-<section class="dashboard-card">
+<main class="dashboard-content">
 
-    <h2 class="section-title">
-        On My Plate
-    </h2>
 
-    <p class="section-description">
-        Keep track of what needs your attention.
-    </p>
+    <!-- =============================================
+         PROFILE
+    ============================================== -->
 
-    <div class="metrics">
+    <section class="dashboard-section">
 
-        <div class="metric">
-            <span
-                class="metric-number"
-                id="due-today"
-            >0</span>
+        <h2 class="section-title">
+            👋 Your Profile
+        </h2>
 
-            <span class="metric-label">
-                Due Today
-            </span>
+        <div class="card-grid">
+
+            <div class="card profile-card">
+
+                <h3>
+                    Student
+                </h3>
+
+                <p>
+                    <strong>Name:</strong>
+                    <span id="profile-name">
+                        Loading...
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <span id="profile-email">
+                        Loading...
+                    </span>
+                </p>
+
+                <p>
+                    <strong>MYP Year:</strong>
+                    <span id="profile-year">
+                        Not selected
+                    </span>
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    📚 Subjects
+                </h3>
+
+                <div
+                    class="subject-list"
+                    id="subject-list"
+                >
+                    <span>
+                        Loading...
+                    </span>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="metric">
-            <span
-                class="metric-number"
-                id="due-week"
-            >0</span>
+    </section>
 
-            <span class="metric-label">
-                Due This Week
-            </span>
+
+    <!-- =============================================
+         GAME PLANS
+    ============================================== -->
+
+    <section class="dashboard-section">
+
+        <h2 class="section-title">
+            🎯 Study Plans
+        </h2>
+
+        <div class="card">
+
+            <div id="game-plans-list">
+
+                <div class="empty-state">
+                    Loading your study plans...
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="metric">
-            <span
-                class="metric-number"
-                id="completed-count"
-            >0</span>
+    </section>
 
-            <span class="metric-label">
-                Completed
-            </span>
+
+    <!-- =============================================
+         UPCOMING
+    ============================================== -->
+
+    <section class="dashboard-section">
+
+        <h2 class="section-title">
+            📅 Coming Up
+        </h2>
+
+        <div class="card">
+
+            <div id="upcoming-list">
+
+                <div class="empty-state">
+                    Loading upcoming work...
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="metric">
-            <span
-                class="metric-number"
-                id="overdue-count"
-            >0</span>
+    </section>
 
-            <span class="metric-label">
-                Overdue
-            </span>
+
+    <!-- =============================================
+         TASKS
+    ============================================== -->
+
+    <section class="dashboard-section">
+
+        <h2 class="section-title">
+            ✅ Tasks
+        </h2>
+
+        <div class="card">
+
+            <div id="tasks-list">
+
+                <div class="empty-state">
+                    Loading tasks...
+                </div>
+
+            </div>
+
         </div>
 
-    </div>
+    </section>
 
-</section>
-
-<section class="dashboard-card">
-
-    <h2 class="section-title">
-        Today’s Game Plan
-    </h2>
-
-    <p class="section-description">
-        Plan and track what you’re doing today.
-    </p>
-
-    <div
-        class="entries"
-        id="game-plan-list"
-    ></div>
-
-</section>
-
-<section class="dashboard-card">
-
-    <h2 class="section-title">
-        Coming Up
-    </h2>
-
-    <p class="section-description">
-        Stay ahead of what’s coming next.
-    </p>
-
-    <div
-        class="entries"
-        id="coming-up-list"
-    ></div>
-
-</section>
-
-<section class="dashboard-card quick-actions">
-
-    <h2 class="section-title">
-        Quick Actions
-    </h2>
-
-    <p class="section-description">
-        Jump straight into your next task.
-    </p>
-
-    <div class="action-buttons">
-
-        <button
-            class="action-button game-plan-action"
-            id="open-game-plan"
-        >
-            + Today’s Game Plan
-        </button>
-
-        <button
-            class="action-button coming-up-action"
-            id="open-coming-up"
-        >
-            Coming Up
-        </button>
-
-    </div>
-
-</section>
-
-</div>
-
-</div>
-
-</div>
 
 </main>
 
 
-<!-- =========================================
-     GAME PLAN MODAL
-========================================= -->
+<!-- =================================================
+     FOOTER
+================================================= -->
 
-<div
-    class="modal"
-    id="game-plan-modal"
->
+<footer>
 
-<div class="modal-card">
-
-    <h2 class="modal-title">
-        Add to Today’s Game Plan
-    </h2>
-
-    <div class="form-group">
-
-        <label>Start Time</label>
-
-        <input
-            type="time"
-            id="game-start"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>End Time</label>
-
-        <input
-            type="time"
-            id="game-end"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Name of Task</label>
-
-        <input
-            type="text"
-            id="game-name"
-            placeholder="What are you working on?"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Subject</label>
-
-        <select id="game-subject"></select>
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Assignment Type</label>
-
-        <div class="assignment-types">
-
-            <button
-                type="button"
-                class="type-option type-random"
-                data-type="Random Assignment"
-            >
-                Random Assignment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-formative"
-                data-type="Formative Assessment"
-            >
-                Formative Assessment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-summative"
-                data-type="Summative Assessment"
-            >
-                Summative Assessment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-other"
-                data-type="Other"
-            >
-                Other
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="modal-actions">
-
-        <button
-            type="button"
-            class="cancel-button"
-            id="cancel-game"
-        >
-            Cancel
-        </button>
-
-        <button
-            type="button"
-            class="add-button"
-            id="add-game"
-        >
-            Add
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================
-     COMING UP MODAL
-========================================= -->
-
-<div
-    class="modal"
-    id="coming-up-modal"
->
-
-<div class="modal-card">
-
-    <h2 class="modal-title">
-        Add to Coming Up
-    </h2>
-
-    <div class="form-group">
-
-        <label>Due Date</label>
-
-        <input
-            type="date"
-            id="coming-date"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Name of Task</label>
-
-        <input
-            type="text"
-            id="coming-name"
-            placeholder="What is coming up?"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Subject</label>
-
-        <select id="coming-subject"></select>
-
-    </div>
-
-    <div class="form-group">
-
-        <label>Assignment Type</label>
-
-        <div class="assignment-types">
-
-            <button
-                type="button"
-                class="type-option type-random"
-                data-type="Random Assignment"
-            >
-                Random Assignment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-formative"
-                data-type="Formative Assessment"
-            >
-                Formative Assessment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-summative"
-                data-type="Summative Assessment"
-            >
-                Summative Assessment
-            </button>
-
-            <button
-                type="button"
-                class="type-option type-other"
-                data-type="Other"
-            >
-                Other
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="modal-actions">
-
-        <button
-            type="button"
-            class="cancel-button"
-            id="cancel-coming"
-        >
-            Cancel
-        </button>
-
-        <button
-            type="button"
-            class="add-button"
-            id="add-coming"
-        >
-            Add
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================
-     CELEBRATION
-========================================= -->
-
-<div
-    class="celebration"
-    id="celebration"
->
-
-<div class="celebration-content">
-
-    <div class="celebration-cap">
-        🎓
-    </div>
-
-    <h1 class="celebration-title">
-        WE'RE<br>
-        LOCKED IN!
-    </h1>
-
-    <p class="celebration-text">
-        Let's make some progress today. 🎉
+    <p>
+        © 2026 MYP Haven
     </p>
 
-</div>
+    <p>
+        MYP Haven is an independent student-created
+        website and is not affiliated with the IB.
+    </p>
 
-</div>
+    <button
+        class="back-top"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    >
+        ↑ Back to Top
+    </button>
+
+</footer>
 
 
-<!-- =========================================
-     FIREBASE + DASHBOARD JAVASCRIPT
-========================================= -->
+<!-- =================================================
+     FIREBASE
+================================================= -->
 
 <script type="module">
 
-/* =========================================
-   FIREBASE
-========================================= */
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
 
 import {
     initializeApp
@@ -1446,21 +929,27 @@ import {
 
 import {
     getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
     getFirestore,
     doc,
     getDoc,
+    collection,
+    getDocs,
     updateDoc,
     setDoc,
-    collection,
-    addDoc,
-    getDocs,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1485,6 +974,10 @@ const firebaseConfig = {
 };
 
 
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
 const app =
     initializeApp(firebaseConfig);
 
@@ -1495,9 +988,19 @@ const db =
     getFirestore(app);
 
 
-/* =========================================
-   VARIABLES
-========================================= */
+/* =====================================================
+   FORCE LOCAL AUTH PERSISTENCE
+===================================================== */
+
+await setPersistence(
+    auth,
+    browserLocalPersistence
+);
+
+
+/* =====================================================
+   GLOBAL STATE
+===================================================== */
 
 let currentUser = null;
 
@@ -1509,144 +1012,798 @@ let gamePlans = [];
 
 let upcomingEvents = [];
 
-let selectedGameType = "";
-
-let selectedComingType = "";
-
 let lockedIn = false;
 
-let sliderProgress = 0;
 
-let dragging = false;
-
-
-/* =========================================
+/* =====================================================
    ELEMENTS
-========================================= */
+===================================================== */
 
-const lockSlider =
-    document.getElementById("lock-slider");
+const loadingScreen =
+    document.getElementById("loading-screen");
 
-const lockHandle =
-    document.getElementById("lock-handle");
+const errorBox =
+    document.getElementById("firebase-error");
 
-const lockProgress =
-    document.getElementById("lock-progress");
+const welcomeTitle =
+    document.getElementById("welcome-title");
 
-const lockText =
-    document.getElementById("lock-text");
+const userName =
+    document.getElementById("user-name");
 
-const dashboardContent =
-    document.getElementById("dashboard-content");
+const profileName =
+    document.getElementById("profile-name");
+
+const profileEmail =
+    document.getElementById("profile-email");
+
+const profileYear =
+    document.getElementById("profile-year");
+
+const subjectList =
+    document.getElementById("subject-list");
+
+const tasksList =
+    document.getElementById("tasks-list");
+
+const gamePlansList =
+    document.getElementById("game-plans-list");
+
+const upcomingList =
+    document.getElementById("upcoming-list");
+
+const logoutButton =
+    document.getElementById("logout-button");
+
+const lockButton =
+    document.getElementById("lock-button");
 
 
-/* =========================================
-   DATE
-========================================= */
+/* =====================================================
+   ERROR HANDLER
+===================================================== */
 
-function updateDate() {
+function showFirebaseError(error) {
 
-    const now = new Date();
+    console.error(
+        "Firebase error:",
+        error
+    );
 
-    document.getElementById(
-        "current-date"
-    ).textContent =
-        now.toLocaleDateString(
-            "en-US",
+    errorBox.textContent =
+        "Something went wrong while loading your data. " +
+        "Please refresh the page. " +
+        "If this keeps happening, check your Firebase Firestore rules.";
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   HIDE LOADING SCREEN
+===================================================== */
+
+function hideLoading() {
+
+    loadingScreen.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   SHOW DASHBOARD
+===================================================== */
+
+function showDashboard() {
+
+    document
+        .querySelector(".dashboard-content")
+        .style.display = "block";
+
+}
+
+
+/* =====================================================
+   LOAD USER PROFILE
+===================================================== */
+
+async function loadUserProfile() {
+
+    if (!currentUser) return;
+
+
+    const userRef =
+        doc(
+            db,
+            "users",
+            currentUser.uid
+        );
+
+
+    const userSnapshot =
+        await getDoc(userRef);
+
+
+    if (userSnapshot.exists()) {
+
+        const data =
+            userSnapshot.data();
+
+
+        /* NAME */
+
+        const name =
+            data.fullName ||
+            currentUser.displayName ||
+            "Student";
+
+
+        welcomeTitle.textContent =
+            `Welcome, ${name}!`;
+
+        userName.textContent =
+            name;
+
+        profileName.textContent =
+            name;
+
+
+        /* EMAIL */
+
+        profileEmail.textContent =
+            data.email ||
+            currentUser.email ||
+            "No email";
+
+
+        /* MYP YEAR */
+
+        profileYear.textContent =
+            data.mypYear ||
+            "Not selected";
+
+
+        /* SUBJECTS */
+
+        selectedSubjects =
+            Array.isArray(data.subjects)
+                ? data.subjects
+                : [];
+
+
+        /* LOCKED IN */
+
+        lockedIn =
+            data.lockedIn === true;
+
+
+        renderSubjects();
+
+        updateLockButton();
+
+
+    } else {
+
+        /*
+         * If the Auth account exists but the
+         * Firestore profile doesn't, create it.
+         */
+
+        await setDoc(
+            userRef,
             {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric"
+
+                uid:
+                    currentUser.uid,
+
+                fullName:
+                    currentUser.displayName || "",
+
+                email:
+                    currentUser.email || "",
+
+                mypYear:
+                    null,
+
+                subjects:
+                    [],
+
+                surveyCompleted:
+                    false,
+
+                lockedIn:
+                    false,
+
+                updatedAt:
+                    serverTimestamp()
+
+            },
+            {
+                merge: true
             }
         );
 
-}
 
-updateDate();
+        selectedSubjects = [];
 
+        welcomeTitle.textContent =
+            `Welcome, ${currentUser.displayName || "Student"}!`;
 
-/* =========================================
-   LOCAL DATE
-========================================= */
+        userName.textContent =
+            currentUser.displayName || "Student";
 
-function getLocalDateString() {
+        profileName.textContent =
+            currentUser.displayName || "Student";
 
-    const now = new Date();
+        profileEmail.textContent =
+            currentUser.email || "No email";
 
-    return `${now.getFullYear()}-${String(
-        now.getMonth() + 1
-    ).padStart(2,"0")}-${String(
-        now.getDate()
-    ).padStart(2,"0")}`;
+        profileYear.textContent =
+            "Not selected";
 
-}
+        renderSubjects();
 
-
-/* =========================================
-   LOCAL LOCK KEY
-========================================= */
-
-function getLockKey() {
-
-    if (!currentUser) {
-        return null;
     }
 
-    return `mypHavenLockedIn_${currentUser.uid}`;
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD DATA
+===================================================== */
+
+async function loadDashboardData() {
+
+    if (!currentUser) return;
+
+
+    const uid =
+        currentUser.uid;
+
+
+    /* =================================================
+       TASKS
+    ================================================= */
+
+    const tasksSnapshot =
+        await getDocs(
+            collection(
+                db,
+                "users",
+                uid,
+                "tasks"
+            )
+        );
+
+
+    tasks =
+        tasksSnapshot.docs.map(
+            document => ({
+
+                id:
+                    document.id,
+
+                ...document.data()
+
+            })
+        );
+
+
+    /* =================================================
+       GAME PLANS
+    ================================================= */
+
+    const gamePlansSnapshot =
+        await getDocs(
+            collection(
+                db,
+                "users",
+                uid,
+                "gamePlans"
+            )
+        );
+
+
+    gamePlans =
+        gamePlansSnapshot.docs.map(
+            document => ({
+
+                id:
+                    document.id,
+
+                ...document.data()
+
+            })
+        );
+
+
+    /* =================================================
+       UPCOMING
+    ================================================= */
+
+    const upcomingSnapshot =
+        await getDocs(
+            collection(
+                db,
+                "users",
+                uid,
+                "upcoming"
+            )
+        );
+
+
+    upcomingEvents =
+        upcomingSnapshot.docs.map(
+            document => ({
+
+                id:
+                    document.id,
+
+                ...document.data()
+
+            })
+        );
+
+
+    renderEverything();
 
 }
 
 
-/* =========================================
-   SAVE LOCAL LOCK
-========================================= */
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
 
-function saveLocalLock() {
+function renderEverything() {
 
-    const key =
-        getLockKey();
+    renderSubjects();
 
-    if (!key) {
+    renderTasks();
+
+    renderGamePlans();
+
+    renderUpcoming();
+
+}
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+function renderSubjects() {
+
+    if (!selectedSubjects.length) {
+
+        subjectList.innerHTML = `
+            <span class="empty-state">
+                No subjects selected yet.
+            </span>
+        `;
+
         return;
+
     }
 
-    localStorage.setItem(
-        key,
-        "true"
-    );
+
+    subjectList.innerHTML =
+        selectedSubjects
+            .map(
+                subject => `
+                    <span class="subject-pill">
+                        ${escapeHTML(subject)}
+                    </span>
+                `
+            )
+            .join("");
 
 }
 
 
-/* =========================================
-   CHECK LOCAL LOCK
-========================================= */
+/* =====================================================
+   TASKS
+===================================================== */
 
-function getLocalLock() {
+function renderTasks() {
 
-    const key =
-        getLockKey();
+    if (!tasks.length) {
 
-    if (!key) {
-        return false;
+        tasksList.innerHTML = `
+            <div class="empty-state">
+                🎉 No tasks yet!
+            </div>
+        `;
+
+        return;
+
     }
 
-    return (
-        localStorage.getItem(key) ===
-        "true"
-    );
+
+    tasksList.innerHTML =
+        tasks
+            .map(
+                task => `
+
+                    <div class="list-item">
+
+                        <div class="list-item-title">
+                            ${escapeHTML(
+                                task.name ||
+                                task.title ||
+                                "Untitled Task"
+                            )}
+                        </div>
+
+                        <div class="list-item-info">
+
+                            ${escapeHTML(
+                                task.subject ||
+                                "No subject"
+                            )}
+
+                        </div>
+
+                        ${
+                            task.status
+                                ? `
+                                    <span class="status">
+                                        ${escapeHTML(task.status)}
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+                `
+            )
+            .join("");
 
 }
 
 
-/* =========================================
+/* =====================================================
+   GAME PLANS
+===================================================== */
+
+function renderGamePlans() {
+
+    if (!gamePlans.length) {
+
+        gamePlansList.innerHTML = `
+            <div class="empty-state">
+                📚 No study plans yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    gamePlansList.innerHTML =
+        gamePlans
+            .map(
+                plan => `
+
+                    <div class="list-item">
+
+                        <div class="list-item-title">
+
+                            ${escapeHTML(
+                                plan.name ||
+                                "Study Session"
+                            )}
+
+                        </div>
+
+                        <div class="list-item-info">
+
+                            Subject:
+                            ${escapeHTML(
+                                plan.subject ||
+                                "Not specified"
+                            )}
+
+                            <br>
+
+                            Date:
+                            ${escapeHTML(
+                                plan.date ||
+                                "Not specified"
+                            )}
+
+                            ${
+                                plan.startTime
+                                    ? `
+                                        <br>
+                                        Time:
+                                        ${escapeHTML(
+                                            plan.startTime
+                                        )}
+                                        ${
+                                            plan.endTime
+                                                ? `
+                                                    -
+                                                    ${escapeHTML(
+                                                        plan.endTime
+                                                    )}
+                                                  `
+                                                : ""
+                                        }
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+                        ${
+                            plan.status
+                                ? `
+                                    <span class="status">
+                                        ${escapeHTML(plan.status)}
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =====================================================
+   UPCOMING
+===================================================== */
+
+function renderUpcoming() {
+
+    if (!upcomingEvents.length) {
+
+        upcomingList.innerHTML = `
+            <div class="empty-state">
+                🎉 Nothing coming up!
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    upcomingList.innerHTML =
+        upcomingEvents
+            .map(
+                event => `
+
+                    <div class="list-item">
+
+                        <div class="list-item-title">
+
+                            ${escapeHTML(
+                                event.name ||
+                                "Upcoming Work"
+                            )}
+
+                        </div>
+
+                        <div class="list-item-info">
+
+                            ${
+                                event.subject
+                                    ? `
+                                        Subject:
+                                        ${escapeHTML(
+                                            event.subject
+                                        )}
+                                        <br>
+                                      `
+                                    : ""
+                            }
+
+                            ${
+                                event.date
+                                    ? `
+                                        Date:
+                                        ${escapeHTML(
+                                            event.date
+                                        )}
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =====================================================
+   LOCK BUTTON
+===================================================== */
+
+function updateLockButton() {
+
+    if (lockedIn) {
+
+        lockButton.textContent =
+            "✓ Locked In";
+
+        lockButton.classList.add(
+            "locked"
+        );
+
+    } else {
+
+        lockButton.textContent =
+            "🔒 Lock In";
+
+        lockButton.classList.remove(
+            "locked"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOCK IN
+===================================================== */
+
+lockButton.addEventListener(
+    "click",
+    async () => {
+
+        if (!currentUser) return;
+
+
+        lockedIn = !lockedIn;
+
+
+        updateLockButton();
+
+
+        try {
+
+            await updateDoc(
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                ),
+                {
+
+                    lockedIn:
+                        lockedIn,
+
+                    updatedAt:
+                        serverTimestamp()
+
+                }
+            );
+
+
+            /*
+             * Small local cache only for the UI.
+             * Firestore remains the main source.
+             */
+
+            localStorage.setItem(
+                `mypHavenLockedIn_${currentUser.uid}`,
+                lockedIn
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Could not save lock status:",
+                error
+            );
+
+            lockedIn = !lockedIn;
+
+            updateLockButton();
+
+            showFirebaseError(error);
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOG OUT
+===================================================== */
+
+logoutButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+            window.location.href =
+                "./account.html";
+
+        } catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            showFirebaseError(error);
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =====================================================
    AUTHENTICATION
-========================================= */
+===================================================== */
 
 onAuthStateChanged(
     auth,
     async user => {
+
+        console.log(
+            "AUTH STATE:",
+            user
+                ? user.uid
+                : "NO USER"
+        );
+
+
+        /* =============================================
+           NOT LOGGED IN
+        ============================================== */
 
         if (!user) {
 
@@ -1658,2616 +1815,59 @@ onAuthStateChanged(
         }
 
 
+        /* =============================================
+           USER FOUND
+        ============================================== */
+
         currentUser =
             user;
 
 
-        console.log(
-            "🔥 Logged in:",
-            currentUser.uid
-        );
+        try {
 
-
-        /*
-         * IMPORTANT:
-         *
-         * Restore local information FIRST.
-         * Firebase cannot prevent the dashboard
-         * from opening anymore.
-         */
-
-        lockedIn =
-            getLocalLock();
-
-
-        loadBackground();
-
-
-        /*
-         * Restore the dashboard immediately
-         * if the user was already locked in.
-         */
-
-        if (lockedIn) {
+            /*
+             * IMPORTANT:
+             * The dashboard is shown immediately.
+             * It is NOT hidden behind Lock In anymore.
+             */
 
             showDashboard();
 
-        }
 
+            /* LOAD FIRESTORE USER */
 
-        /*
-         * Get Firebase information in the
-         * background.
-         */
+            await loadUserProfile();
 
-        await loadUserProfile();
 
+            /* LOAD ALL USER DATA */
 
-        setupSubjectDropdowns();
+            await loadDashboardData();
 
 
-        /*
-         * Load saved assignments.
-         */
+            /* SHOW DASHBOARD */
 
-        await loadDashboardData();
-
-
-        /*
-         * Render everything again with the
-         * latest Firebase data.
-         */
-
-        renderEverything();
-
-
-        /*
-         * Restore the slider one final time.
-         */
-
-        restoreLockedSlider();
-
-
-        console.log(
-            "✅ Dashboard fully restored."
-        );
-
-    }
-);
-
-
-/* =========================================
-   LOAD USER PROFILE
-========================================= */
-
-async function loadUserProfile() {
-
-    if (!currentUser) {
-        return;
-    }
-
-
-    try {
-
-        const userRef =
-            doc(
-                db,
-                "users",
-                currentUser.uid
-            );
-
-
-        const userSnap =
-            await getDoc(userRef);
-
-
-        if (!userSnap.exists()) {
-            return;
-        }
-
-
-        const data =
-            userSnap.data();
-
-
-        /*
-         * Subjects
-         */
-
-        if (
-            Array.isArray(
-                data.subjects
-            )
-        ) {
-
-            selectedSubjects =
-                data.subjects;
-
-        }
-
-
-        /*
-         * Firebase lock state
-         */
-
-        if (
-            data.lockedIn === true
-        ) {
-
-            lockedIn = true;
-
-            saveLocalLock();
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Profile loading failed:",
-            error
-        );
-
-        /*
-         * IMPORTANT:
-         *
-         * Firebase failing must NOT
-         * break the dashboard.
-         */
-
-    }
-
-
-    /*
-     * Survey fallback
-     */
-
-    if (
-        selectedSubjects.length === 0
-    ) {
-
-        const savedSurvey =
-            localStorage.getItem(
-                "mypHavenSurvey"
-            );
-
-
-        if (savedSurvey) {
-
-            try {
-
-                const survey =
-                    JSON.parse(
-                        savedSurvey
-                    );
-
-
-                if (
-                    Array.isArray(
-                        survey.subjects
-                    )
-                ) {
-
-                    selectedSubjects =
-                        survey.subjects;
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "Survey data error:",
-                    error
-                );
-
-            }
-
-        }
-
-    }
-
-}
-
-
-/* =========================================
-   LOAD DASHBOARD DATA
-========================================= */
-
-async function loadDashboardData() {
-
-    if (!currentUser) {
-        return;
-    }
-
-
-    /*
-     * Start with empty arrays.
-     * This prevents old data from being
-     * duplicated.
-     */
-
-    tasks = [];
-
-    gamePlans = [];
-
-    upcomingEvents = [];
-
-
-    /* TASKS */
-
-    try {
-
-        const snapshot =
-            await getDocs(
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "tasks"
-                )
-            );
-
-
-        tasks =
-            snapshot.docs.map(
-                item => ({
-                    id: item.id,
-                    ...item.data()
-                })
-            );
-
-    } catch (error) {
-
-        console.error(
-            "Tasks could not load:",
-            error
-        );
-
-    }
-
-
-    /* GAME PLANS */
-
-    try {
-
-        const snapshot =
-            await getDocs(
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "gamePlans"
-                )
-            );
-
-
-        gamePlans =
-            snapshot.docs.map(
-                item => ({
-                    id: item.id,
-                    ...item.data()
-                })
-            );
-
-    } catch (error) {
-
-        console.error(
-            "Game Plans could not load:",
-            error
-        );
-
-    }
-
-
-    /* UPCOMING */
-
-    try {
-
-        const snapshot =
-            await getDocs(
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "upcoming"
-                )
-            );
-
-
-        upcomingEvents =
-            snapshot.docs.map(
-                item => ({
-                    id: item.id,
-                    ...item.data()
-                })
-            );
-
-    } catch (error) {
-
-        console.error(
-            "Coming Up could not load:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   SUBJECT DROPDOWNS
-========================================= */
-
-function setupSubjectDropdowns() {
-
-    const dropdowns = [
-
-        document.getElementById(
-            "game-subject"
-        ),
-
-        document.getElementById(
-            "coming-subject"
-        )
-
-    ];
-
-
-    dropdowns.forEach(
-        dropdown => {
-
-            if (!dropdown) {
-                return;
-            }
-
-
-            dropdown.innerHTML = "";
-
-
-            selectedSubjects.forEach(
-                subject => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value =
-                        subject;
-
-                    option.textContent =
-                        subject;
-
-                    dropdown.appendChild(
-                        option
-                    );
-
-                }
-            );
-
-
-            const other =
-                document.createElement(
-                    "option"
-                );
-
-            other.value =
-                "Other";
-
-            other.textContent =
-                "Other";
-
-            dropdown.appendChild(
-                other
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   RENDER EVERYTHING
-========================================= */
-
-function renderEverything() {
-
-    updateMetrics();
-
-    renderGamePlans();
-
-    renderComingUp();
-
-}
-
-
-/* =========================================
-   DATE ONLY
-========================================= */
-
-function dateOnly(date) {
-
-    return new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-    );
-
-}
-
-
-/* =========================================
-   METRICS
-========================================= */
-
-function updateMetrics() {
-
-    const today =
-        dateOnly(
-            new Date()
-        );
-
-
-    const weekEnd =
-        new Date(today);
-
-
-    weekEnd.setDate(
-        weekEnd.getDate() + 7
-    );
-
-
-    let dueToday = 0;
-
-    let dueWeek = 0;
-
-    let completed = 0;
-
-    let overdue = 0;
-
-
-    tasks.forEach(
-        task => {
-
-            if (!task.dueDate) {
-                return;
-            }
-
-
-            const due =
-                dateOnly(
-                    new Date(
-                        task.dueDate
-                    )
-                );
-
-
-            if (
-                task.status ===
-                "Completed"
-            ) {
-
-                completed++;
-
-                return;
-
-            }
-
-
-            if (
-                due.getTime() ===
-                today.getTime()
-            ) {
-
-                dueToday++;
-
-            }
-
-
-            if (
-                due >= today &&
-                due < weekEnd
-            ) {
-
-                dueWeek++;
-
-            }
-
-
-            if (due < today) {
-
-                overdue++;
-
-            }
-
-        }
-    );
-
-
-    gamePlans.forEach(
-        plan => {
-
-            if (!plan.date) {
-                return;
-            }
-
-
-            const due =
-                dateOnly(
-                    new Date(
-                        plan.date
-                    )
-                );
-
-
-            if (
-                plan.status ===
-                "Completed"
-            ) {
-
-                completed++;
-
-                return;
-
-            }
-
-
-            if (
-                due.getTime() ===
-                today.getTime()
-            ) {
-
-                dueToday++;
-
-            }
-
-
-            if (
-                due >= today &&
-                due < weekEnd
-            ) {
-
-                dueWeek++;
-
-            }
-
-
-            if (due < today) {
-
-                overdue++;
-
-            }
-
-        }
-    );
-
-
-    document.getElementById(
-        "due-today"
-    ).textContent =
-        dueToday;
-
-
-    document.getElementById(
-        "due-week"
-    ).textContent =
-        dueWeek;
-
-
-    document.getElementById(
-        "completed-count"
-    ).textContent =
-        completed;
-
-
-    document.getElementById(
-        "overdue-count"
-    ).textContent =
-        overdue;
-
-}
-
-
-/* =========================================
-   GAME PLANS
-========================================= */
-
-function renderGamePlans() {
-
-    const container =
-        document.getElementById(
-            "game-plan-list"
-        );
-
-
-    container.innerHTML = "";
-
-
-    const today =
-        getLocalDateString();
-
-
-    const todayPlans =
-        gamePlans.filter(
-            plan =>
-                plan.date === today
-        );
-
-
-    if (
-        todayPlans.length === 0
-    ) {
-
-        container.innerHTML = `
-            <div class="empty-state">
-                Nothing planned yet. Add something to your day!
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    todayPlans.forEach(
-        plan => {
-
-            const entry =
-                document.createElement(
-                    "div"
-                );
-
-            entry.className =
-                "entry";
-
-
-            const entryInfo =
-                document.createElement(
-                    "div"
-                );
-
-            entryInfo.className =
-                "entry-info";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "entry-name";
-
-            name.textContent =
-                plan.name || "";
-
-
-            const meta =
-                document.createElement(
-                    "div"
-                );
-
-            meta.className =
-                "entry-meta";
-
-            meta.textContent =
-                `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
-
-
-            const statusButtons =
-                document.createElement(
-                    "div"
-                );
-
-            statusButtons.className =
-                "status-buttons";
-
-
-            const completedButton =
-                document.createElement(
-                    "button"
-                );
-
-            completedButton.type =
-                "button";
-
-            completedButton.className =
-                "status-button status-completed";
-
-            completedButton.textContent =
-                "✓ Completed";
-
-
-            const pendingButton =
-                document.createElement(
-                    "button"
-                );
-
-            pendingButton.type =
-                "button";
-
-            pendingButton.className =
-                "status-button status-pending";
-
-            pendingButton.textContent =
-                "○ Not Completed";
-
-
-            function refreshStatus() {
-
-                completedButton.classList.remove(
-                    "selected"
-                );
-
-                pendingButton.classList.remove(
-                    "selected"
-                );
-
-
-                if (
-                    plan.status ===
-                    "Completed"
-                ) {
-
-                    completedButton.classList.add(
-                        "selected"
-                    );
-
-                } else {
-
-                    pendingButton.classList.add(
-                        "selected"
-                    );
-
-                }
-
-            }
-
-
-            refreshStatus();
-
-
-            completedButton.addEventListener(
-                "click",
-                async () => {
-
-                    if (
-                        plan.status ===
-                        "Completed"
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    plan.status =
-                        "Completed";
-
-
-                    refreshStatus();
-
-                    updateMetrics();
-
-
-                    completedButton.classList.add(
-                        "saving"
-                    );
-
-                    pendingButton.classList.add(
-                        "saving"
-                    );
-
-
-                    try {
-
-                        await updateGamePlanStatus(
-                            plan.id,
-                            "Completed"
-                        );
-
-                    } catch (error) {
-
-                        console.error(error);
-
-                        plan.status =
-                            "Not Completed";
-
-                        refreshStatus();
-
-                        updateMetrics();
-
-                    } finally {
-
-                        completedButton.classList.remove(
-                            "saving"
-                        );
-
-                        pendingButton.classList.remove(
-                            "saving"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            pendingButton.addEventListener(
-                "click",
-                async () => {
-
-                    if (
-                        plan.status ===
-                            "Not Completed" ||
-                        !plan.status
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    plan.status =
-                        "Not Completed";
-
-
-                    refreshStatus();
-
-                    updateMetrics();
-
-
-                    completedButton.classList.add(
-                        "saving"
-                    );
-
-                    pendingButton.classList.add(
-                        "saving"
-                    );
-
-
-                    try {
-
-                        await updateGamePlanStatus(
-                            plan.id,
-                            "Not Completed"
-                        );
-
-                    } catch (error) {
-
-                        console.error(error);
-
-                        plan.status =
-                            "Completed";
-
-                        refreshStatus();
-
-                        updateMetrics();
-
-                    } finally {
-
-                        completedButton.classList.remove(
-                            "saving"
-                        );
-
-                        pendingButton.classList.remove(
-                            "saving"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            statusButtons.appendChild(
-                completedButton
-            );
-
-            statusButtons.appendChild(
-                pendingButton
-            );
-
-
-            entryInfo.appendChild(
-                name
-            );
-
-            entryInfo.appendChild(
-                meta
-            );
-
-            entryInfo.appendChild(
-                statusButtons
-            );
-
-
-            entry.appendChild(
-                entryInfo
-            );
-
-
-            container.appendChild(
-                entry
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   UPDATE STATUS
-========================================= */
-
-async function updateGamePlanStatus(
-    id,
-    status
-) {
-
-    if (!currentUser) {
-
-        throw new Error(
-            "No logged-in user."
-        );
-
-    }
-
-
-    const gamePlanRef =
-        doc(
-            db,
-            "users",
-            currentUser.uid,
-            "gamePlans",
-            id
-        );
-
-
-    await updateDoc(
-        gamePlanRef,
-        {
-            status: status,
-            updatedAt:
-                serverTimestamp()
-        }
-    );
-
-}
-
-
-/* =========================================
-   COMING UP
-========================================= */
-
-function renderComingUp() {
-
-    const container =
-        document.getElementById(
-            "coming-up-list"
-        );
-
-
-    container.innerHTML = "";
-
-
-    const today =
-        dateOnly(
-            new Date()
-        );
-
-
-    const events =
-        upcomingEvents
-            .filter(
-                event => {
-
-                    if (!event.date) {
-                        return false;
-                    }
-
-
-                    return (
-                        dateOnly(
-                            new Date(
-                                event.date
-                            )
-                        ) >= today
-                    );
-
-                }
-            )
-            .sort(
-                (a,b) =>
-                    new Date(a.date) -
-                    new Date(b.date)
-            )
-            .slice(
-                0,
-                5
-            );
-
-
-    if (
-        events.length === 0
-    ) {
-
-        container.innerHTML = `
-            <div class="empty-state">
-                Nothing coming up yet.
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    events.forEach(
-        event => {
-
-            const date =
-                dateOnly(
-                    new Date(
-                        event.date
-                    )
-                );
-
-
-            const difference =
-                Math.round(
-                    (
-                        date -
-                        today
-                    ) /
-                    86400000
-                );
-
-
-            const countdown =
-                difference === 0
-                    ? "Today"
-                    : difference === 1
-                        ? "1 day away"
-                        : `${difference} days away`;
-
-
-            const entry =
-                document.createElement(
-                    "div"
-                );
-
-            entry.className =
-                "entry";
-
-
-            const entryInfo =
-                document.createElement(
-                    "div"
-                );
-
-            entryInfo.className =
-                "entry-info";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "entry-name";
-
-            name.textContent =
-                event.name || "";
-
-
-            const meta =
-                document.createElement(
-                    "div"
-                );
-
-            meta.className =
-                "entry-meta";
-
-            meta.textContent =
-                `${event.subject || "Other"} · ${event.assignmentType || "Other"}`;
-
-
-            const dateBox =
-                document.createElement(
-                    "div"
-                );
-
-            dateBox.className =
-                "entry-date";
-
-
-            const strong =
-                document.createElement(
-                    "strong"
-                );
-
-            strong.textContent =
-                date.toLocaleDateString(
-                    "en-US",
-                    {
-                        month: "short",
-                        day: "numeric"
-                    }
-                );
-
-
-            const span =
-                document.createElement(
-                    "span"
-                );
-
-            span.textContent =
-                countdown;
-
-
-            dateBox.appendChild(
-                strong
-            );
-
-            dateBox.appendChild(
-                span
-            );
-
-
-            entryInfo.appendChild(
-                name
-            );
-
-            entryInfo.appendChild(
-                meta
-            );
-
-
-            entry.appendChild(
-                entryInfo
-            );
-
-            entry.appendChild(
-                dateBox
-            );
-
-
-            container.appendChild(
-                entry
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   LOCK-IN SLIDER
-========================================================= */
-
-function maxSliderPosition() {
-
-    return Math.max(
-        0,
-        lockSlider.clientWidth -
-        lockHandle.offsetWidth -
-        16
-    );
-
-}
-
-
-/* =========================================
-   SET SLIDER
-========================================= */
-
-function setSliderProgress(
-    percent
-) {
-
-    if (lockedIn) {
-        return;
-    }
-
-
-    sliderProgress =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                percent
-            )
-        );
-
-
-    const max =
-        maxSliderPosition();
-
-
-    const position =
-        max *
-        (
-            sliderProgress /
-            100
-        );
-
-
-    lockHandle.style.left =
-        `${8 + position}px`;
-
-
-    lockProgress.style.width =
-        `${sliderProgress}%`;
-
-
-    const rainbowColors = [
-
-        "#FF4D6D",
-        "#FF8A3D",
-        "#FFD23F",
-        "#7ED957",
-        "#39D6C0",
-        "#34D399",
-        "#00C2FF",
-        "#3B82F6",
-        "#8B5CF6",
-        "#A855F7",
-        "#FF6FB5",
-        "#D946EF",
-        "#C026D3",
-        "#A21CAF",
-        "#86198F",
-        "#6366F1",
-        "#818CF8",
-        "#22D3EE"
-
-    ];
-
-
-    const index =
-        Math.floor(
-            (
-                sliderProgress /
-                100
-            ) *
-            (
-                rainbowColors.length - 1
-            )
-        );
-
-
-    lockProgress.style.background =
-        rainbowColors[
-            Math.min(
-                index,
-                rainbowColors.length - 1
-            )
-        ];
-
-
-    if (
-        sliderProgress >= 98
-    ) {
-
-        completeLockIn();
-
-    }
-
-}
-
-
-/* =========================================
-   POINTER POSITION
-========================================= */
-
-function updateSliderFromPointer(
-    clientX
-) {
-
-    if (lockedIn) {
-        return;
-    }
-
-
-    const rect =
-        lockSlider.getBoundingClientRect();
-
-
-    const handleWidth =
-        lockHandle.getBoundingClientRect().width;
-
-
-    const max =
-        maxSliderPosition();
-
-
-    let position =
-        clientX -
-        rect.left -
-        handleWidth / 2 -
-        8;
-
-
-    position =
-        Math.max(
-            0,
-            Math.min(
-                max,
-                position
-            )
-        );
-
-
-    const percentage =
-        max <= 0
-            ? 100
-            : (
-                position /
-                max
-            ) *
-            100;
-
-
-    setSliderProgress(
-        percentage
-    );
-
-}
-
-
-/* =========================================
-   START DRAG
-========================================= */
-
-function startDragging(
-    event
-) {
-
-    if (lockedIn) {
-        return;
-    }
-
-
-    event.preventDefault();
-
-
-    dragging = true;
-
-
-    lockSlider.classList.add(
-        "dragging"
-    );
-
-    lockHandle.classList.add(
-        "dragging"
-    );
-
-
-    updateSliderFromPointer(
-        event.clientX
-    );
-
-}
-
-
-/* =========================================
-   DRAG
-========================================= */
-
-function dragSlider(
-    event
-) {
-
-    if (
-        !dragging ||
-        lockedIn
-    ) {
-
-        return;
-
-    }
-
-
-    event.preventDefault();
-
-
-    updateSliderFromPointer(
-        event.clientX
-    );
-
-}
-
-
-/* =========================================
-   STOP DRAG
-========================================= */
-
-function stopDragging() {
-
-    if (!dragging) {
-        return;
-    }
-
-
-    dragging = false;
-
-
-    lockSlider.classList.remove(
-        "dragging"
-    );
-
-    lockHandle.classList.remove(
-        "dragging"
-    );
-
-
-    if (
-        !lockedIn &&
-        sliderProgress < 98
-    ) {
-
-        sliderProgress = 0;
-
-        lockHandle.style.left =
-            "8px";
-
-        lockProgress.style.width =
-            "0%";
-
-        lockProgress.style.background =
-            "transparent";
-
-    }
-
-}
-
-
-/* =========================================
-   SLIDER EVENTS
-========================================= */
-
-lockSlider.addEventListener(
-    "pointerdown",
-    startDragging
-);
-
-lockSlider.addEventListener(
-    "pointermove",
-    dragSlider
-);
-
-window.addEventListener(
-    "pointerup",
-    stopDragging
-);
-
-window.addEventListener(
-    "pointercancel",
-    stopDragging
-);
-
-
-/* =========================================
-   COMPLETE LOCK-IN
-========================================= */
-
-async function completeLockIn() {
-
-    if (lockedIn) {
-        return;
-    }
-
-
-    lockedIn = true;
-
-    dragging = false;
-
-    sliderProgress = 100;
-
-
-    /*
-     * SAVE LOCALLY FIRST.
-     *
-     * This guarantees refresh works even
-     * if Firebase is temporarily slow.
-     */
-
-    saveLocalLock();
-
-
-    /*
-     * Update visual state immediately.
-     */
-
-    showDashboard();
-
-
-    /*
-     * Celebration only happens here.
-     */
-
-    showCelebration();
-
-
-    /*
-     * Save to Firebase in the background.
-     */
-
-    if (currentUser) {
-
-        try {
-
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid
-                ),
-                {
-                    lockedIn: true,
-
-                    updatedAt:
-                        serverTimestamp()
-                },
-                {
-                    merge: true
-                }
-            );
+            hideLoading();
 
 
             console.log(
-                "🔐 Lock-in saved to Firebase."
+                "DASHBOARD LOADED SUCCESSFULLY"
             );
 
 
         } catch (error) {
 
             console.error(
-                "Firebase lock save failed:",
+                "DASHBOARD LOAD ERROR:",
                 error
             );
 
-            /*
-             * Local storage already saved it,
-             * so refresh still works.
-             */
+            showFirebaseError(error);
+
+            hideLoading();
 
         }
 
     }
-
-}
-
-
-/* =========================================
-   SHOW DASHBOARD
-========================================= */
-
-function showDashboard() {
-
-    lockedIn = true;
-
-    sliderProgress = 100;
-
-
-    const max =
-        maxSliderPosition();
-
-
-    lockHandle.style.left =
-        `${8 + max}px`;
-
-
-    lockProgress.style.width =
-        "100%";
-
-
-    lockProgress.style.background =
-        "#22D3EE";
-
-
-    lockSlider.style.background =
-        "#22D3EE";
-
-
-    lockText.textContent =
-        "We're locked in!";
-
-
-    lockSlider.classList.add(
-        "completed"
-    );
-
-
-    lockSlider.classList.remove(
-        "dragging"
-    );
-
-
-    lockHandle.classList.remove(
-        "dragging"
-    );
-
-
-    dashboardContent.classList.add(
-        "visible"
-    );
-
-}
-
-
-/* =========================================
-   RESTORE SLIDER
-========================================= */
-
-function restoreLockedSlider() {
-
-    /*
-     * If Firebase OR localStorage says
-     * locked in, stay locked.
-     */
-
-    if (
-        lockedIn ||
-        getLocalLock()
-    ) {
-
-        lockedIn = true;
-
-        showDashboard();
-
-        return;
-
-    }
-
-
-    /*
-     * New/unlocked user.
-     */
-
-    lockedIn = false;
-
-    sliderProgress = 0;
-
-    dragging = false;
-
-
-    lockHandle.style.left =
-        "8px";
-
-
-    lockProgress.style.width =
-        "0%";
-
-
-    lockProgress.style.background =
-        "transparent";
-
-
-    lockSlider.style.background =
-        "#D1D5DB";
-
-
-    lockText.textContent =
-        "Are we ready to lock in?";
-
-
-    lockSlider.classList.remove(
-        "completed"
-    );
-
-
-    dashboardContent.classList.remove(
-        "visible"
-    );
-
-}
-
-
-/* =========================================
-   CELEBRATION
-========================================= */
-
-function showCelebration() {
-
-    const celebration =
-        document.getElementById(
-            "celebration"
-        );
-
-
-    celebration.classList.add(
-        "show"
-    );
-
-
-    createConfetti();
-
-
-    setTimeout(
-        () => {
-
-            celebration.classList.remove(
-                "show"
-            );
-
-        },
-        3000
-    );
-
-}
-
-
-/* =========================================
-   CONFETTI
-========================================= */
-
-function createConfetti() {
-
-    const colors = [
-
-        "#FF4D6D",
-        "#FF8A3D",
-        "#FFD23F",
-        "#7ED957",
-        "#39D6C0",
-        "#00C2FF",
-        "#8B5CF6",
-        "#D946EF",
-        "#22D3EE"
-
-    ];
-
-
-    for (
-        let i = 0;
-        i < 220;
-        i++
-    ) {
-
-        const piece =
-            document.createElement(
-                "div"
-            );
-
-
-        piece.className =
-            "confetti";
-
-
-        piece.style.left =
-            `${Math.random() * 100}%`;
-
-
-        piece.style.top =
-            `${Math.random() * 20}%`;
-
-
-        piece.style.background =
-            colors[
-                Math.floor(
-                    Math.random() *
-                    colors.length
-                )
-            ];
-
-
-        piece.style.setProperty(
-            "--x",
-            `${(
-                Math.random() - 0.5
-            ) *
-            window.innerWidth *
-            1.5}px`
-        );
-
-
-        piece.style.setProperty(
-            "--y",
-            `${Math.random() *
-            window.innerHeight}px`
-        );
-
-
-        piece.style.setProperty(
-            "--r",
-            `${Math.random() *
-            1440}deg`
-        );
-
-
-        document.body.appendChild(
-            piece
-        );
-
-
-        setTimeout(
-            () =>
-                piece.remove(),
-            3200
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   BACKGROUND
-========================================= */
-
-const backgroundInput =
-    document.getElementById(
-        "background-input"
-    );
-
-
-backgroundInput.addEventListener(
-    "change",
-    event => {
-
-        const file =
-            event.target.files[0];
-
-
-        if (
-            !file ||
-            !currentUser
-        ) {
-
-            return;
-
-        }
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(event) {
-
-                const image =
-                    new Image();
-
-
-                image.onload =
-                    function() {
-
-                        const canvas =
-                            document.createElement(
-                                "canvas"
-                            );
-
-
-                        const maxSize =
-                            1600;
-
-
-                        let width =
-                            image.width;
-
-                        let height =
-                            image.height;
-
-
-                        if (
-                            width >
-                            maxSize ||
-                            height >
-                            maxSize
-                        ) {
-
-                            if (
-                                width >
-                                height
-                            ) {
-
-                                height =
-                                    height *
-                                    (
-                                        maxSize /
-                                        width
-                                    );
-
-                                width =
-                                    maxSize;
-
-                            } else {
-
-                                width =
-                                    width *
-                                    (
-                                        maxSize /
-                                        height
-                                    );
-
-                                height =
-                                    maxSize;
-
-                            }
-
-                        }
-
-
-                        canvas.width =
-                            width;
-
-                        canvas.height =
-                            height;
-
-
-                        const context =
-                            canvas.getContext(
-                                "2d"
-                            );
-
-
-                        context.drawImage(
-                            image,
-                            0,
-                            0,
-                            width,
-                            height
-                        );
-
-
-                        const compressedImage =
-                            canvas.toDataURL(
-                                "image/jpeg",
-                                0.75
-                            );
-
-
-                        applyBackground(
-                            compressedImage
-                        );
-
-
-                        try {
-
-                            localStorage.setItem(
-                                `mypHavenBackground_${currentUser.uid}`,
-                                compressedImage
-                            );
-
-                        } catch (error) {
-
-                            console.error(
-                                "Background save failed:",
-                                error
-                            );
-
-                            alert(
-                                "The background image is too large to save."
-                            );
-
-                        }
-
-                    };
-
-
-                image.src =
-                    event.target.result;
-
-            };
-
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================================
-   LOAD BACKGROUND
-========================================= */
-
-function loadBackground() {
-
-    if (!currentUser) {
-        return;
-    }
-
-
-    const image =
-        localStorage.getItem(
-            `mypHavenBackground_${currentUser.uid}`
-        );
-
-
-    if (image) {
-
-        applyBackground(
-            image
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   APPLY BACKGROUND
-========================================= */
-
-function applyBackground(
-    image
-) {
-
-    const background =
-        document.getElementById(
-            "dashboard-background"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "dashboard-overlay"
-        );
-
-
-    background.style.backgroundImage =
-        `url("${image}")`;
-
-
-    background.style.display =
-        "block";
-
-
-    overlay.style.display =
-        "block";
-
-}
-
-
-/* =========================================
-   MODALS
-========================================= */
-
-const gameModal =
-    document.getElementById(
-        "game-plan-modal"
-    );
-
-
-const comingModal =
-    document.getElementById(
-        "coming-up-modal"
-    );
-
-
-document.getElementById(
-    "open-game-plan"
-).addEventListener(
-    "click",
-    () => {
-
-        gameModal.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "open-coming-up"
-).addEventListener(
-    "click",
-    () => {
-
-        comingModal.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "cancel-game"
-).addEventListener(
-    "click",
-    () => {
-
-        gameModal.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "cancel-coming"
-).addEventListener(
-    "click",
-    () => {
-
-        comingModal.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-/* =========================================
-   ASSIGNMENT TYPES
-========================================= */
-
-document
-    .querySelectorAll(
-        "#game-plan-modal .type-option"
-    )
-    .forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    document
-                        .querySelectorAll(
-                            "#game-plan-modal .type-option"
-                        )
-                        .forEach(
-                            b =>
-                                b.classList.remove(
-                                    "selected"
-                                )
-                        );
-
-
-                    button.classList.add(
-                        "selected"
-                    );
-
-
-                    selectedGameType =
-                        button.dataset.type;
-
-                }
-            );
-
-        }
-    );
-
-
-document
-    .querySelectorAll(
-        "#coming-up-modal .type-option"
-    )
-    .forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    document
-                        .querySelectorAll(
-                            "#coming-up-modal .type-option"
-                        )
-                        .forEach(
-                            b =>
-                                b.classList.remove(
-                                    "selected"
-                                )
-                        );
-
-
-                    button.classList.add(
-                        "selected"
-                    );
-
-
-                    selectedComingType =
-                        button.dataset.type;
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================
-   ADD GAME PLAN
-========================================= */
-
-document.getElementById(
-    "add-game"
-).addEventListener(
-    "click",
-    async () => {
-
-        const startTime =
-            document.getElementById(
-                "game-start"
-            ).value;
-
-
-        const endTime =
-            document.getElementById(
-                "game-end"
-            ).value;
-
-
-        const name =
-            document.getElementById(
-                "game-name"
-            ).value.trim();
-
-
-        const subject =
-            document.getElementById(
-                "game-subject"
-            ).value;
-
-
-        if (
-            !startTime ||
-            !endTime ||
-            !name ||
-            !subject ||
-            !selectedGameType
-        ) {
-
-            alert(
-                "Please complete all fields."
-            );
-
-            return;
-
-        }
-
-
-        if (!currentUser) {
-
-            alert(
-                "Please wait for your account to load."
-            );
-
-            return;
-
-        }
-
-
-        const today =
-            getLocalDateString();
-
-
-        try {
-
-            const ref =
-                await addDoc(
-                    collection(
-                        db,
-                        "users",
-                        currentUser.uid,
-                        "gamePlans"
-                    ),
-                    {
-
-                        date:
-                            today,
-
-                        startTime:
-                            startTime,
-
-                        endTime:
-                            endTime,
-
-                        name:
-                            name,
-
-                        subject:
-                            subject,
-
-                        assignmentType:
-                            selectedGameType,
-
-                        status:
-                            "Not Completed",
-
-                        createdAt:
-                            serverTimestamp(),
-
-                        updatedAt:
-                            serverTimestamp()
-
-                    }
-                );
-
-
-            gamePlans.push({
-
-                id:
-                    ref.id,
-
-                date:
-                    today,
-
-                startTime:
-                    startTime,
-
-                endTime:
-                    endTime,
-
-                name:
-                    name,
-
-                subject:
-                    subject,
-
-                assignmentType:
-                    selectedGameType,
-
-                status:
-                    "Not Completed"
-
-            });
-
-
-            gameModal.classList.remove(
-                "show"
-            );
-
-
-            document.getElementById(
-                "game-start"
-            ).value = "";
-
-
-            document.getElementById(
-                "game-end"
-            ).value = "";
-
-
-            document.getElementById(
-                "game-name"
-            ).value = "";
-
-
-            selectedGameType =
-                "";
-
-
-            document
-                .querySelectorAll(
-                    "#game-plan-modal .type-option"
-                )
-                .forEach(
-                    b =>
-                        b.classList.remove(
-                            "selected"
-                        )
-                );
-
-
-            renderEverything();
-
-
-        } catch (error) {
-
-            console.error(
-                "Game Plan error:",
-                error
-            );
-
-
-            alert(
-                "The Game Plan could not be saved."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   ADD COMING UP
-========================================= */
-
-document.getElementById(
-    "add-coming"
-).addEventListener(
-    "click",
-    async () => {
-
-        const date =
-            document.getElementById(
-                "coming-date"
-            ).value;
-
-
-        const name =
-            document.getElementById(
-                "coming-name"
-            ).value.trim();
-
-
-        const subject =
-            document.getElementById(
-                "coming-subject"
-            ).value;
-
-
-        if (
-            !date ||
-            !name ||
-            !subject ||
-            !selectedComingType
-        ) {
-
-            alert(
-                "Please complete all fields."
-            );
-
-            return;
-
-        }
-
-
-        if (!currentUser) {
-
-            alert(
-                "Please wait for your account to load."
-            );
-
-            return;
-
-        }
-
-
-        try {
-
-            const ref =
-                await addDoc(
-                    collection(
-                        db,
-                        "users",
-                        currentUser.uid,
-                        "upcoming"
-                    ),
-                    {
-
-                        date:
-                            date,
-
-                        name:
-                            name,
-
-                        subject:
-                            subject,
-
-                        assignmentType:
-                            selectedComingType,
-
-                        createdAt:
-                            serverTimestamp()
-
-                    }
-                );
-
-
-            upcomingEvents.push({
-
-                id:
-                    ref.id,
-
-                date:
-                    date,
-
-                name:
-                    name,
-
-                subject:
-                    subject,
-
-                assignmentType:
-                    selectedComingType
-
-            });
-
-
-            comingModal.classList.remove(
-                "show"
-            );
-
-
-            document.getElementById(
-                "coming-date"
-            ).value = "";
-
-
-            document.getElementById(
-                "coming-name"
-            ).value = "";
-
-
-            selectedComingType =
-                "";
-
-
-            document
-                .querySelectorAll(
-                    "#coming-up-modal .type-option"
-                )
-                .forEach(
-                    b =>
-                        b.classList.remove(
-                            "selected"
-                        )
-                );
-
-
-            renderEverything();
-
-
-        } catch (error) {
-
-            console.error(
-                "Coming Up error:",
-                error
-            );
-
-
-            alert(
-                "The upcoming event could not be saved."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   CLOSE MODALS
-========================================= */
-
-document
-    .querySelectorAll(
-        ".modal"
-    )
-    .forEach(
-        modal => {
-
-            modal.addEventListener(
-                "click",
-                event => {
-
-                    if (
-                        event.target === modal
-                    ) {
-
-                        modal.classList.remove(
-                            "show"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================
-   FINAL STARTUP MESSAGE
-========================================= */
-
-console.log(
-    "🔥 MYP Haven Dashboard is ready."
 );
 
 </script>
