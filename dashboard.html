@@ -1,7 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MYP Haven | Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "DM Sans", sans-serif;
+    color: #111111;
+    background: #FFFFFF;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+#dashboard-background {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+#dashboard-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: rgba(255,255,255,0.84);
+    display: none;
+}
+
+/* =========================================
+   PAGE
+========================================= */
+
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 28px 80px;
+}
+
+.dashboard-inner {
+    width: min(1500px, 100%);
+    margin: auto;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.background-button {
+    border: none;
+    border-radius: 999px;
+    background: #FFFFFF;
+    color: #6366F1;
+    padding: 12px 18px;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.2s ease;
+}
+
+.background-button:hover {
+    transform: translateY(-2px);
+}
+
+#background-input {
+    display: none;
+}
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.current-date {
+    text-align: center;
+    color: #D946EF;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.welcome-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    text-align: center;
+    font-size: clamp(4rem, 9vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.welcome-subtitle {
+    text-align: center;
+    font-size: 1.15rem;
+}
+
+/* =========================================
+   LOCK IN SLIDER
+========================================= */
+
+.lock-section {
+    margin-top: 90px;
+    margin-bottom: 70px;
+}
+
+.lock-slider {
+    width: 100%;
+    height: 125px;
+    padding: 8px;
+    border-radius: 999px;
+    background: #D1D5DB;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.03);
+
+    cursor: grab;
+
+    touch-action: none;
+    user-select: none;
+
+    transition:
+        background 0.15s ease;
+}
+
+.lock-slider.dragging {
+    cursor: grabbing;
+}
+
+.lock-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 0%;
+
+    border-radius: 999px;
+
+    background: linear-gradient(
+        90deg,
+        #FF4D6D,
+        #FF8A3D,
+        #FFD23F,
+        #7ED957,
+        #39D6C0,
+        #34D399,
+        #00C2FF,
+        #3B82F6,
+        #8B5CF6,
+        #A855F7,
+        #FF6FB5,
+        #D946EF,
+        #C026D3,
+        #A21CAF,
+        #86198F,
+        #6366F1,
+        #818CF8,
+        #22D3EE
+    );
+
+    pointer-events: none;
+
+    transition:
+        width 0.03s linear,
+        background 0.15s ease;
+}
+
+.lock-text {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 700;
+
+    z-index: 3;
+
+    transition:
+        color 0.25s ease;
+}
+
+.lock-handle {
+    position: absolute;
+
+    top: 8px;
+    left: 8px;
+
+    width: 109px;
+    height: 109px;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3.3rem;
+
+    cursor: grab;
+
+    user-select: none;
+    touch-action: none;
+
+    z-index: 5;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
+
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+.lock-handle.dragging {
+    cursor: grabbing;
+
+    transform: scale(0.94);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.22);
+}
+
+.lock-slider.completed .lock-text {
+    color: #FFFFFF;
+}
+
+/* =========================================
+   DASHBOARD CONTENT
+========================================= */
+
+.dashboard-content {
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.dashboard-content.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+}
+
+.dashboard-card {
+    background: rgba(255,255,255,0.94);
+
+    border-radius: 30px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 18px 50px rgba(0,0,0,0.08);
+
+    backdrop-filter: blur(10px);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: #666666;
+
+    margin-bottom: 30px;
+}
+
+/* =========================================
+   METRICS
+========================================= */
+
+.metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.metric {
+    padding: 22px 14px;
+
+    border-radius: 22px;
+
+    background: #F8F8F8;
+
+    text-align: center;
+}
+
+.metric-number {
+    display: block;
+
+    font-size: 3rem;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+.metric-label {
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    color: #444444;
+}
+
+.metric:nth-child(1) .metric-number {
+    color: #FF4D6D;
+}
+
+.metric:nth-child(2) .metric-number {
+    color: #FF8A3D;
+}
+
+.metric:nth-child(3) .metric-number {
+    color: #10B981;
+}
+
+.metric:nth-child(4) .metric-number {
+    color: #DC2626;
+}
+
+/* =========================================
+   ENTRIES
+========================================= */
+
+.entries {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.empty-state {
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: #F7F7F7;
+
+    text-align: center;
+
+    color: #777777;
+}
+
+.entry {
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: #F8F8F8;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-left:
+        6px solid #6366F1;
+}
+
+.entry-info {
+    min-width: 0;
+}
+
+.entry-name {
+    font-size: 1rem;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.entry-meta {
+    font-size: 0.85rem;
+
+    color: #666666;
+}
+
+.entry-date {
+    text-align: right;
+
+    white-space: nowrap;
+}
+
+.entry-date strong {
+    display: block;
+
+    font-size: 1rem;
+}
+
+.entry-date span {
+    font-size: 0.8rem;
+
+    color: #6366F1;
+
+    font-weight: 700;
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-buttons {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+    flex-wrap: wrap;
+}
+
+.status-button {
+    border: 2px solid transparent;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease,
+        opacity 0.15s ease;
+}
+
+.status-completed {
+    background: #DCFCE7;
+
+    color: #15803D;
+}
+
+.status-pending {
+    background: #FEE2E2;
+
+    color: #B91C1C;
+}
+
+.status-button.selected {
+    border-color: currentColor;
+
+    box-shadow:
+        0 0 0 3px rgba(0,0,0,0.08);
+
+    transform:
+        translateY(-1px);
+}
+
+.status-button.saving {
+    opacity: 0.55;
+
+    pointer-events: none;
+}
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions {
+    grid-column: 1 / -1;
+}
+
+.action-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.action-button {
+    min-height: 100px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    color: #FFFFFF;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 1.15rem;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.action-button:hover {
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.12);
+}
+
+.game-plan-action {
+    background: #FF8A3D;
+}
+
+.coming-up-action {
+    background: #6366F1;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(0,0,0,0.45);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    backdrop-filter: blur(8px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: min(520px, 100%);
+
+    background: #FFFFFF;
+
+    border-radius: 30px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.25);
+}
+
+.modal-title {
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 0.85rem;
+
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 52px;
+
+    border:
+        2px solid #E5E7EB;
+
+    border-radius: 14px;
+
+    padding: 0 14px;
+
+    font-family:
+        "DM Sans", sans-serif;
+
+    font-size: 0.95rem;
+
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #6366F1;
+}
+
+.assignment-types {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+.type-option {
+    border: 2px solid transparent;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    font-family:
+        "DM Sans", sans-serif;
+
+    font-weight: 700;
+
+    background: #F5F5F5;
+}
+
+.type-option.selected {
+    border-color: #111111;
+}
+
+.type-random {
+    background: #FFE1D0;
+}
+
+.type-formative {
+    background: #FFF3B8;
+}
+
+.type-summative {
+    background: #E7D7FF;
+}
+
+.type-other {
+    background: #FFD9EA;
+}
+
+.modal-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.modal-actions button {
+    flex: 1;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    font-family:
+        "DM Sans", sans-serif;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: #EEEEEE;
+}
+
+.add-button {
+    background: #6366F1;
+
+    color: #FFFFFF;
+}
+
+/* =========================================
+   CELEBRATION
+========================================= */
+
+.celebration {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #A855F7,
+            #D946EF,
+            #22D3EE
+        );
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.celebration.show {
+    display: flex;
+}
+
+.celebration-content {
+    position: relative;
+
+    z-index: 10;
+
+    color: #FFFFFF;
+}
+
+.celebration-cap {
+    font-size: 8rem;
+
+    animation:
+        capPop 0.8s ease both;
+}
+
+@keyframes capPop {
+
+    0% {
+        transform:
+            scale(0)
+            rotate(-25deg);
+    }
+
+    70% {
+        transform:
+            scale(1.2)
+            rotate(8deg);
+    }
+
+    100% {
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+.celebration-title {
+    font-family:
+        "Bricolage Grotesque",
+        sans-serif;
+
+    font-size:
+        clamp(3.5rem, 10vw, 8rem);
+
+    line-height: 0.9;
+
+    margin: 20px 0;
+}
+
+.celebration-text {
+    font-size: 1.3rem;
+}
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+.confetti {
+    position: fixed;
+
+    width: 12px;
+
+    height: 20px;
+
+    z-index: 6000;
+
+    pointer-events: none;
+
+    animation:
+        confettiFall
+        3s ease-out
+        forwards;
+}
+
+@keyframes confettiFall {
+
+    from {
+
+        transform:
+            translate(0,0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    to {
+
+        transform:
+            translate(var(--x), var(--y))
+            rotate(var(--r));
+
+        opacity: 0;
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width: 950px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-column: auto;
+    }
+
+}
+
+@media(max-width: 700px) {
+
+    .dashboard {
+        padding:
+            25px
+            15px
+            60px;
+    }
+
+    .metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .lock-slider {
+        height: 100px;
+    }
+
+    .lock-handle {
+        width: 84px;
+
+        height: 84px;
+
+        font-size: 2.5rem;
+    }
+
+    .dashboard-card {
+        padding:
+            25px
+            20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="dashboard-background"></div>
+
+<div id="dashboard-overlay"></div>
+
+<main class="dashboard">
+
+<div class="dashboard-inner">
+
+<div class="top-bar">
+
+    <label
+        class="background-button"
+        for="background-input"
+    >
+        Change Background
+    </label>
+
+    <input
+        type="file"
+        id="background-input"
+        accept="image/*"
+    >
+
+</div>
+
+<div
+    class="current-date"
+    id="current-date"
+></div>
+
+<h1 class="welcome-title">
+    Welcome Back!
+</h1>
+
+<p class="welcome-subtitle">
+    Let's make some progress today.
+</p>
+
+<section class="lock-section">
+
+    <div
+        class="lock-slider"
+        id="lock-slider"
+    >
+
+        <div
+            class="lock-progress"
+            id="lock-progress"
+        ></div>
+
+        <div
+            class="lock-text"
+            id="lock-text"
+        >
+            Are we ready to lock in?
+        </div>
+
+        <div
+            class="lock-handle"
+            id="lock-handle"
+            aria-label="Slide to lock in"
+        >
+            🎓
+        </div>
+
+    </div>
+
+</section>
+
+<div
+    class="dashboard-content"
+    id="dashboard-content"
+>
+
+<div class="dashboard-grid">
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        On My Plate
+    </h2>
+
+    <p class="section-description">
+        Keep track of what needs your attention.
+    </p>
+
+    <div class="metrics">
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="due-today"
+            >0</span>
+
+            <span class="metric-label">
+                Due Today
+            </span>
+        </div>
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="due-week"
+            >0</span>
+
+            <span class="metric-label">
+                Due This Week
+            </span>
+        </div>
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="completed-count"
+            >0</span>
+
+            <span class="metric-label">
+                Completed
+            </span>
+        </div>
+
+        <div class="metric">
+            <span
+                class="metric-number"
+                id="overdue-count"
+            >0</span>
+
+            <span class="metric-label">
+                Overdue
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        Today’s Game Plan
+    </h2>
+
+    <p class="section-description">
+        Plan and track what you’re doing today.
+    </p>
+
+    <div
+        class="entries"
+        id="game-plan-list"
+    ></div>
+
+</section>
+
+<section class="dashboard-card">
+
+    <h2 class="section-title">
+        Coming Up
+    </h2>
+
+    <p class="section-description">
+        Stay ahead of what’s coming next.
+    </p>
+
+    <div
+        class="entries"
+        id="coming-up-list"
+    ></div>
+
+</section>
+
+<section class="dashboard-card quick-actions">
+
+    <h2 class="section-title">
+        Quick Actions
+    </h2>
+
+    <p class="section-description">
+        Jump straight into your next task.
+    </p>
+
+    <div class="action-buttons">
+
+        <button
+            class="action-button game-plan-action"
+            id="open-game-plan"
+        >
+            + Today’s Game Plan
+        </button>
+
+        <button
+            class="action-button coming-up-action"
+            id="open-coming-up"
+        >
+            Coming Up
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- =========================================
+     GAME PLAN MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="game-plan-modal"
+>
+
+<div class="modal-card">
+
+    <h2 class="modal-title">
+        Add to Today’s Game Plan
+    </h2>
+
+    <div class="form-group">
+
+        <label>Start Time</label>
+
+        <input
+            type="time"
+            id="game-start"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>End Time</label>
+
+        <input
+            type="time"
+            id="game-end"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Name of Task</label>
+
+        <input
+            type="text"
+            id="game-name"
+            placeholder="What are you working on?"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Subject</label>
+
+        <select id="game-subject"></select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Assignment Type</label>
+
+        <div class="assignment-types">
+
+            <button
+                type="button"
+                class="type-option type-random"
+                data-type="Random Assignment"
+            >
+                Random Assignment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-formative"
+                data-type="Formative Assessment"
+            >
+                Formative Assessment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-summative"
+                data-type="Summative Assessment"
+            >
+                Summative Assessment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-other"
+                data-type="Other"
+            >
+                Other
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="modal-actions">
+
+        <button
+            type="button"
+            class="cancel-button"
+            id="cancel-game"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="button"
+            class="add-button"
+            id="add-game"
+        >
+            Add
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     COMING UP MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="coming-up-modal"
+>
+
+<div class="modal-card">
+
+    <h2 class="modal-title">
+        Add to Coming Up
+    </h2>
+
+    <div class="form-group">
+
+        <label>Due Date</label>
+
+        <input
+            type="date"
+            id="coming-date"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Name of Task</label>
+
+        <input
+            type="text"
+            id="coming-name"
+            placeholder="What is coming up?"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Subject</label>
+
+        <select id="coming-subject"></select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Assignment Type</label>
+
+        <div class="assignment-types">
+
+            <button
+                type="button"
+                class="type-option type-random"
+                data-type="Random Assignment"
+            >
+                Random Assignment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-formative"
+                data-type="Formative Assessment"
+            >
+                Formative Assessment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-summative"
+                data-type="Summative Assessment"
+            >
+                Summative Assessment
+            </button>
+
+            <button
+                type="button"
+                class="type-option type-other"
+                data-type="Other"
+            >
+                Other
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="modal-actions">
+
+        <button
+            type="button"
+            class="cancel-button"
+            id="cancel-coming"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="button"
+            class="add-button"
+            id="add-coming"
+        >
+            Add
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     CELEBRATION
+========================================= -->
+
+<div
+    class="celebration"
+    id="celebration"
+>
+
+<div class="celebration-content">
+
+    <div class="celebration-cap">
+        🎓
+    </div>
+
+    <h1 class="celebration-title">
+        WE'RE<br>
+        LOCKED IN!
+    </h1>
+
+    <p class="celebration-text">
+        Let's make some progress today. 🎉
+    </p>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     FIREBASE + DASHBOARD JAVASCRIPT
+========================================= -->
+
 <script type="module">
 
 /* =========================================
-   FIREBASE IMPORTS
+   FIREBASE
 ========================================= */
 
 import {
@@ -26,22 +1462,37 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* =========================================
-   FIREBASE CONFIG
-========================================= */
-
 const firebaseConfig = {
-    apiKey: "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
-    authDomain: "the-myp-haven.firebaseapp.com",
-    projectId: "the-myp-haven",
-    storageBucket: "the-myp-haven.firebasestorage.app",
-    messagingSenderId: "904577455533",
-    appId: "1:904577455533:web:1d918ee8a3caa547eefd24"
+
+    apiKey:
+        "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
+
+    authDomain:
+        "the-myp-haven.firebaseapp.com",
+
+    projectId:
+        "the-myp-haven",
+
+    storageBucket:
+        "the-myp-haven.firebasestorage.app",
+
+    messagingSenderId:
+        "904577455533",
+
+    appId:
+        "1:904577455533:web:1d918ee8a3caa547eefd24"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
 
 
 /* =========================================
@@ -49,21 +1500,28 @@ const db = getFirestore(app);
 ========================================= */
 
 let currentUser = null;
+
 let selectedSubjects = [];
+
 let tasks = [];
+
 let gamePlans = [];
+
 let upcomingEvents = [];
 
 let selectedGameType = "";
+
 let selectedComingType = "";
 
 let lockedIn = false;
+
 let sliderProgress = 0;
+
 let dragging = false;
 
 
 /* =========================================
-   DOM ELEMENTS
+   ELEMENTS
 ========================================= */
 
 const lockSlider =
@@ -90,20 +1548,26 @@ function updateDate() {
 
     const now = new Date();
 
-    document.getElementById("current-date").textContent =
-        now.toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        });
+    document.getElementById(
+        "current-date"
+    ).textContent =
+        now.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
 }
 
 updateDate();
 
 
 /* =========================================
-   LOCAL DATE STRING
+   LOCAL DATE
 ========================================= */
 
 function getLocalDateString() {
@@ -112,9 +1576,67 @@ function getLocalDateString() {
 
     return `${now.getFullYear()}-${String(
         now.getMonth() + 1
-    ).padStart(2, "0")}-${String(
+    ).padStart(2,"0")}-${String(
         now.getDate()
-    ).padStart(2, "0")}`;
+    ).padStart(2,"0")}`;
+
+}
+
+
+/* =========================================
+   LOCAL LOCK KEY
+========================================= */
+
+function getLockKey() {
+
+    if (!currentUser) {
+        return null;
+    }
+
+    return `mypHavenLockedIn_${currentUser.uid}`;
+
+}
+
+
+/* =========================================
+   SAVE LOCAL LOCK
+========================================= */
+
+function saveLocalLock() {
+
+    const key =
+        getLockKey();
+
+    if (!key) {
+        return;
+    }
+
+    localStorage.setItem(
+        key,
+        "true"
+    );
+
+}
+
+
+/* =========================================
+   CHECK LOCAL LOCK
+========================================= */
+
+function getLocalLock() {
+
+    const key =
+        getLockKey();
+
+    if (!key) {
+        return false;
+    }
+
+    return (
+        localStorage.getItem(key) ===
+        "true"
+    );
+
 }
 
 
@@ -122,37 +1644,108 @@ function getLocalDateString() {
    AUTHENTICATION
 ========================================= */
 
-onAuthStateChanged(auth, async user => {
+onAuthStateChanged(
+    auth,
+    async user => {
 
-    if (!user) {
+        if (!user) {
 
-        window.location.href = "./account.html";
+            window.location.href =
+                "./account.html";
 
-        return;
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        console.log(
+            "🔥 Logged in:",
+            currentUser.uid
+        );
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Restore local information FIRST.
+         * Firebase cannot prevent the dashboard
+         * from opening anymore.
+         */
+
+        lockedIn =
+            getLocalLock();
+
+
+        loadBackground();
+
+
+        /*
+         * Restore the dashboard immediately
+         * if the user was already locked in.
+         */
+
+        if (lockedIn) {
+
+            showDashboard();
+
+        }
+
+
+        /*
+         * Get Firebase information in the
+         * background.
+         */
+
+        await loadUserProfile();
+
+
+        setupSubjectDropdowns();
+
+
+        /*
+         * Load saved assignments.
+         */
+
+        await loadDashboardData();
+
+
+        /*
+         * Render everything again with the
+         * latest Firebase data.
+         */
+
+        renderEverything();
+
+
+        /*
+         * Restore the slider one final time.
+         */
+
+        restoreLockedSlider();
+
+
+        console.log(
+            "✅ Dashboard fully restored."
+        );
+
     }
-
-    currentUser = user;
-
-    console.log("Logged in:", currentUser.uid);
-
-    await loadUserData();
-
-    loadBackground();
-
-    setupSubjectDropdowns();
-
-    renderEverything();
-
-    restoreLockedSlider();
-
-});
+);
 
 
 /* =========================================
-   LOAD USER DATA
+   LOAD USER PROFILE
 ========================================= */
 
-async function loadUserData() {
+async function loadUserProfile() {
+
+    if (!currentUser) {
+        return;
+    }
+
 
     try {
 
@@ -163,84 +1756,112 @@ async function loadUserData() {
                 currentUser.uid
             );
 
+
         const userSnap =
             await getDoc(userRef);
 
 
-        if (userSnap.exists()) {
-
-            const data = userSnap.data();
-
-
-            if (Array.isArray(data.subjects)) {
-
-                selectedSubjects =
-                    data.subjects;
-
-            }
+        if (!userSnap.exists()) {
+            return;
+        }
 
 
-            if (data.lockedIn === true) {
+        const data =
+            userSnap.data();
 
-                lockedIn = true;
 
-            }
+        /*
+         * Subjects
+         */
+
+        if (
+            Array.isArray(
+                data.subjects
+            )
+        ) {
+
+            selectedSubjects =
+                data.subjects;
 
         }
 
 
-        /* FALLBACK TO SURVEY */
+        /*
+         * Firebase lock state
+         */
 
-        if (selectedSubjects.length === 0) {
+        if (
+            data.lockedIn === true
+        ) {
 
-            const localSurvey =
-                localStorage.getItem(
-                    "mypHavenSurvey"
-                );
+            lockedIn = true;
 
-            if (localSurvey) {
-
-                try {
-
-                    const survey =
-                        JSON.parse(
-                            localSurvey
-                        );
-
-                    if (
-                        Array.isArray(
-                            survey.subjects
-                        )
-                    ) {
-
-                        selectedSubjects =
-                            survey.subjects;
-
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "Survey data error:",
-                        error
-                    );
-
-                }
-
-            }
+            saveLocalLock();
 
         }
-
-
-        await loadDashboardData();
-
 
     } catch (error) {
 
         console.error(
-            "Could not load user data:",
+            "Profile loading failed:",
             error
         );
+
+        /*
+         * IMPORTANT:
+         *
+         * Firebase failing must NOT
+         * break the dashboard.
+         */
+
+    }
+
+
+    /*
+     * Survey fallback
+     */
+
+    if (
+        selectedSubjects.length === 0
+    ) {
+
+        const savedSurvey =
+            localStorage.getItem(
+                "mypHavenSurvey"
+            );
+
+
+        if (savedSurvey) {
+
+            try {
+
+                const survey =
+                    JSON.parse(
+                        savedSurvey
+                    );
+
+
+                if (
+                    Array.isArray(
+                        survey.subjects
+                    )
+                ) {
+
+                    selectedSubjects =
+                        survey.subjects;
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Survey data error:",
+                    error
+                );
+
+            }
+
+        }
 
     }
 
@@ -253,88 +1874,117 @@ async function loadUserData() {
 
 async function loadDashboardData() {
 
+    if (!currentUser) {
+        return;
+    }
+
+
+    /*
+     * Start with empty arrays.
+     * This prevents old data from being
+     * duplicated.
+     */
+
+    tasks = [];
+
+    gamePlans = [];
+
+    upcomingEvents = [];
+
+
+    /* TASKS */
+
     try {
 
-        /* TASKS */
-
-        const tasksRef =
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "tasks"
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "tasks"
+                )
             );
 
-        const taskSnapshot =
-            await getDocs(tasksRef);
 
         tasks =
-            taskSnapshot.docs.map(
+            snapshot.docs.map(
                 item => ({
                     id: item.id,
                     ...item.data()
                 })
             );
-
-
-        /* GAME PLANS */
-
-        const gameRef =
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "gamePlans"
-            );
-
-        const gameSnapshot =
-            await getDocs(gameRef);
-
-        gamePlans =
-            gameSnapshot.docs.map(
-                item => ({
-                    id: item.id,
-                    ...item.data()
-                })
-            );
-
-
-        /* UPCOMING */
-
-        const upcomingRef =
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "upcoming"
-            );
-
-        const upcomingSnapshot =
-            await getDocs(upcomingRef);
-
-        upcomingEvents =
-            upcomingSnapshot.docs.map(
-                item => ({
-                    id: item.id,
-                    ...item.data()
-                })
-            );
-
-
-        console.log(
-            "Dashboard data loaded:",
-            {
-                tasks,
-                gamePlans,
-                upcomingEvents
-            }
-        );
-
 
     } catch (error) {
 
         console.error(
-            "Could not load dashboard data:",
+            "Tasks could not load:",
+            error
+        );
+
+    }
+
+
+    /* GAME PLANS */
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "gamePlans"
+                )
+            );
+
+
+        gamePlans =
+            snapshot.docs.map(
+                item => ({
+                    id: item.id,
+                    ...item.data()
+                })
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Game Plans could not load:",
+            error
+        );
+
+    }
+
+
+    /* UPCOMING */
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "upcoming"
+                )
+            );
+
+
+        upcomingEvents =
+            snapshot.docs.map(
+                item => ({
+                    id: item.id,
+                    ...item.data()
+                })
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Coming Up could not load:",
             error
         );
 
@@ -362,37 +2012,56 @@ function setupSubjectDropdowns() {
     ];
 
 
-    dropdowns.forEach(dropdown => {
+    dropdowns.forEach(
+        dropdown => {
 
-        dropdown.innerHTML = "";
+            if (!dropdown) {
+                return;
+            }
 
 
-        selectedSubjects.forEach(subject => {
+            dropdown.innerHTML = "";
 
-            const option =
+
+            selectedSubjects.forEach(
+                subject => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value =
+                        subject;
+
+                    option.textContent =
+                        subject;
+
+                    dropdown.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            const other =
                 document.createElement(
                     "option"
                 );
 
-            option.value = subject;
-            option.textContent = subject;
+            other.value =
+                "Other";
 
-            dropdown.appendChild(option);
+            other.textContent =
+                "Other";
 
-        });
-
-
-        const other =
-            document.createElement(
-                "option"
+            dropdown.appendChild(
+                other
             );
 
-        other.value = "Other";
-        other.textContent = "Other";
-
-        dropdown.appendChild(other);
-
-    });
+        }
+    );
 
 }
 
@@ -434,10 +2103,14 @@ function dateOnly(date) {
 function updateMetrics() {
 
     const today =
-        dateOnly(new Date());
+        dateOnly(
+            new Date()
+        );
+
 
     const weekEnd =
         new Date(today);
+
 
     weekEnd.setDate(
         weekEnd.getDate() + 7
@@ -445,128 +2118,152 @@ function updateMetrics() {
 
 
     let dueToday = 0;
+
     let dueWeek = 0;
+
     let completed = 0;
+
     let overdue = 0;
 
 
-    tasks.forEach(task => {
+    tasks.forEach(
+        task => {
 
-        if (!task.dueDate) {
-            return;
-        }
-
-
-        const due =
-            dateOnly(
-                new Date(task.dueDate)
-            );
+            if (!task.dueDate) {
+                return;
+            }
 
 
-        if (task.status === "Completed") {
-
-            completed++;
-
-            return;
-
-        }
-
-
-        if (
-            due.getTime() ===
-            today.getTime()
-        ) {
-
-            dueToday++;
-
-        }
+            const due =
+                dateOnly(
+                    new Date(
+                        task.dueDate
+                    )
+                );
 
 
-        if (
-            due >= today &&
-            due < weekEnd
-        ) {
+            if (
+                task.status ===
+                "Completed"
+            ) {
 
-            dueWeek++;
+                completed++;
 
-        }
+                return;
 
-
-        if (due < today) {
-
-            overdue++;
-
-        }
-
-    });
+            }
 
 
-    gamePlans.forEach(plan => {
+            if (
+                due.getTime() ===
+                today.getTime()
+            ) {
 
-        if (!plan.date) {
-            return;
-        }
+                dueToday++;
 
-
-        const due =
-            dateOnly(
-                new Date(plan.date)
-            );
+            }
 
 
-        if (plan.status === "Completed") {
+            if (
+                due >= today &&
+                due < weekEnd
+            ) {
 
-            completed++;
+                dueWeek++;
 
-            return;
+            }
+
+
+            if (due < today) {
+
+                overdue++;
+
+            }
 
         }
+    );
 
 
-        if (
-            due.getTime() ===
-            today.getTime()
-        ) {
+    gamePlans.forEach(
+        plan => {
 
-            dueToday++;
+            if (!plan.date) {
+                return;
+            }
+
+
+            const due =
+                dateOnly(
+                    new Date(
+                        plan.date
+                    )
+                );
+
+
+            if (
+                plan.status ===
+                "Completed"
+            ) {
+
+                completed++;
+
+                return;
+
+            }
+
+
+            if (
+                due.getTime() ===
+                today.getTime()
+            ) {
+
+                dueToday++;
+
+            }
+
+
+            if (
+                due >= today &&
+                due < weekEnd
+            ) {
+
+                dueWeek++;
+
+            }
+
+
+            if (due < today) {
+
+                overdue++;
+
+            }
 
         }
-
-
-        if (
-            due >= today &&
-            due < weekEnd
-        ) {
-
-            dueWeek++;
-
-        }
-
-
-        if (due < today) {
-
-            overdue++;
-
-        }
-
-    });
+    );
 
 
     document.getElementById(
         "due-today"
-    ).textContent = dueToday;
+    ).textContent =
+        dueToday;
+
 
     document.getElementById(
         "due-week"
-    ).textContent = dueWeek;
+    ).textContent =
+        dueWeek;
+
 
     document.getElementById(
         "completed-count"
-    ).textContent = completed;
+    ).textContent =
+        completed;
+
 
     document.getElementById(
         "overdue-count"
-    ).textContent = overdue;
+    ).textContent =
+        overdue;
 
 }
 
@@ -582,6 +2279,7 @@ function renderGamePlans() {
             "game-plan-list"
         );
 
+
     container.innerHTML = "";
 
 
@@ -596,7 +2294,9 @@ function renderGamePlans() {
         );
 
 
-    if (todayPlans.length === 0) {
+    if (
+        todayPlans.length === 0
+    ) {
 
         container.innerHTML = `
             <div class="empty-state">
@@ -609,263 +2309,296 @@ function renderGamePlans() {
     }
 
 
-    todayPlans.forEach(plan => {
+    todayPlans.forEach(
+        plan => {
 
-        const entry =
-            document.createElement("div");
+            const entry =
+                document.createElement(
+                    "div"
+                );
 
-        entry.className = "entry";
-
-
-        const entryInfo =
-            document.createElement("div");
-
-        entryInfo.className = "entry-info";
+            entry.className =
+                "entry";
 
 
-        const name =
-            document.createElement("div");
+            const entryInfo =
+                document.createElement(
+                    "div"
+                );
 
-        name.className = "entry-name";
-
-        name.textContent =
-            plan.name || "";
-
-
-        const meta =
-            document.createElement("div");
-
-        meta.className = "entry-meta";
-
-        meta.textContent =
-            `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
+            entryInfo.className =
+                "entry-info";
 
 
-        const statusButtons =
-            document.createElement("div");
+            const name =
+                document.createElement(
+                    "div"
+                );
 
-        statusButtons.className =
-            "status-buttons";
+            name.className =
+                "entry-name";
 
-
-        const completedButton =
-            document.createElement("button");
-
-        completedButton.type = "button";
-
-        completedButton.className =
-            "status-button status-completed";
-
-        completedButton.textContent =
-            "✓ Completed";
+            name.textContent =
+                plan.name || "";
 
 
-        const pendingButton =
-            document.createElement("button");
+            const meta =
+                document.createElement(
+                    "div"
+                );
 
-        pendingButton.type = "button";
+            meta.className =
+                "entry-meta";
 
-        pendingButton.className =
-            "status-button status-pending";
-
-        pendingButton.textContent =
-            "○ Not Completed";
-
-
-        function refreshStatus() {
-
-            completedButton.classList.remove(
-                "selected"
-            );
-
-            pendingButton.classList.remove(
-                "selected"
-            );
+            meta.textContent =
+                `${plan.subject || "Other"} · ${plan.assignmentType || "Other"} · ${plan.startTime || ""} – ${plan.endTime || ""}`;
 
 
-            if (
-                plan.status ===
-                "Completed"
-            ) {
+            const statusButtons =
+                document.createElement(
+                    "div"
+                );
 
-                completedButton.classList.add(
+            statusButtons.className =
+                "status-buttons";
+
+
+            const completedButton =
+                document.createElement(
+                    "button"
+                );
+
+            completedButton.type =
+                "button";
+
+            completedButton.className =
+                "status-button status-completed";
+
+            completedButton.textContent =
+                "✓ Completed";
+
+
+            const pendingButton =
+                document.createElement(
+                    "button"
+                );
+
+            pendingButton.type =
+                "button";
+
+            pendingButton.className =
+                "status-button status-pending";
+
+            pendingButton.textContent =
+                "○ Not Completed";
+
+
+            function refreshStatus() {
+
+                completedButton.classList.remove(
                     "selected"
                 );
 
-            } else {
-
-                pendingButton.classList.add(
+                pendingButton.classList.remove(
                     "selected"
                 );
 
-            }
-
-        }
-
-
-        refreshStatus();
-
-
-        completedButton.addEventListener(
-            "click",
-            async () => {
 
                 if (
                     plan.status ===
                     "Completed"
                 ) {
 
-                    return;
-
-                }
-
-
-                plan.status =
-                    "Completed";
-
-                refreshStatus();
-
-                updateMetrics();
-
-
-                completedButton.classList.add(
-                    "saving"
-                );
-
-                pendingButton.classList.add(
-                    "saving"
-                );
-
-
-                try {
-
-                    await updateGamePlanStatus(
-                        plan.id,
-                        "Completed"
+                    completedButton.classList.add(
+                        "selected"
                     );
 
-                } catch (error) {
+                } else {
 
-                    console.error(error);
-
-                    plan.status =
-                        "Not Completed";
-
-                    refreshStatus();
-
-                    updateMetrics();
-
-                } finally {
-
-                    completedButton.classList.remove(
-                        "saving"
-                    );
-
-                    pendingButton.classList.remove(
-                        "saving"
+                    pendingButton.classList.add(
+                        "selected"
                     );
 
                 }
 
             }
-        );
 
 
-        pendingButton.addEventListener(
-            "click",
-            async () => {
-
-                if (
-                    plan.status ===
-                        "Not Completed" ||
-                    !plan.status
-                ) {
-
-                    return;
-
-                }
+            refreshStatus();
 
 
-                plan.status =
-                    "Not Completed";
+            completedButton.addEventListener(
+                "click",
+                async () => {
 
-                refreshStatus();
+                    if (
+                        plan.status ===
+                        "Completed"
+                    ) {
 
-                updateMetrics();
+                        return;
 
+                    }
 
-                completedButton.classList.add(
-                    "saving"
-                );
-
-                pendingButton.classList.add(
-                    "saving"
-                );
-
-
-                try {
-
-                    await updateGamePlanStatus(
-                        plan.id,
-                        "Not Completed"
-                    );
-
-                } catch (error) {
-
-                    console.error(error);
 
                     plan.status =
                         "Completed";
 
+
                     refreshStatus();
 
                     updateMetrics();
 
-                } finally {
 
-                    completedButton.classList.remove(
+                    completedButton.classList.add(
                         "saving"
                     );
 
-                    pendingButton.classList.remove(
+                    pendingButton.classList.add(
                         "saving"
                     );
+
+
+                    try {
+
+                        await updateGamePlanStatus(
+                            plan.id,
+                            "Completed"
+                        );
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        plan.status =
+                            "Not Completed";
+
+                        refreshStatus();
+
+                        updateMetrics();
+
+                    } finally {
+
+                        completedButton.classList.remove(
+                            "saving"
+                        );
+
+                        pendingButton.classList.remove(
+                            "saving"
+                        );
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
 
-        statusButtons.appendChild(
-            completedButton
-        );
+            pendingButton.addEventListener(
+                "click",
+                async () => {
 
-        statusButtons.appendChild(
-            pendingButton
-        );
+                    if (
+                        plan.status ===
+                            "Not Completed" ||
+                        !plan.status
+                    ) {
 
+                        return;
 
-        entryInfo.appendChild(name);
-
-        entryInfo.appendChild(meta);
-
-        entryInfo.appendChild(
-            statusButtons
-        );
+                    }
 
 
-        entry.appendChild(entryInfo);
+                    plan.status =
+                        "Not Completed";
 
-        container.appendChild(entry);
 
-    });
+                    refreshStatus();
+
+                    updateMetrics();
+
+
+                    completedButton.classList.add(
+                        "saving"
+                    );
+
+                    pendingButton.classList.add(
+                        "saving"
+                    );
+
+
+                    try {
+
+                        await updateGamePlanStatus(
+                            plan.id,
+                            "Not Completed"
+                        );
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        plan.status =
+                            "Completed";
+
+                        refreshStatus();
+
+                        updateMetrics();
+
+                    } finally {
+
+                        completedButton.classList.remove(
+                            "saving"
+                        );
+
+                        pendingButton.classList.remove(
+                            "saving"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            statusButtons.appendChild(
+                completedButton
+            );
+
+            statusButtons.appendChild(
+                pendingButton
+            );
+
+
+            entryInfo.appendChild(
+                name
+            );
+
+            entryInfo.appendChild(
+                meta
+            );
+
+            entryInfo.appendChild(
+                statusButtons
+            );
+
+
+            entry.appendChild(
+                entryInfo
+            );
+
+
+            container.appendChild(
+                entry
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================
-   UPDATE GAME PLAN STATUS
+   UPDATE STATUS
 ========================================= */
 
 async function updateGamePlanStatus(
@@ -896,27 +2629,10 @@ async function updateGamePlanStatus(
         gamePlanRef,
         {
             status: status,
-            updatedAt: serverTimestamp()
+            updatedAt:
+                serverTimestamp()
         }
     );
-
-
-    const plan =
-        gamePlans.find(
-            item =>
-                item.id === id
-        );
-
-
-    if (plan) {
-
-        plan.status =
-            status;
-
-    }
-
-
-    updateMetrics();
 
 }
 
@@ -932,37 +2648,50 @@ function renderComingUp() {
             "coming-up-list"
         );
 
+
     container.innerHTML = "";
 
 
     const today =
-        dateOnly(new Date());
+        dateOnly(
+            new Date()
+        );
 
 
     const events =
         upcomingEvents
-            .filter(event => {
+            .filter(
+                event => {
 
-                if (!event.date) {
-                    return false;
+                    if (!event.date) {
+                        return false;
+                    }
+
+
+                    return (
+                        dateOnly(
+                            new Date(
+                                event.date
+                            )
+                        ) >= today
+                    );
+
                 }
-
-                return (
-                    dateOnly(
-                        new Date(event.date)
-                    ) >= today
-                );
-
-            })
+            )
             .sort(
-                (a, b) =>
+                (a,b) =>
                     new Date(a.date) -
                     new Date(b.date)
             )
-            .slice(0, 5);
+            .slice(
+                0,
+                5
+            );
 
 
-    if (events.length === 0) {
+    if (
+        events.length === 0
+    ) {
 
         container.innerHTML = `
             <div class="empty-state">
@@ -975,128 +2704,157 @@ function renderComingUp() {
     }
 
 
-    events.forEach(event => {
+    events.forEach(
+        event => {
 
-        const date =
-            dateOnly(
-                new Date(event.date)
+            const date =
+                dateOnly(
+                    new Date(
+                        event.date
+                    )
+                );
+
+
+            const difference =
+                Math.round(
+                    (
+                        date -
+                        today
+                    ) /
+                    86400000
+                );
+
+
+            const countdown =
+                difference === 0
+                    ? "Today"
+                    : difference === 1
+                        ? "1 day away"
+                        : `${difference} days away`;
+
+
+            const entry =
+                document.createElement(
+                    "div"
+                );
+
+            entry.className =
+                "entry";
+
+
+            const entryInfo =
+                document.createElement(
+                    "div"
+                );
+
+            entryInfo.className =
+                "entry-info";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "entry-name";
+
+            name.textContent =
+                event.name || "";
+
+
+            const meta =
+                document.createElement(
+                    "div"
+                );
+
+            meta.className =
+                "entry-meta";
+
+            meta.textContent =
+                `${event.subject || "Other"} · ${event.assignmentType || "Other"}`;
+
+
+            const dateBox =
+                document.createElement(
+                    "div"
+                );
+
+            dateBox.className =
+                "entry-date";
+
+
+            const strong =
+                document.createElement(
+                    "strong"
+                );
+
+            strong.textContent =
+                date.toLocaleDateString(
+                    "en-US",
+                    {
+                        month: "short",
+                        day: "numeric"
+                    }
+                );
+
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+            span.textContent =
+                countdown;
+
+
+            dateBox.appendChild(
+                strong
+            );
+
+            dateBox.appendChild(
+                span
             );
 
 
-        const difference =
-            Math.round(
-                (
-                    date -
-                    today
-                ) / 86400000
+            entryInfo.appendChild(
+                name
+            );
+
+            entryInfo.appendChild(
+                meta
             );
 
 
-        const countdown =
-            difference === 0
-                ? "Today"
-                : difference === 1
-                    ? "1 day away"
-                    : `${difference} days away`;
+            entry.appendChild(
+                entryInfo
+            );
 
-
-        const entry =
-            document.createElement("div");
-
-        entry.className = "entry";
-
-
-        const entryInfo =
-            document.createElement("div");
-
-        entryInfo.className =
-            "entry-info";
-
-
-        const name =
-            document.createElement("div");
-
-        name.className = "entry-name";
-
-        name.textContent =
-            event.name || "";
-
-
-        const meta =
-            document.createElement("div");
-
-        meta.className = "entry-meta";
-
-        meta.textContent =
-            `${event.subject || "Other"} · ${event.assignmentType || "Other"}`;
-
-
-        const dateBox =
-            document.createElement("div");
-
-        dateBox.className = "entry-date";
-
-
-        const strong =
-            document.createElement("strong");
-
-        strong.textContent =
-            date.toLocaleDateString(
-                "en-US",
-                {
-                    month: "short",
-                    day: "numeric"
-                }
+            entry.appendChild(
+                dateBox
             );
 
 
-        const span =
-            document.createElement("span");
+            container.appendChild(
+                entry
+            );
 
-        span.textContent =
-            countdown;
-
-
-        dateBox.appendChild(strong);
-        dateBox.appendChild(span);
-
-
-        entryInfo.appendChild(name);
-        entryInfo.appendChild(meta);
-
-
-        entry.appendChild(entryInfo);
-        entry.appendChild(dateBox);
-
-
-        container.appendChild(entry);
-
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
-   🔥 FIXED LOCK-IN SLIDER
+   LOCK-IN SLIDER
 ========================================================= */
-
-
-/* =========================================
-   MAXIMUM HANDLE POSITION
-========================================= */
 
 function maxSliderPosition() {
 
-    const sliderWidth =
-        lockSlider.getBoundingClientRect().width;
-
-    const handleWidth =
-        lockHandle.getBoundingClientRect().width;
-
     return Math.max(
         0,
-        sliderWidth -
-        handleWidth -
+        lockSlider.clientWidth -
+        lockHandle.offsetWidth -
         16
     );
 
@@ -1104,10 +2862,12 @@ function maxSliderPosition() {
 
 
 /* =========================================
-   UPDATE SLIDER VISUALLY
+   SET SLIDER
 ========================================= */
 
-function setSliderProgress(percent) {
+function setSliderProgress(
+    percent
+) {
 
     if (lockedIn) {
         return;
@@ -1143,8 +2903,6 @@ function setSliderProgress(percent) {
     lockProgress.style.width =
         `${sliderProgress}%`;
 
-
-    /* Rainbow colours */
 
     const rainbowColors = [
 
@@ -1191,8 +2949,6 @@ function setSliderProgress(percent) {
         ];
 
 
-    /* Automatically lock at 98% */
-
     if (
         sliderProgress >= 98
     ) {
@@ -1205,12 +2961,17 @@ function setSliderProgress(percent) {
 
 
 /* =========================================
-   UPDATE FROM POINTER
+   POINTER POSITION
 ========================================= */
 
 function updateSliderFromPointer(
     clientX
 ) {
+
+    if (lockedIn) {
+        return;
+    }
+
 
     const rect =
         lockSlider.getBoundingClientRect();
@@ -1242,7 +3003,7 @@ function updateSliderFromPointer(
 
 
     const percentage =
-        max === 0
+        max <= 0
             ? 100
             : (
                 position /
@@ -1259,10 +3020,12 @@ function updateSliderFromPointer(
 
 
 /* =========================================
-   START DRAGGING
+   START DRAG
 ========================================= */
 
-function startDragging(event) {
+function startDragging(
+    event
+) {
 
     if (lockedIn) {
         return;
@@ -1284,21 +3047,6 @@ function startDragging(event) {
     );
 
 
-    try {
-
-        lockSlider.setPointerCapture(
-            event.pointerId
-        );
-
-    } catch (error) {
-
-        console.log(
-            "Pointer capture unavailable."
-        );
-
-    }
-
-
     updateSliderFromPointer(
         event.clientX
     );
@@ -1307,10 +3055,12 @@ function startDragging(event) {
 
 
 /* =========================================
-   DRAGGING
+   DRAG
 ========================================= */
 
-function dragSlider(event) {
+function dragSlider(
+    event
+) {
 
     if (
         !dragging ||
@@ -1333,10 +3083,10 @@ function dragSlider(event) {
 
 
 /* =========================================
-   STOP DRAGGING
+   STOP DRAG
 ========================================= */
 
-function stopDragging(event) {
+function stopDragging() {
 
     if (!dragging) {
         return;
@@ -1354,24 +3104,6 @@ function stopDragging(event) {
         "dragging"
     );
 
-
-    try {
-
-        lockSlider.releasePointerCapture(
-            event.pointerId
-        );
-
-    } catch (error) {
-
-        /* Nothing needed here */
-
-    }
-
-
-    /*
-     * If they didn't reach the end,
-     * return the handle to the beginning.
-     */
 
     if (
         !lockedIn &&
@@ -1408,19 +3140,19 @@ lockSlider.addEventListener(
     dragSlider
 );
 
-lockSlider.addEventListener(
+window.addEventListener(
     "pointerup",
     stopDragging
 );
 
-lockSlider.addEventListener(
+window.addEventListener(
     "pointercancel",
     stopDragging
 );
 
 
 /* =========================================
-   COMPLETE LOCK IN
+   COMPLETE LOCK-IN
 ========================================= */
 
 async function completeLockIn() {
@@ -1433,6 +3165,91 @@ async function completeLockIn() {
     lockedIn = true;
 
     dragging = false;
+
+    sliderProgress = 100;
+
+
+    /*
+     * SAVE LOCALLY FIRST.
+     *
+     * This guarantees refresh works even
+     * if Firebase is temporarily slow.
+     */
+
+    saveLocalLock();
+
+
+    /*
+     * Update visual state immediately.
+     */
+
+    showDashboard();
+
+
+    /*
+     * Celebration only happens here.
+     */
+
+    showCelebration();
+
+
+    /*
+     * Save to Firebase in the background.
+     */
+
+    if (currentUser) {
+
+        try {
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                ),
+                {
+                    lockedIn: true,
+
+                    updatedAt:
+                        serverTimestamp()
+                },
+                {
+                    merge: true
+                }
+            );
+
+
+            console.log(
+                "🔐 Lock-in saved to Firebase."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Firebase lock save failed:",
+                error
+            );
+
+            /*
+             * Local storage already saved it,
+             * so refresh still works.
+             */
+
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   SHOW DASHBOARD
+========================================= */
+
+function showDashboard() {
+
+    lockedIn = true;
 
     sliderProgress = 100;
 
@@ -1453,21 +3270,16 @@ async function completeLockIn() {
         "#22D3EE";
 
 
-    lockText.textContent =
-        "We're locked in!";
-
-
     lockSlider.style.background =
         "#22D3EE";
 
 
+    lockText.textContent =
+        "We're locked in!";
+
+
     lockSlider.classList.add(
         "completed"
-    );
-
-
-    lockHandle.classList.remove(
-        "dragging"
     );
 
 
@@ -1476,179 +3288,82 @@ async function completeLockIn() {
     );
 
 
-    /* SAVE TO FIREBASE */
+    lockHandle.classList.remove(
+        "dragging"
+    );
 
-    if (currentUser) {
-
-        try {
-
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid
-                ),
-                {
-                    lockedIn: true,
-                    updatedAt:
-                        serverTimestamp()
-                },
-                {
-                    merge: true
-                }
-            );
-
-
-            console.log(
-                "Lock-in saved successfully."
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                "Could not save lock-in:",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* SHOW DASHBOARD */
-
-    showDashboard();
-
-
-    /* CELEBRATION */
-
-    showCelebration();
-
-}
-
-
-/* =========================================
-   SHOW DASHBOARD
-========================================= */
-
-function showDashboard() {
 
     dashboardContent.classList.add(
         "visible"
     );
 
-
-    if (!lockedIn) {
-        return;
-    }
-
-
-    const max =
-        maxSliderPosition();
-
-
-    lockHandle.style.left =
-        `${8 + max}px`;
-
-
-    lockProgress.style.width =
-        "100%";
-
-
-    lockProgress.style.background =
-        "#22D3EE";
-
-
-    lockSlider.style.background =
-        "#22D3EE";
-
-
-    lockText.textContent =
-        "We're locked in!";
-
-
-    lockSlider.classList.add(
-        "completed"
-    );
-
 }
 
 
 /* =========================================
-   RESTORE LOCKED SLIDER
+   RESTORE SLIDER
 ========================================= */
 
 function restoreLockedSlider() {
 
-    if (!lockedIn) {
+    /*
+     * If Firebase OR localStorage says
+     * locked in, stay locked.
+     */
 
-        sliderProgress = 0;
+    if (
+        lockedIn ||
+        getLocalLock()
+    ) {
 
-        lockHandle.style.left =
-            "8px";
+        lockedIn = true;
 
-        lockProgress.style.width =
-            "0%";
-
-        lockProgress.style.background =
-            "transparent";
-
-        lockSlider.style.background =
-            "#D1D5DB";
-
-        lockText.textContent =
-            "Are we ready to lock in?";
-
-        lockSlider.classList.remove(
-            "completed"
-        );
-
-        dashboardContent.classList.remove(
-            "visible"
-        );
+        showDashboard();
 
         return;
 
     }
 
 
-    requestAnimationFrame(() => {
+    /*
+     * New/unlocked user.
+     */
 
-        const max =
-            maxSliderPosition();
+    lockedIn = false;
 
+    sliderProgress = 0;
 
-        lockHandle.style.left =
-            `${8 + max}px`;
-
-
-        lockProgress.style.width =
-            "100%";
+    dragging = false;
 
 
-        lockProgress.style.background =
-            "#22D3EE";
+    lockHandle.style.left =
+        "8px";
 
 
-        lockSlider.style.background =
-            "#22D3EE";
+    lockProgress.style.width =
+        "0%";
 
 
-        lockText.textContent =
-            "We're locked in!";
+    lockProgress.style.background =
+        "transparent";
 
 
-        lockSlider.classList.add(
-            "completed"
-        );
+    lockSlider.style.background =
+        "#D1D5DB";
 
 
-        dashboardContent.classList.add(
-            "visible"
-        );
+    lockText.textContent =
+        "Are we ready to lock in?";
 
-    });
+
+    lockSlider.classList.remove(
+        "completed"
+    );
+
+
+    dashboardContent.classList.remove(
+        "visible"
+    );
 
 }
 
@@ -1673,13 +3388,16 @@ function showCelebration() {
     createConfetti();
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        celebration.classList.remove(
-            "show"
-        );
+            celebration.classList.remove(
+                "show"
+            );
 
-    }, 3000);
+        },
+        3000
+    );
 
 }
 
@@ -1724,6 +3442,7 @@ function createConfetti() {
         piece.style.left =
             `${Math.random() * 100}%`;
 
+
         piece.style.top =
             `${Math.random() * 20}%`;
 
@@ -1767,7 +3486,8 @@ function createConfetti() {
 
 
         setTimeout(
-            () => piece.remove(),
+            () =>
+                piece.remove(),
             3200
         );
 
@@ -1794,8 +3514,13 @@ backgroundInput.addEventListener(
             event.target.files[0];
 
 
-        if (!file) {
+        if (
+            !file ||
+            !currentUser
+        ) {
+
             return;
+
         }
 
 
@@ -1807,18 +3532,127 @@ backgroundInput.addEventListener(
             function(event) {
 
                 const image =
+                    new Image();
+
+
+                image.onload =
+                    function() {
+
+                        const canvas =
+                            document.createElement(
+                                "canvas"
+                            );
+
+
+                        const maxSize =
+                            1600;
+
+
+                        let width =
+                            image.width;
+
+                        let height =
+                            image.height;
+
+
+                        if (
+                            width >
+                            maxSize ||
+                            height >
+                            maxSize
+                        ) {
+
+                            if (
+                                width >
+                                height
+                            ) {
+
+                                height =
+                                    height *
+                                    (
+                                        maxSize /
+                                        width
+                                    );
+
+                                width =
+                                    maxSize;
+
+                            } else {
+
+                                width =
+                                    width *
+                                    (
+                                        maxSize /
+                                        height
+                                    );
+
+                                height =
+                                    maxSize;
+
+                            }
+
+                        }
+
+
+                        canvas.width =
+                            width;
+
+                        canvas.height =
+                            height;
+
+
+                        const context =
+                            canvas.getContext(
+                                "2d"
+                            );
+
+
+                        context.drawImage(
+                            image,
+                            0,
+                            0,
+                            width,
+                            height
+                        );
+
+
+                        const compressedImage =
+                            canvas.toDataURL(
+                                "image/jpeg",
+                                0.75
+                            );
+
+
+                        applyBackground(
+                            compressedImage
+                        );
+
+
+                        try {
+
+                            localStorage.setItem(
+                                `mypHavenBackground_${currentUser.uid}`,
+                                compressedImage
+                            );
+
+                        } catch (error) {
+
+                            console.error(
+                                "Background save failed:",
+                                error
+                            );
+
+                            alert(
+                                "The background image is too large to save."
+                            );
+
+                        }
+
+                    };
+
+
+                image.src =
                     event.target.result;
-
-
-                localStorage.setItem(
-                    `mypHavenBackground_${currentUser.uid}`,
-                    image
-                );
-
-
-                applyBackground(
-                    image
-                );
 
             };
 
@@ -1828,6 +3662,10 @@ backgroundInput.addEventListener(
     }
 );
 
+
+/* =========================================
+   LOAD BACKGROUND
+========================================= */
 
 function loadBackground() {
 
@@ -1853,12 +3691,19 @@ function loadBackground() {
 }
 
 
-function applyBackground(image) {
+/* =========================================
+   APPLY BACKGROUND
+========================================= */
+
+function applyBackground(
+    image
+) {
 
     const background =
         document.getElementById(
             "dashboard-background"
         );
+
 
     const overlay =
         document.getElementById(
@@ -1869,8 +3714,10 @@ function applyBackground(image) {
     background.style.backgroundImage =
         `url("${image}")`;
 
+
     background.style.display =
         "block";
+
 
     overlay.style.display =
         "block";
@@ -1886,6 +3733,7 @@ const gameModal =
     document.getElementById(
         "game-plan-modal"
     );
+
 
 const comingModal =
     document.getElementById(
@@ -1957,70 +3805,76 @@ document
     .querySelectorAll(
         "#game-plan-modal .type-option"
     )
-    .forEach(button => {
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                document
-                    .querySelectorAll(
-                        "#game-plan-modal .type-option"
-                    )
-                    .forEach(b =>
-                        b.classList.remove(
-                            "selected"
+                    document
+                        .querySelectorAll(
+                            "#game-plan-modal .type-option"
                         )
+                        .forEach(
+                            b =>
+                                b.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "selected"
                     );
 
 
-                button.classList.add(
-                    "selected"
-                );
+                    selectedGameType =
+                        button.dataset.type;
 
+                }
+            );
 
-                selectedGameType =
-                    button.dataset.type;
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 document
     .querySelectorAll(
         "#coming-up-modal .type-option"
     )
-    .forEach(button => {
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                document
-                    .querySelectorAll(
-                        "#coming-up-modal .type-option"
-                    )
-                    .forEach(b =>
-                        b.classList.remove(
-                            "selected"
+                    document
+                        .querySelectorAll(
+                            "#coming-up-modal .type-option"
                         )
+                        .forEach(
+                            b =>
+                                b.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "selected"
                     );
 
 
-                button.classList.add(
-                    "selected"
-                );
+                    selectedComingType =
+                        button.dataset.type;
 
+                }
+            );
 
-                selectedComingType =
-                    button.dataset.type;
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 /* =========================================
@@ -2074,6 +3928,17 @@ document.getElementById(
         }
 
 
+        if (!currentUser) {
+
+            alert(
+                "Please wait for your account to load."
+            );
+
+            return;
+
+        }
+
+
         const today =
             getLocalDateString();
 
@@ -2089,33 +3954,61 @@ document.getElementById(
                         "gamePlans"
                     ),
                     {
-                        date: today,
-                        startTime: startTime,
-                        endTime: endTime,
-                        name: name,
-                        subject: subject,
+
+                        date:
+                            today,
+
+                        startTime:
+                            startTime,
+
+                        endTime:
+                            endTime,
+
+                        name:
+                            name,
+
+                        subject:
+                            subject,
+
                         assignmentType:
                             selectedGameType,
+
                         status:
                             "Not Completed",
+
                         createdAt:
                             serverTimestamp(),
+
                         updatedAt:
                             serverTimestamp()
+
                     }
                 );
 
 
             gamePlans.push({
 
-                id: ref.id,
-                date: today,
-                startTime: startTime,
-                endTime: endTime,
-                name: name,
-                subject: subject,
+                id:
+                    ref.id,
+
+                date:
+                    today,
+
+                startTime:
+                    startTime,
+
+                endTime:
+                    endTime,
+
+                name:
+                    name,
+
+                subject:
+                    subject,
+
                 assignmentType:
                     selectedGameType,
+
                 status:
                     "Not Completed"
 
@@ -2131,16 +4024,19 @@ document.getElementById(
                 "game-start"
             ).value = "";
 
+
             document.getElementById(
                 "game-end"
             ).value = "";
+
 
             document.getElementById(
                 "game-name"
             ).value = "";
 
 
-            selectedGameType = "";
+            selectedGameType =
+                "";
 
 
             document
@@ -2220,6 +4116,17 @@ document.getElementById(
         }
 
 
+        if (!currentUser) {
+
+            alert(
+                "Please wait for your account to load."
+            );
+
+            return;
+
+        }
+
+
         try {
 
             const ref =
@@ -2231,23 +4138,40 @@ document.getElementById(
                         "upcoming"
                     ),
                     {
-                        date: date,
-                        name: name,
-                        subject: subject,
+
+                        date:
+                            date,
+
+                        name:
+                            name,
+
+                        subject:
+                            subject,
+
                         assignmentType:
                             selectedComingType,
+
                         createdAt:
                             serverTimestamp()
+
                     }
                 );
 
 
             upcomingEvents.push({
 
-                id: ref.id,
-                date: date,
-                name: name,
-                subject: subject,
+                id:
+                    ref.id,
+
+                date:
+                    date,
+
+                name:
+                    name,
+
+                subject:
+                    subject,
+
                 assignmentType:
                     selectedComingType
 
@@ -2263,12 +4187,14 @@ document.getElementById(
                 "coming-date"
             ).value = "";
 
+
             document.getElementById(
                 "coming-name"
             ).value = "";
 
 
-            selectedComingType = "";
+            selectedComingType =
+                "";
 
 
             document
@@ -2309,35 +4235,43 @@ document.getElementById(
 ========================================= */
 
 document
-    .querySelectorAll(".modal")
-    .forEach(modal => {
+    .querySelectorAll(
+        ".modal"
+    )
+    .forEach(
+        modal => {
 
-        modal.addEventListener(
-            "click",
-            event => {
+            modal.addEventListener(
+                "click",
+                event => {
 
-                if (
-                    event.target === modal
-                ) {
+                    if (
+                        event.target === modal
+                    ) {
 
-                    modal.classList.remove(
-                        "show"
-                    );
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
 
                 }
+            );
 
-            }
-        );
-
-    });
+        }
+    );
 
 
 /* =========================================
-   STARTUP
+   FINAL STARTUP MESSAGE
 ========================================= */
 
 console.log(
-    "🔥 MYP Haven Dashboard loaded successfully."
+    "🔥 MYP Haven Dashboard is ready."
 );
 
 </script>
+
+</body>
+
+</html>
