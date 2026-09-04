@@ -1,354 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tell Us More About You! | MYP Haven</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Tell Us More About You! | MYP Haven</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <style>
+<link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
 
-        body {
-            min-height: 100vh;
-            background: #A855F7;
-            font-family: "DM Sans", sans-serif;
-            padding: 45px 20px;
-            color: #171717;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .page {
-            width: min(1100px, 100%);
-            margin: auto;
-        }
+body {
+    min-height: 100vh;
+    background: #A855F7;
+    font-family: "DM Sans", sans-serif;
+    padding: 45px 20px;
+    color: #171717;
+}
 
-        .title {
-            color: white;
-            font-family: "Bricolage Grotesque", sans-serif;
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            font-weight: 800;
-            line-height: .9;
-            letter-spacing: -0.05em;
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.page {
+    width: min(1100px, 100%);
+    margin: auto;
+}
 
-        .card {
-            background: white;
-            border-radius: 35px;
-            padding: 50px;
-            box-shadow: 0 25px 70px rgba(0,0,0,.18);
-        }
+.title {
+    color: white;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: .9;
+    letter-spacing: -0.05em;
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-        .intro {
-            text-align: center;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 45px;
-        }
+.card {
+    background: white;
+    border-radius: 35px;
+    padding: 50px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.18);
+}
 
-        .section {
-            margin-bottom: 45px;
-        }
+.intro {
+    text-align: center;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 45px;
+}
 
-        .question {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
+.section {
+    margin-bottom: 45px;
+}
 
-        .required {
-            color: #A855F7;
-        }
+.question {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
 
-        .year-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
+.required {
+    color: #A855F7;
+}
 
-        .year {
-            border: 2px solid #e5e5e5;
-            background: white;
-            border-radius: 18px;
-            min-height: 65px;
-            font-family: "DM Sans", sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s ease;
-        }
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
 
-        .year:hover {
-            border-color: #A855F7;
-            transform: translateY(-2px);
-        }
+.year {
+    border: 2px solid #e5e5e5;
+    background: white;
+    border-radius: 18px;
+    min-height: 65px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+}
 
-        .year.selected {
-            background: #A855F7;
-            border-color: #A855F7;
-            color: white;
-            transform: scale(1.03);
-        }
+.year:hover {
+    border-color: #A855F7;
+    transform: translateY(-2px);
+}
 
-        .group {
-            margin-bottom: 35px;
-        }
+.year.selected {
+    background: #A855F7;
+    border-color: #A855F7;
+    color: white;
+    transform: scale(1.03);
+}
 
-        .group-title {
-            font-family: "Bricolage Grotesque", sans-serif;
-            color: #A855F7;
-            font-size: 1.7rem;
-            font-weight: 800;
-            margin-bottom: 14px;
-        }
+.group {
+    margin-bottom: 35px;
+}
 
-        .subjects {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
+.group-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: #A855F7;
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
 
-        .subject {
-            min-height: 58px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            border: 2px solid #e7e7e7;
-            border-radius: 16px;
-            background: white;
-            cursor: pointer;
-            transition: .2s ease;
-        }
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
 
-        .subject:hover {
-            border-color: #A855F7;
-            transform: translateY(-2px);
-        }
+.subject {
+    min-height: 58px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #e7e7e7;
+    border-radius: 16px;
+    background: white;
+    cursor: pointer;
+    transition: .2s ease;
+}
 
-        .subject.selected {
-            background: #F3E8FF;
-            border-color: #A855F7;
-            transform: scale(1.02);
-        }
+.subject:hover {
+    border-color: #A855F7;
+    transform: translateY(-2px);
+}
 
-        .circle {
-            width: 28px;
-            height: 28px;
-            min-width: 28px;
-            border: 2px solid #ccc;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 13px;
-            color: transparent;
-            font-weight: 800;
-            transition: .25s ease;
-        }
+.subject.selected {
+    background: #F3E8FF;
+    border-color: #A855F7;
+    transform: scale(1.02);
+}
 
-        .subject.selected .circle {
-            background: #A855F7;
-            border-color: #A855F7;
-            color: white;
-            animation: pop .3s ease;
-        }
+.circle {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 13px;
+    color: transparent;
+    font-weight: 800;
+    transition: .25s ease;
+}
 
-        @keyframes pop {
-            0% { transform: scale(.4); }
-            70% { transform: scale(1.25); }
-            100% { transform: scale(1); }
-        }
+.subject.selected .circle {
+    background: #A855F7;
+    border-color: #A855F7;
+    color: white;
+    animation: pop .3s ease;
+}
 
-        .label {
-            font-weight: 600;
-        }
+@keyframes pop {
+    0% { transform: scale(.4); }
+    70% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
 
-        .error {
-            display: none;
-            margin-top: 15px;
-            padding: 13px 17px;
-            border-radius: 12px;
-            background: #FFE4E6;
-            color: #BE123C;
-            font-weight: 600;
-        }
+.label {
+    font-weight: 600;
+}
 
-        .error.show {
-            display: block;
-        }
+.error {
+    display: none;
+    margin-top: 15px;
+    padding: 13px 17px;
+    border-radius: 12px;
+    background: #FFE4E6;
+    color: #BE123C;
+    font-weight: 600;
+}
 
-        .unlock {
-            border-top: 2px solid #eee;
-            padding-top: 40px;
-            text-align: center;
-        }
+.error.show {
+    display: block;
+}
 
-        .unlock h2 {
-            font-family: "Bricolage Grotesque", sans-serif;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+.unlock {
+    border-top: 2px solid #eee;
+    padding-top: 40px;
+    text-align: center;
+}
 
-        .unlock p {
-            color: #666;
-            margin-bottom: 25px;
-        }
+.unlock h2 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
 
-        .slider {
-            max-width: 850px;
-            height: 85px;
-            margin: auto;
-            padding: 8px;
-            background: #F3E8FF;
-            border-radius: 999px;
-        }
+.unlock p {
+    color: #666;
+    margin-bottom: 25px;
+}
 
-        .track {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #E9D5FF;
-            border-radius: 999px;
-        }
+.slider {
+    max-width: 850px;
+    height: 85px;
+    margin: auto;
+    padding: 8px;
+    background: #F3E8FF;
+    border-radius: 999px;
+}
 
-        .slider-text {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7E22CE;
-            font-weight: 700;
-            pointer-events: none;
-        }
+.track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #E9D5FF;
+    border-radius: 999px;
+}
 
-        .cap {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 67px;
-            height: 67px;
-            border-radius: 50%;
-            background: #A855F7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.1rem;
-            cursor: grab;
-            user-select: none;
-            touch-action: none;
-            box-shadow: 0 5px 15px rgba(168,85,247,.35);
-        }
+.slider-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7E22CE;
+    font-weight: 700;
+    pointer-events: none;
+}
 
-        .success {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #A855F7;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-        }
+.cap {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    background: #A855F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.1rem;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    box-shadow: 0 5px 15px rgba(168,85,247,.35);
+}
 
-        .success.show {
-            display: flex;
-        }
+.success {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #A855F7;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
 
-        .success-content {
-            position: relative;
-            z-index: 5;
-            color: white;
-        }
+.success.show {
+    display: flex;
+}
 
-        .success-cap {
-            font-size: 7rem;
-            animation: celebrate .8s ease both;
-        }
+.success-content {
+    position: relative;
+    z-index: 5;
+    color: white;
+}
 
-        @keyframes celebrate {
-            0% {
-                transform: scale(0) rotate(-20deg);
-            }
-            70% {
-                transform: scale(1.2) rotate(8deg);
-            }
-            100% {
-                transform: scale(1) rotate(0);
-            }
-        }
+.success-cap {
+    font-size: 7rem;
+    animation: celebrate .8s ease both;
+}
 
-        .success h1 {
-            font-family: "Bricolage Grotesque", sans-serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            line-height: .9;
-            margin: 20px 0;
-        }
+@keyframes celebrate {
+    0% {
+        transform: scale(0) rotate(-20deg);
+    }
 
-        .success p {
-            font-size: 1.2rem;
-        }
+    70% {
+        transform: scale(1.2) rotate(8deg);
+    }
 
-        .confetti {
-            position: fixed;
-            width: 12px;
-            height: 18px;
-            z-index: 4;
-            pointer-events: none;
-            animation: fall 2.5s ease-out forwards;
-        }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
 
-        @keyframes fall {
-            to {
-                opacity: 0;
-                transform:
-                    translate(var(--x), var(--y))
-                    rotate(var(--r));
-            }
-        }
+.success h1 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: .9;
+    margin: 20px 0;
+}
 
-        @media(max-width:800px) {
+.success p {
+    font-size: 1.2rem;
+}
 
-            .card {
-                padding: 30px 20px;
-            }
+.confetti {
+    position: fixed;
+    width: 12px;
+    height: 18px;
+    z-index: 4;
+    pointer-events: none;
+    animation: fall 2.5s ease-out forwards;
+}
 
-            .year-grid {
-                grid-template-columns: repeat(2,1fr);
-            }
+@keyframes fall {
+    to {
+        opacity: 0;
+        transform:
+            translate(var(--x), var(--y))
+            rotate(var(--r));
+    }
+}
 
-            .subjects {
-                grid-template-columns: 1fr;
-            }
-        }
+@media(max-width:800px) {
 
-        @media(max-width:450px) {
+    .card {
+        padding: 30px 20px;
+    }
 
-            .year-grid {
-                grid-template-columns: 1fr;
-            }
+    .year-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
 
-            .title {
-                font-size: 3rem;
-            }
-        }
+    .subjects {
+        grid-template-columns: 1fr;
+    }
 
-    </style>
+}
+
+@media(max-width:450px) {
+
+    .year-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -366,8 +373,6 @@
         </p>
 
 
-        <!-- MYP YEAR -->
-
         <div class="section">
 
             <h2 class="question">
@@ -377,31 +382,31 @@
 
             <div class="year-grid">
 
-                <button class="year" data-year="Pre MYP (PYP5)">
+                <button type="button" class="year" data-year="Pre MYP (PYP5)">
                     Pre MYP (PYP5)
                 </button>
 
-                <button class="year" data-year="MYP 1">
+                <button type="button" class="year" data-year="MYP 1">
                     MYP 1
                 </button>
 
-                <button class="year" data-year="MYP 2">
+                <button type="button" class="year" data-year="MYP 2">
                     MYP 2
                 </button>
 
-                <button class="year" data-year="MYP 3">
+                <button type="button" class="year" data-year="MYP 3">
                     MYP 3
                 </button>
 
-                <button class="year" data-year="MYP 4">
+                <button type="button" class="year" data-year="MYP 4">
                     MYP 4
                 </button>
 
-                <button class="year" data-year="MYP 5">
+                <button type="button" class="year" data-year="MYP 5">
                     MYP 5
                 </button>
 
-                <button class="year" data-year="Other">
+                <button type="button" class="year" data-year="Other">
                     Other
                 </button>
 
@@ -413,8 +418,6 @@
 
         </div>
 
-
-        <!-- SUBJECTS -->
 
         <div class="section">
 
@@ -653,8 +656,6 @@
             </div>
 
 
-            <!-- UNLOCK -->
-
             <div class="unlock">
 
                 <h2>
@@ -724,130 +725,502 @@
 </div>
 
 
-<script>
+<!-- =================================================
+     FIREBASE
+================================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =================================================
+   FIREBASE CONFIG
+================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBNI4CR26Re0xdh-T0XdVyb6fFN7SPgPNA",
+
+    authDomain:
+        "the-myp-haven.firebaseapp.com",
+
+    projectId:
+        "the-myp-haven",
+
+    storageBucket:
+        "the-myp-haven.firebasestorage.app",
+
+    messagingSenderId:
+        "904577455533",
+
+    appId:
+        "1:904577455533:web:1d918ee8a3caa547eefd24"
+
+};
+
+
+/* =================================================
+   INITIALIZE
+================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =================================================
+   KEEP LOGIN AFTER REFRESH
+================================================= */
+
+await setPersistence(
+    auth,
+    browserLocalPersistence
+);
+
+
+/* =================================================
+   VARIABLES
+================================================= */
+
+let currentUser = null;
 
 let selectedYear = null;
+
 let selectedSubjects = [];
 
-const years = document.querySelectorAll(".year");
-const subjects = document.querySelectorAll(".subject");
+let dragging = false;
 
-const yearError = document.getElementById("yearError");
-const subjectError = document.getElementById("subjectError");
-
-const track = document.getElementById("track");
-const cap = document.getElementById("cap");
-const sliderText = document.getElementById("sliderText");
-const success = document.getElementById("success");
+let surveyFinished = false;
 
 
-/* YEAR SELECTION */
+/* =================================================
+   ELEMENTS
+================================================= */
 
-years.forEach(year => {
+const years =
+    document.querySelectorAll(".year");
 
-    year.addEventListener("click", function() {
+const subjects =
+    document.querySelectorAll(".subject");
 
-        years.forEach(y => y.classList.remove("selected"));
+const yearError =
+    document.getElementById("yearError");
 
-        this.classList.add("selected");
+const subjectError =
+    document.getElementById("subjectError");
 
-        selectedYear = this.dataset.year;
+const track =
+    document.getElementById("track");
 
-        yearError.classList.remove("show");
+const cap =
+    document.getElementById("cap");
 
-    });
+const sliderText =
+    document.getElementById("sliderText");
 
-});
+const success =
+    document.getElementById("success");
 
 
-/* SUBJECT SELECTION */
+/* =================================================
+   AUTH CHECK
+================================================= */
 
-subjects.forEach(subject => {
+onAuthStateChanged(
+    auth,
+    async user => {
 
-    subject.addEventListener("click", function() {
+        if (!user) {
 
-        const value = this.dataset.subject;
+            window.location.href =
+                "./account.html";
 
-        this.classList.toggle("selected");
-
-        if (this.classList.contains("selected")) {
-
-            if (!selectedSubjects.includes(value)) {
-                selectedSubjects.push(value);
-            }
-
-        } else {
-
-            selectedSubjects =
-                selectedSubjects.filter(
-                    item => item !== value
-                );
+            return;
 
         }
 
-        subjectError.classList.remove("show");
+        currentUser = user;
 
-    });
+        console.log(
+            "Logged-in user:",
+            currentUser.uid
+        );
+
+        await loadExistingSurvey();
+
+    }
+);
+
+
+/* =================================================
+   LOAD EXISTING DATA
+================================================= */
+
+async function loadExistingSurvey() {
+
+    try {
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            );
+
+        const snapshot =
+            await getDoc(userRef);
+
+
+        if (!snapshot.exists()) {
+            return;
+        }
+
+
+        const data =
+            snapshot.data();
+
+
+        /* RESTORE YEAR */
+
+        if (data.mypYear) {
+
+            selectedYear =
+                data.mypYear;
+
+            years.forEach(year => {
+
+                if (
+                    year.dataset.year ===
+                    selectedYear
+                ) {
+
+                    year.classList.add(
+                        "selected"
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        /* RESTORE SUBJECTS */
+
+        if (
+            Array.isArray(
+                data.subjects
+            )
+        ) {
+
+            selectedSubjects =
+                [...data.subjects];
+
+            subjects.forEach(subject => {
+
+                if (
+                    selectedSubjects.includes(
+                        subject.dataset.subject
+                    )
+                ) {
+
+                    subject.classList.add(
+                        "selected"
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        console.log(
+            "Survey data loaded."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading survey:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   YEAR SELECTION
+================================================= */
+
+years.forEach(year => {
+
+    year.addEventListener(
+        "click",
+        function() {
+
+            years.forEach(
+                item =>
+                    item.classList.remove(
+                        "selected"
+                    )
+            );
+
+            this.classList.add(
+                "selected"
+            );
+
+            selectedYear =
+                this.dataset.year;
+
+            yearError.classList.remove(
+                "show"
+            );
+
+        }
+    );
 
 });
 
 
-/* SAVE SURVEY */
+/* =================================================
+   SUBJECT SELECTION
+================================================= */
 
-function saveSurvey() {
+subjects.forEach(subject => {
 
-    const data = {
+    subject.addEventListener(
+        "click",
+        function() {
 
-        mypYear: selectedYear,
+            const value =
+                this.dataset.subject;
 
-        subjects: selectedSubjects,
 
-        completed: true,
+            this.classList.toggle(
+                "selected"
+            );
 
-        completedAt: new Date().toISOString()
 
-    };
+            if (
+                this.classList.contains(
+                    "selected"
+                )
+            ) {
+
+                if (
+                    !selectedSubjects.includes(
+                        value
+                    )
+                ) {
+
+                    selectedSubjects.push(
+                        value
+                    );
+
+                }
+
+            } else {
+
+                selectedSubjects =
+                    selectedSubjects.filter(
+                        item =>
+                            item !== value
+                    );
+
+            }
+
+
+            subjectError.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+});
+
+
+/* =================================================
+   SAVE TO FIREBASE
+================================================= */
+
+async function saveSurvey() {
+
+    if (!currentUser) {
+
+        throw new Error(
+            "No logged-in Firebase user."
+        );
+
+    }
+
+
+    const userRef =
+        doc(
+            db,
+            "users",
+            currentUser.uid
+        );
+
+
+    await setDoc(
+        userRef,
+        {
+
+            uid:
+                currentUser.uid,
+
+            email:
+                currentUser.email || "",
+
+            fullName:
+                currentUser.displayName || "",
+
+            mypYear:
+                selectedYear,
+
+            subjects:
+                selectedSubjects,
+
+            surveyCompleted:
+                true,
+
+            lockedIn:
+                true,
+
+            updatedAt:
+                serverTimestamp()
+
+        },
+        {
+            merge: true
+        }
+    );
+
+
+    /* BACKUP */
 
     localStorage.setItem(
         "mypHavenSurvey",
-        JSON.stringify(data)
+        JSON.stringify({
+
+            mypYear:
+                selectedYear,
+
+            subjects:
+                selectedSubjects,
+
+            completed:
+                true,
+
+            completedAt:
+                new Date().toISOString()
+
+        })
+    );
+
+
+    localStorage.setItem(
+        `mypHavenLockedIn_${currentUser.uid}`,
+        "true"
+    );
+
+
+    console.log(
+        "SURVEY SAVED TO FIREBASE"
     );
 
 }
 
 
-/* SLIDER */
-
-let dragging = false;
+/* =================================================
+   SLIDER POSITION
+================================================= */
 
 function getMax() {
 
-    return track.clientWidth - cap.offsetWidth - 8;
+    return Math.max(
+        0,
+        track.clientWidth -
+        cap.offsetWidth -
+        8
+    );
 
 }
 
 
+/* =================================================
+   MOVE CAP
+================================================= */
+
 function moveCap(clientX) {
 
-    const rect = track.getBoundingClientRect();
+    if (surveyFinished) return;
+
+
+    const rect =
+        track.getBoundingClientRect();
+
+
+    const max =
+        getMax();
+
 
     let position =
         clientX -
         rect.left -
         cap.offsetWidth / 2;
 
-    const max = getMax();
 
-    position = Math.max(
-        4,
-        Math.min(position, max)
-    );
+    position =
+        Math.max(
+            4,
+            Math.min(
+                position,
+                max
+            )
+        );
 
-    cap.style.left = position + "px";
 
-    const percentage = position / max;
+    cap.style.left =
+        position + "px";
 
-    if (percentage >= .75) {
+
+    const percentage =
+        max > 0
+            ? position / max
+            : 0;
+
+
+    if (percentage >= 0.75) {
 
         sliderText.textContent =
             "ALMOST THERE!";
@@ -859,7 +1232,8 @@ function moveCap(clientX) {
 
     }
 
-    if (percentage >= .96) {
+
+    if (percentage >= 0.96) {
 
         finishSurvey();
 
@@ -868,91 +1242,155 @@ function moveCap(clientX) {
 }
 
 
-/* MOUSE */
+/* =================================================
+   MOUSE
+================================================= */
 
-cap.addEventListener("mousedown", function(e) {
+cap.addEventListener(
+    "mousedown",
+    event => {
 
-    dragging = true;
+        if (surveyFinished) return;
 
-    e.preventDefault();
+        dragging = true;
 
-});
-
-
-document.addEventListener("mousemove", function(e) {
-
-    if (!dragging) return;
-
-    moveCap(e.clientX);
-
-});
-
-
-document.addEventListener("mouseup", function() {
-
-    if (!dragging) return;
-
-    dragging = false;
-
-    const position =
-        parseFloat(cap.style.left) || 4;
-
-    const max = getMax();
-
-    if (position < max * .96) {
-
-        cap.style.left = "4px";
-
-        sliderText.textContent =
-            "SLIDE TO UNLOCK →";
+        event.preventDefault();
 
     }
-
-});
-
-
-/* TOUCH */
-
-cap.addEventListener("touchstart", function() {
-
-    dragging = true;
-
-}, { passive: true });
+);
 
 
-document.addEventListener("touchmove", function(e) {
+document.addEventListener(
+    "mousemove",
+    event => {
 
-    if (!dragging) return;
+        if (!dragging) return;
 
-    moveCap(e.touches[0].clientX);
-
-}, { passive: true });
-
-
-document.addEventListener("touchend", function() {
-
-    if (!dragging) return;
-
-    dragging = false;
-
-    const position =
-        parseFloat(cap.style.left) || 4;
-
-    const max = getMax();
-
-    if (position < max * .96) {
-
-        cap.style.left = "4px";
-
-        sliderText.textContent =
-            "SLIDE TO UNLOCK →";
+        moveCap(
+            event.clientX
+        );
 
     }
+);
 
-});
+
+document.addEventListener(
+    "mouseup",
+    () => {
+
+        if (!dragging) return;
+
+        dragging = false;
 
 
-/* CONFETTI */
+        if (surveyFinished) return;
+
+
+        const position =
+            parseFloat(
+                cap.style.left
+            ) || 4;
+
+
+        const max =
+            getMax();
+
+
+        if (
+            position <
+            max * 0.96
+        ) {
+
+            cap.style.left =
+                "4px";
+
+            sliderText.textContent =
+                "SLIDE TO UNLOCK →";
+
+        }
+
+    }
+);
+
+
+/* =================================================
+   TOUCH
+================================================= */
+
+cap.addEventListener(
+    "touchstart",
+    event => {
+
+        if (surveyFinished) return;
+
+        dragging = true;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "touchmove",
+    event => {
+
+        if (!dragging) return;
+
+        moveCap(
+            event.touches[0].clientX
+        );
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    () => {
+
+        if (!dragging) return;
+
+        dragging = false;
+
+
+        if (surveyFinished) return;
+
+
+        const position =
+            parseFloat(
+                cap.style.left
+            ) || 4;
+
+
+        const max =
+            getMax();
+
+
+        if (
+            position <
+            max * 0.96
+        ) {
+
+            cap.style.left =
+                "4px";
+
+            sliderText.textContent =
+                "SLIDE TO UNLOCK →";
+
+        }
+
+    }
+);
+
+
+/* =================================================
+   CONFETTI
+================================================= */
 
 function createConfetti() {
 
@@ -965,65 +1403,108 @@ function createConfetti() {
         "#FFFFFF"
     ];
 
-    for (let i = 0; i < 220; i++) {
+
+    for (
+        let i = 0;
+        i < 220;
+        i++
+    ) {
 
         const piece =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        piece.className = "confetti";
 
-        piece.style.left = "50%";
-        piece.style.top = "50%";
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            "50%";
+
+        piece.style.top =
+            "50%";
+
 
         piece.style.background =
             colors[
                 Math.floor(
-                    Math.random() * colors.length
+                    Math.random() *
+                    colors.length
                 )
             ];
 
+
         piece.style.setProperty(
             "--x",
-            ((Math.random() - .5)
-            * window.innerWidth * 1.7) + "px"
+            (
+                (Math.random() - 0.5) *
+                window.innerWidth *
+                1.7
+            ) + "px"
         );
+
 
         piece.style.setProperty(
             "--y",
-            ((Math.random() - .5)
-            * window.innerHeight * 1.7) + "px"
+            (
+                (Math.random() - 0.5) *
+                window.innerHeight *
+                1.7
+            ) + "px"
         );
+
 
         piece.style.setProperty(
             "--r",
-            (Math.random() * 1440) + "deg"
+            (
+                Math.random() *
+                1440
+            ) + "deg"
         );
 
-        document.body.appendChild(piece);
 
-        setTimeout(() => piece.remove(), 2800);
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => piece.remove(),
+            2800
+        );
 
     }
 
 }
 
 
-/* FINISH */
+/* =================================================
+   FINISH SURVEY
+================================================= */
 
-function finishSurvey() {
+async function finishSurvey() {
 
-    if (selectedYear === null) {
+    if (surveyFinished) return;
+
+
+    if (!selectedYear) {
 
         dragging = false;
 
-        cap.style.left = "4px";
+        cap.style.left =
+            "4px";
 
         sliderText.textContent =
             "SELECT YOUR MYP YEAR FIRST";
 
-        yearError.classList.add("show");
+        yearError.classList.add(
+            "show"
+        );
 
-        document.querySelector(".section")
+        document
+            .querySelector(".section")
             .scrollIntoView({
                 behavior: "smooth"
             });
@@ -1033,53 +1514,106 @@ function finishSurvey() {
     }
 
 
-    if (selectedSubjects.length === 0) {
+    if (
+        selectedSubjects.length === 0
+    ) {
 
         dragging = false;
 
-        cap.style.left = "4px";
+        cap.style.left =
+            "4px";
 
         sliderText.textContent =
             "SELECT AT LEAST ONE SUBJECT";
 
-        subjectError.classList.add("show");
+        subjectError.classList.add(
+            "show"
+        );
 
         return;
 
     }
 
 
-    saveSurvey();
+    surveyFinished = true;
 
-    cap.style.left =
-        getMax() + "px";
-
-    sliderText.textContent =
-        "UNLOCKED! 🎉";
+    dragging = false;
 
 
-    success.classList.add("show");
+    try {
 
-    createConfetti();
+        /* SAVE TO FIREBASE FIRST */
 
-
-    /* Extra confetti bursts */
-
-    setTimeout(createConfetti, 700);
-    setTimeout(createConfetti, 1400);
+        await saveSurvey();
 
 
-    /*
-       Dashboard redirect.
-       Give the celebration time to play.
-    */
+        /* MOVE CAP */
 
-    setTimeout(function() {
+        cap.style.left =
+            getMax() + "px";
 
-        window.location.href =
-            "./dashboard.html";
 
-    }, 5000);
+        sliderText.textContent =
+            "UNLOCKED! 🎉";
+
+
+        /* SHOW SUCCESS */
+
+        success.classList.add(
+            "show"
+        );
+
+
+        createConfetti();
+
+        setTimeout(
+            createConfetti,
+            700
+        );
+
+        setTimeout(
+            createConfetti,
+            1400
+        );
+
+
+        /* GO TO DASHBOARD */
+
+        setTimeout(
+            () => {
+
+                window.location.href =
+                    "./dashboard.html";
+
+            },
+            4000
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "SURVEY SAVE ERROR:",
+            error
+        );
+
+
+        surveyFinished = false;
+
+
+        cap.style.left =
+            "4px";
+
+
+        sliderText.textContent =
+            "TRY AGAIN";
+
+
+        alert(
+            "Your information could not be saved. Please check your Firebase Firestore rules."
+        );
+
+    }
 
 }
 
