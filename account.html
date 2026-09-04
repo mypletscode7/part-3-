@@ -1,583 +1,8 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-```
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MYP Haven | Account</title>
-
-<!-- GOOGLE FONTS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
->
-
-<style>
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        min-height: 100vh;
-
-        font-family: "DM Sans", sans-serif;
-
-        background: #8B5CF6;
-
-        color: #FFFFFF;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        padding: 30px;
-    }
-
-    .account-container {
-        width: min(520px, 100%);
-    }
-
-    .account-title {
-        text-align: center;
-
-        font-family: "Bricolage Grotesque", sans-serif;
-
-        font-size: clamp(3.5rem, 10vw, 6rem);
-
-        font-weight: 800;
-
-        line-height: 0.9;
-
-        letter-spacing: -0.055em;
-
-        margin-bottom: 15px;
-    }
-
-    .account-subtitle {
-        text-align: center;
-
-        font-size: 1.05rem;
-
-        line-height: 1.5;
-
-        margin-bottom: 35px;
-    }
-
-    .account-card {
-        background: #FFFFFF;
-
-        color: #111111;
-
-        border-radius: 28px;
-
-        padding: 35px;
-
-        box-shadow:
-            0 25px 60px rgba(0, 0, 0, 0.18);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-
-        margin-bottom: 8px;
-
-        font-size: 0.9rem;
-
-        font-weight: 700;
-    }
-
-    input {
-        width: 100%;
-
-        height: 54px;
-
-        padding: 0 16px;
-
-        border: 2px solid #E5E7EB;
-
-        border-radius: 14px;
-
-        background: #FFFFFF;
-
-        font-family: "DM Sans", sans-serif;
-
-        font-size: 1rem;
-
-        outline: none;
-
-        transition:
-            border-color 0.2s ease,
-            box-shadow 0.2s ease;
-    }
-
-    input:focus {
-        border-color: #8B5CF6;
-
-        box-shadow:
-            0 0 0 4px rgba(139, 92, 246, 0.12);
-    }
-
-    .terms-group {
-        display: flex;
-
-        align-items: flex-start;
-
-        gap: 10px;
-
-        margin: 5px 0 22px;
-    }
-
-    .terms-group input {
-        width: 19px;
-        height: 19px;
-
-        min-width: 19px;
-
-        margin-top: 2px;
-
-        accent-color: #8B5CF6;
-
-        cursor: pointer;
-    }
-
-    .terms-label {
-        margin: 0;
-
-        font-size: 0.85rem;
-
-        line-height: 1.45;
-
-        font-weight: 500;
-
-        color: #444444;
-    }
-
-    .terms-label a {
-        color: #8B5CF6;
-
-        font-weight: 700;
-
-        text-decoration: none;
-    }
-
-    .terms-label a:hover {
-        text-decoration: underline;
-    }
-
-    .account-button {
-        width: 100%;
-
-        height: 56px;
-
-        border: none;
-
-        border-radius: 999px;
-
-        background: #8B5CF6;
-
-        color: #FFFFFF;
-
-        font-family: "DM Sans", sans-serif;
-
-        font-size: 1rem;
-
-        font-weight: 700;
-
-        cursor: pointer;
-
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            opacity 0.2s ease;
-    }
-
-    .account-button:hover {
-        transform: translateY(-2px);
-
-        box-shadow:
-            0 12px 25px rgba(139, 92, 246, 0.25);
-    }
-
-    .account-button:active {
-        transform: scale(0.98);
-    }
-
-    .account-button:disabled {
-        opacity: 0.65;
-
-        cursor: not-allowed;
-
-        transform: none;
-
-        box-shadow: none;
-    }
-
-    .switch-text {
-        margin-top: 22px;
-
-        text-align: center;
-
-        font-size: 0.9rem;
-    }
-
-    .switch-button {
-        border: none;
-
-        background: none;
-
-        color: #8B5CF6;
-
-        font-family: "DM Sans", sans-serif;
-
-        font-weight: 700;
-
-        cursor: pointer;
-    }
-
-    .switch-button:hover {
-        text-decoration: underline;
-    }
-
-    .error-message {
-        display: none;
-
-        margin-bottom: 18px;
-
-        padding: 12px 15px;
-
-        border-radius: 12px;
-
-        background: #FEE2E2;
-
-        color: #B91C1C;
-
-        font-size: 0.9rem;
-
-        font-weight: 600;
-
-        line-height: 1.4;
-    }
-
-    .success-message {
-        display: none;
-
-        margin-bottom: 18px;
-
-        padding: 12px 15px;
-
-        border-radius: 12px;
-
-        background: #DCFCE7;
-
-        color: #166534;
-
-        font-size: 0.9rem;
-
-        font-weight: 600;
-
-        line-height: 1.4;
-    }
-
-    .loading-text {
-        display: none;
-
-        text-align: center;
-
-        margin-top: 15px;
-
-        font-size: 0.85rem;
-
-        color: #666666;
-    }
-
-    @media (max-width: 600px) {
-
-        body {
-            padding: 20px;
-        }
-
-        .account-card {
-            padding: 25px 20px;
-        }
-
-    }
-
-</style>
-```
-
-</head>
-
-<body>
-
-```
-<main class="account-container">
-
-    <h1 class="account-title">
-        Welcome.
-    </h1>
-
-    <p class="account-subtitle">
-        Create your MYP Haven account and start mastering the MYP.
-    </p>
-
-
-    <section class="account-card">
-
-        <!-- MESSAGES -->
-
-        <div
-            class="error-message"
-            id="error-message"
-            role="alert"
-        ></div>
-
-        <div
-            class="success-message"
-            id="success-message"
-            role="status"
-        ></div>
-
-
-        <!-- =========================================
-             SIGN UP
-        ========================================== -->
-
-        <form id="signup-form">
-
-            <!-- FULL NAME -->
-
-            <div class="form-group">
-
-                <label for="signup-name">
-                    Full Name
-                </label>
-
-                <input
-                    id="signup-name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    autocomplete="name"
-                    required
-                >
-
-            </div>
-
-
-            <!-- EMAIL -->
-
-            <div class="form-group">
-
-                <label for="signup-email">
-                    Email
-                </label>
-
-                <input
-                    id="signup-email"
-                    type="email"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <label for="signup-password">
-                    Password
-                </label>
-
-                <input
-                    id="signup-password"
-                    type="password"
-                    placeholder="Create a password"
-                    autocomplete="new-password"
-                    minlength="6"
-                    required
-                >
-
-            </div>
-
-
-            <!-- CONFIRM PASSWORD -->
-
-            <div class="form-group">
-
-                <label for="signup-confirm-password">
-                    Confirm Password
-                </label>
-
-                <input
-                    id="signup-confirm-password"
-                    type="password"
-                    placeholder="Confirm your password"
-                    autocomplete="new-password"
-                    minlength="6"
-                    required
-                >
-
-            </div>
-
-
-            <!-- TERMS -->
-
-            <div class="terms-group">
-
-                <input
-                    id="terms-checkbox"
-                    type="checkbox"
-                    required
-                >
-
-                <label
-                    class="terms-label"
-                    for="terms-checkbox"
-                >
-
-                    I agree to MYP Haven's
-                    <a href="#" target="_blank">
-                        Terms
-                    </a>
-                    and
-                    <a href="#" target="_blank">
-                        Privacy Policy
-                    </a>.
-
-                </label>
-
-            </div>
-
-
-            <!-- CREATE ACCOUNT -->
-
-            <button
-                class="account-button"
-                id="signup-button"
-                type="submit"
-            >
-                Create Account
-            </button>
-
-        </form>
-
-
-        <!-- =========================================
-             LOGIN
-        ========================================== -->
-
-        <form
-            id="login-form"
-            style="display: none;"
-        >
-
-            <!-- EMAIL -->
-
-            <div class="form-group">
-
-                <label for="login-email">
-                    Email
-                </label>
-
-                <input
-                    id="login-email"
-                    type="email"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <label for="login-password">
-                    Password
-                </label>
-
-                <input
-                    id="login-password"
-                    type="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
-                    required
-                >
-
-            </div>
-
-
-            <!-- SIGN IN -->
-
-            <button
-                class="account-button"
-                id="login-button"
-                type="submit"
-            >
-                Sign In
-            </button>
-
-        </form>
-
-
-        <!-- SWITCH -->
-
-        <p class="switch-text">
-
-            <span id="switch-question">
-                Already have an account?
-            </span>
-
-            <button
-                class="switch-button"
-                id="switch-button"
-                type="button"
-            >
-                Sign In
-            </button>
-
-        </p>
-
-
-        <p
-            class="loading-text"
-            id="loading-text"
-        >
-            Please wait...
-        </p>
-
-    </section>
-
-</main>
-
-
-<!-- =================================================
-     FIREBASE
-================================================= -->
-
 <script type="module">
 
-    /* ================================================
+    /* =================================================
        FIREBASE IMPORTS
-    ================================================ */
+    ================================================= */
 
     import {
         initializeApp
@@ -587,7 +12,10 @@
         getAuth,
         createUserWithEmailAndPassword,
         signInWithEmailAndPassword,
-        updateProfile
+        updateProfile,
+        setPersistence,
+        browserLocalPersistence,
+        onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
     import {
@@ -598,9 +26,9 @@
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-    /* ================================================
-       FIREBASE CONFIGURATION
-    ================================================ */
+    /* =================================================
+       FIREBASE CONFIG
+    ================================================= */
 
     const firebaseConfig = {
 
@@ -625,23 +53,30 @@
     };
 
 
-    /* ================================================
+    /* =================================================
        INITIALIZE FIREBASE
-    ================================================ */
+    ================================================= */
 
-    const app =
-        initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
 
-    const auth =
-        getAuth(app);
+    const auth = getAuth(app);
 
-    const db =
-        getFirestore(app);
+    const db = getFirestore(app);
 
 
-    /* ================================================
+    /* =================================================
+       KEEP USERS LOGGED IN AFTER REFRESH
+    ================================================= */
+
+    await setPersistence(
+        auth,
+        browserLocalPersistence
+    );
+
+
+    /* =================================================
        ELEMENTS
-    ================================================ */
+    ================================================= */
 
     const signupForm =
         document.getElementById("signup-form");
@@ -671,117 +106,122 @@
         document.getElementById("login-button");
 
 
-    /* ================================================
-       MESSAGE FUNCTIONS
-    ================================================ */
+    /* =================================================
+       MESSAGES
+    ================================================= */
 
     function showError(message) {
 
-        errorMessage.textContent =
-            message;
+        errorMessage.textContent = message;
 
-        errorMessage.style.display =
-            "block";
+        errorMessage.style.display = "block";
 
-        successMessage.style.display =
-            "none";
+        successMessage.style.display = "none";
 
     }
 
 
     function showSuccess(message) {
 
-        successMessage.textContent =
-            message;
+        successMessage.textContent = message;
 
-        successMessage.style.display =
-            "block";
+        successMessage.style.display = "block";
 
-        errorMessage.style.display =
-            "none";
+        errorMessage.style.display = "none";
 
     }
 
 
     function clearMessages() {
 
-        errorMessage.style.display =
-            "none";
+        errorMessage.style.display = "none";
 
-        successMessage.style.display =
-            "none";
+        successMessage.style.display = "none";
 
     }
 
 
     function setLoading(isLoading) {
 
-        signupButton.disabled =
-            isLoading;
+        signupButton.disabled = isLoading;
 
-        loginButton.disabled =
-            isLoading;
+        loginButton.disabled = isLoading;
 
         loadingText.style.display =
-            isLoading
-                ? "block"
-                : "none";
+            isLoading ? "block" : "none";
 
     }
 
 
-    /* ================================================
-       FIREBASE ERROR TRANSLATION
-    ================================================ */
+    /* =================================================
+       FIREBASE ERROR MESSAGES
+    ================================================= */
 
     function getFriendlyError(error) {
+
+        console.error(error);
 
         switch (error.code) {
 
             case "auth/email-already-in-use":
-
-                return "An account with this email already exists. Please log in instead.";
+                return "An account with this email already exists. Please sign in instead.";
 
             case "auth/invalid-email":
-
                 return "Please enter a valid email address.";
 
             case "auth/weak-password":
-
-                return "Your password must be at least 6 characters long.";
+                return "Your password must be at least 6 characters.";
 
             case "auth/invalid-credential":
-
                 return "Your email or password is incorrect.";
 
             case "auth/user-not-found":
-
                 return "No account was found with this email.";
 
             case "auth/wrong-password":
-
                 return "Your password is incorrect.";
 
             case "auth/network-request-failed":
-
-                return "There was a network problem. Please check your internet connection and try again.";
+                return "There was a network problem. Please check your internet connection.";
 
             case "permission-denied":
-
-                return "Your account was created, but your profile could not be saved. Please check your Firestore rules.";
+                return "Firebase could not save your profile. Check your Firestore security rules.";
 
             default:
-
-                return "Something went wrong. Please try again.";
+                return error.message || "Something went wrong. Please try again.";
 
         }
 
     }
 
 
-    /* ================================================
-       SWITCH LOGIN / SIGNUP
-    ================================================ */
+    /* =================================================
+       IF ALREADY LOGGED IN
+    ================================================= */
+
+    onAuthStateChanged(auth, user => {
+
+        if (user) {
+
+            /*
+             * Don't redirect immediately if we're
+             * creating an account because the survey
+             * should appear first.
+             */
+
+            console.log(
+                "Firebase user detected:",
+                user.uid
+            );
+
+        }
+
+    });
+
+
+    /* =================================================
+       SWITCH BETWEEN SIGN UP / LOGIN
+    ================================================= */
 
     let loginMode = false;
 
@@ -790,19 +230,16 @@
         "click",
         () => {
 
-            loginMode =
-                !loginMode;
+            loginMode = !loginMode;
 
             clearMessages();
 
 
             if (loginMode) {
 
-                signupForm.style.display =
-                    "none";
+                signupForm.style.display = "none";
 
-                loginForm.style.display =
-                    "block";
+                loginForm.style.display = "block";
 
                 switchQuestion.textContent =
                     "Don't have an account?";
@@ -812,11 +249,9 @@
 
             } else {
 
-                signupForm.style.display =
-                    "block";
+                signupForm.style.display = "block";
 
-                loginForm.style.display =
-                    "none";
+                loginForm.style.display = "none";
 
                 switchQuestion.textContent =
                     "Already have an account?";
@@ -830,9 +265,9 @@
     );
 
 
-    /* ================================================
+    /* =================================================
        CREATE ACCOUNT
-    ================================================ */
+    ================================================= */
 
     signupForm.addEventListener(
         "submit",
@@ -842,10 +277,6 @@
 
             clearMessages();
 
-
-            /* -----------------------------------------
-               GET FORM VALUES
-            ----------------------------------------- */
 
             const name =
                 document
@@ -876,14 +307,23 @@
                     .checked;
 
 
-            /* -----------------------------------------
-               VALIDATION
-            ----------------------------------------- */
+            /* VALIDATION */
 
             if (name.length < 2) {
 
                 showError(
                     "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                showError(
+                    "Your password must be at least 6 characters."
                 );
 
                 return;
@@ -905,7 +345,7 @@
             if (!termsAccepted) {
 
                 showError(
-                    "Please agree to the Terms and Privacy Policy before creating your account."
+                    "Please agree to the Terms and Privacy Policy."
                 );
 
                 return;
@@ -913,18 +353,14 @@
             }
 
 
-            /* -----------------------------------------
-               START LOADING
-            ----------------------------------------- */
-
             setLoading(true);
 
 
             try {
 
-                /* -------------------------------------
-                   CREATE FIREBASE AUTH ACCOUNT
-                ------------------------------------- */
+                /* -----------------------------------------
+                   CREATE AUTH ACCOUNT
+                ----------------------------------------- */
 
                 const userCredential =
                     await createUserWithEmailAndPassword(
@@ -938,9 +374,15 @@
                     userCredential.user;
 
 
-                /* -------------------------------------
-                   SAVE NAME TO FIREBASE AUTH PROFILE
-                ------------------------------------- */
+                console.log(
+                    "ACCOUNT CREATED:",
+                    user.uid
+                );
+
+
+                /* -----------------------------------------
+                   SAVE DISPLAY NAME
+                ----------------------------------------- */
 
                 await updateProfile(
                     user,
@@ -950,9 +392,9 @@
                 );
 
 
-                /* -------------------------------------
-                   SAVE USER PROFILE TO FIRESTORE
-                ------------------------------------- */
+                /* -----------------------------------------
+                   CREATE FIRESTORE USER DOCUMENT
+                ----------------------------------------- */
 
                 await setDoc(
                     doc(
@@ -962,26 +404,21 @@
                     ),
                     {
 
-                        uid:
-                            user.uid,
+                        uid: user.uid,
 
-                        fullName:
-                            name,
+                        fullName: name,
 
-                        email:
-                            email,
+                        email: email,
 
-                        mypYear:
-                            null,
+                        mypYear: null,
 
-                        subjects:
-                            [],
+                        subjects: [],
 
-                        surveyCompleted:
-                            false,
+                        surveyCompleted: false,
 
-                        termsAccepted:
-                            true,
+                        lockedIn: false,
+
+                        termsAccepted: true,
 
                         createdAt:
                             serverTimestamp(),
@@ -989,33 +426,60 @@
                         updatedAt:
                             serverTimestamp()
 
+                    },
+                    {
+                        merge: true
                     }
                 );
 
 
-                /* -------------------------------------
-                   SUCCESS
-                ------------------------------------- */
+                console.log(
+                    "USER PROFILE SAVED TO FIRESTORE"
+                );
+
 
                 showSuccess(
-    `Welcome to MYP Haven, ${name}!`
-);
+                    `Welcome to MYP Haven, ${name}!`
+                );
 
-setTimeout(() => {
-window.location.href = "https://mypletscode7.github.io/part-3-/survey.html";}, 1000);
+
+                /*
+                 * Save a temporary local copy of the
+                 * user's name. Firebase remains the
+                 * main source of truth.
+                 */
+
+                localStorage.setItem(
+                    "mypHavenName",
+                    name
+                );
+
+
+                /* -----------------------------------------
+                   GO TO SURVEY
+                ----------------------------------------- */
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "./survey.html";
+
+                    },
+                    800
+                );
+
 
             } catch (error) {
 
                 console.error(
-                    "Firebase signup error:",
+                    "SIGN UP ERROR:",
                     error
                 );
-
 
                 showError(
                     getFriendlyError(error)
                 );
-
 
                 setLoading(false);
 
@@ -1025,9 +489,9 @@ window.location.href = "https://mypletscode7.github.io/part-3-/survey.html";}, 1
     );
 
 
-    /* ================================================
+    /* =================================================
        SIGN IN
-    ================================================ */
+    ================================================= */
 
     loginForm.addEventListener(
         "submit",
@@ -1055,9 +519,9 @@ window.location.href = "https://mypletscode7.github.io/part-3-/survey.html";}, 1
 
             try {
 
-                /* -------------------------------------
-                   SIGN IN
-                ------------------------------------- */
+                /* -----------------------------------------
+                   LOGIN
+                ----------------------------------------- */
 
                 const userCredential =
                     await signInWithEmailAndPassword(
@@ -1071,43 +535,74 @@ window.location.href = "https://mypletscode7.github.io/part-3-/survey.html";}, 1
                     userCredential.user;
 
 
-                /* -------------------------------------
-                   CHECK FIRESTORE USER PROFILE
-                ------------------------------------- */
-
-                showSuccess(
-                    `Welcome back, ${user.displayName || ""}!`
+                console.log(
+                    "LOGIN SUCCESS:",
+                    user.uid
                 );
 
 
-                /*
-                 * Existing users go directly
-                 * to their dashboard.
-                 */
+                /* -----------------------------------------
+                   MAKE SURE FIRESTORE USER DOCUMENT
+                   EXISTS
+                ----------------------------------------- */
+
+                await setDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    ),
+                    {
+
+                        uid:
+                            user.uid,
+
+                        email:
+                            user.email,
+
+                        fullName:
+                            user.displayName || "",
+
+                        updatedAt:
+                            serverTimestamp()
+
+                    },
+                    {
+                        merge: true
+                    }
+                );
+
+
+                showSuccess(
+                    `Welcome back, ${user.displayName || "to MYP Haven"}!`
+                );
+
+
+                /* -----------------------------------------
+                   GO TO DASHBOARD
+                ----------------------------------------- */
 
                 setTimeout(
                     () => {
 
                         window.location.href =
-                            "/part-3-/dashboard.html";
+                            "./dashboard.html";
 
                     },
-                    700
+                    500
                 );
 
 
             } catch (error) {
 
                 console.error(
-                    "Firebase login error:",
+                    "LOGIN ERROR:",
                     error
                 );
-
 
                 showError(
                     getFriendlyError(error)
                 );
-
 
                 setLoading(false);
 
@@ -1117,8 +612,3 @@ window.location.href = "https://mypletscode7.github.io/part-3-/survey.html";}, 1
     );
 
 </script>
-```
-
-</body>
-
-</html>
